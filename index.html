@@ -49,9 +49,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       ANIMATED BACKGROUND
-       ═══════════════════════════════════════════════════════ */
     .bg-effects {
       position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
     }
@@ -77,9 +74,6 @@
       66% { transform: translate(-30px, 20px) scale(0.95); }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       LAYOUT
-       ═══════════════════════════════════════════════════════ */
     .app-container {
       position: relative; z-index: 1;
       max-width: 520px; margin: 0 auto;
@@ -87,9 +81,6 @@
       min-height: 100vh;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       HEADER
-       ═══════════════════════════════════════════════════════ */
     .app-header {
       text-align: center; padding: 32px 0 24px; position: relative;
     }
@@ -117,9 +108,6 @@
       font-weight: 400; letter-spacing: 0.3px;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       ANNOUNCEMENT BANNER
-       ═══════════════════════════════════════════════════════ */
     .announcement-banner {
       background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.06));
       border: 1px solid rgba(245,158,11,0.25);
@@ -136,9 +124,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       STATS BAR
-       ═══════════════════════════════════════════════════════ */
     .stats-bar {
       display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
       margin-bottom: 24px;
@@ -160,9 +145,6 @@
       letter-spacing: 0.8px; margin-top: 6px; font-weight: 600;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       PROGRESS BAR
-       ═══════════════════════════════════════════════════════ */
     .progress-section { margin-bottom: 24px; }
     .progress-header {
       display: flex; justify-content: space-between; align-items: center;
@@ -189,9 +171,6 @@
       100% { background-position: -200% 0; }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       DRAW DATE BANNER
-       ═══════════════════════════════════════════════════════ */
     .draw-date-banner {
       background: linear-gradient(135deg, rgba(108,60,225,0.1), rgba(139,92,246,0.05));
       border: 1px solid rgba(139,92,246,0.2); border-radius: var(--radius-sm);
@@ -208,9 +187,6 @@
       color: var(--primary-light);
     }
 
-    /* ═══════════════════════════════════════════════════════
-       CARDS
-       ═══════════════════════════════════════════════════════ */
     .card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 24px; margin-bottom: 20px;
@@ -231,9 +207,6 @@
     .card-icon.red    { background: rgba(239,68,68,0.15); color: var(--danger); }
     .card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); }
 
-    /* ═══════════════════════════════════════════════════════
-       GCASH INFO
-       ═══════════════════════════════════════════════════════ */
     .gcash-info {
       background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15);
       border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;
@@ -259,9 +232,6 @@
     .copy-btn:hover { background: rgba(59,130,246,0.3); }
     .copy-btn.copied { background: rgba(16,185,129,0.2); color: var(--accent); }
 
-    /* ═══════════════════════════════════════════════════════
-       FORM ELEMENTS
-       ═══════════════════════════════════════════════════════ */
     .form-group { margin-bottom: 18px; }
     .form-label {
       display: block; font-size: 12px; font-weight: 600;
@@ -286,7 +256,6 @@
     }
     .form-hint.error-hint { color: var(--danger); }
 
-    /* Quantity selector */
     .quantity-control {
       display: flex; align-items: center; gap: 12px;
     }
@@ -304,7 +273,6 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* Price summary */
     .price-summary {
       background: rgba(108,60,225,0.08); border: 1px solid rgba(108,60,225,0.15);
       border-radius: var(--radius-sm); padding: 16px; margin-top: 20px;
@@ -324,9 +292,6 @@
       color: var(--primary-light);
     }
 
-    /* ═══════════════════════════════════════════════════════
-       BUTTONS
-       ═══════════════════════════════════════════════════════ */
     .btn {
       display: flex; align-items: center; justify-content: center; gap: 10px;
       width: 100%; padding: 16px 24px; border: none; border-radius: var(--radius-sm);
@@ -369,9 +334,6 @@
     }
     .btn-group .btn { flex: 1; }
 
-    /* ═══════════════════════════════════════════════════════
-       RECEIPT / RESULT
-       ═══════════════════════════════════════════════════════ */
     .receipt-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
@@ -438,7 +400,6 @@
       background: rgba(245,158,11,0.12); color: var(--secondary);
     }
 
-    /* Copy button in receipt */
     .copy-btn-sm {
       background: rgba(139,92,246,0.15); border: none; color: var(--primary-light);
       width: 26px; height: 26px; border-radius: 5px; cursor: pointer;
@@ -448,9 +409,6 @@
     .copy-btn-sm:hover { background: rgba(139,92,246,0.3); }
     .copy-btn-sm.copied { background: rgba(16,185,129,0.2); color: var(--accent); }
 
-    /* ═══════════════════════════════════════════════════════
-       SECTIONS VISIBILITY
-       ═══════════════════════════════════════════════════════ */
     .section { display: none; animation: fadeIn 0.4s ease; }
     .section.active { display: block; }
     @keyframes fadeIn {
@@ -458,9 +416,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       GENERATING OVERLAY
-       ═══════════════════════════════════════════════════════ */
     .generating-overlay {
       display: none; position: fixed; inset: 0; z-index: 1000;
       background: rgba(15, 11, 26, 0.92);
@@ -470,9 +425,7 @@
     }
     .generating-overlay.active { display: flex; }
 
-    .gen-container {
-      animation: fadeIn 0.3s ease;
-    }
+    .gen-container { animation: fadeIn 0.3s ease; }
 
     .gen-icon-wrapper {
       width: 120px; height: 120px; border-radius: 50%;
@@ -481,7 +434,6 @@
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 28px; position: relative;
     }
-
     .gen-icon-wrapper::before {
       content: ''; position: absolute; inset: -8px;
       border-radius: 50%; border: 2px solid transparent;
@@ -489,7 +441,6 @@
       border-right-color: var(--secondary);
       animation: spin 1.5s linear infinite;
     }
-
     .gen-icon-wrapper::after {
       content: ''; position: absolute; inset: -16px;
       border-radius: 50%; border: 2px solid transparent;
@@ -497,12 +448,10 @@
       border-left-color: var(--primary);
       animation: spin 2s linear infinite reverse;
     }
-
     .gen-icon-wrapper i {
       font-size: 44px; color: var(--primary-light);
       animation: genPulse 1s ease-in-out infinite;
     }
-
     @keyframes genPulse {
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.1); opacity: 0.7; }
@@ -512,17 +461,14 @@
       font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700;
       color: var(--text-primary); margin-bottom: 8px;
     }
-
     .gen-subtitle {
       font-size: 14px; color: var(--text-secondary); margin-bottom: 24px;
       max-width: 280px;
     }
-
     .gen-numbers {
       display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
       margin-bottom: 20px; min-height: 44px;
     }
-
     .gen-num {
       width: 40px; height: 40px; border-radius: 8px;
       background: var(--bg-card); border: 1px solid var(--border);
@@ -531,7 +477,6 @@
       color: var(--primary-light);
       animation: numPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-
     @keyframes numPop {
       from { transform: scale(0) rotate(-10deg); opacity: 0; }
       to { transform: scale(1) rotate(0); opacity: 1; }
@@ -546,15 +491,11 @@
       background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary));
       transition: width 0.3s ease;
     }
-
     .gen-status {
       font-size: 12px; color: var(--text-muted); margin-top: 12px;
       font-weight: 500;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       MAINTENANCE MODE
-       ═══════════════════════════════════════════════════════ */
     .maintenance-overlay {
       display: none; position: fixed; inset: 0; z-index: 999;
       background: var(--bg-primary);
@@ -576,9 +517,19 @@
       50% { transform: scale(1.08); opacity: 0.7; }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       TOAST NOTIFICATION
-       ═══════════════════════════════════════════════════════ */
+    /* Sold-out overlay */
+    .soldout-banner {
+      background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.06));
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: var(--radius-sm); padding: 18px 16px;
+      margin-bottom: 20px; display: none; text-align: center;
+      animation: slideDown 0.4s ease;
+    }
+    .soldout-banner.visible { display: block; }
+    .soldout-banner i { color: var(--danger); font-size: 28px; margin-bottom: 8px; }
+    .soldout-banner h3 { font-size: 16px; color: var(--danger); margin-bottom: 4px; }
+    .soldout-banner p { font-size: 13px; color: var(--text-secondary); }
+
     .toast-container {
       position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
       z-index: 9999; display: flex; flex-direction: column; gap: 8px;
@@ -602,9 +553,6 @@
     @keyframes toastIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes toastOut { to { opacity: 0; transform: translateY(-12px); } }
 
-    /* ═══════════════════════════════════════════════════════
-       ADMIN
-       ═══════════════════════════════════════════════════════ */
     .admin-link {
       text-align: center; padding: 24px 0 12px;
     }
@@ -615,9 +563,6 @@
     .admin-link a:hover { color: var(--primary-light); }
     .admin-section .card { max-width: 400px; margin: 40px auto; }
 
-    /* ═══════════════════════════════════════════════════════
-       STEP INDICATOR (4 STEPS)
-       ═══════════════════════════════════════════════════════ */
     .steps {
       display: flex; align-items: center; justify-content: center;
       gap: 0; margin-bottom: 24px;
@@ -658,9 +603,6 @@
       .step-line { width: 32px; }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       PAYMENT INSTRUCTIONS
-       ═══════════════════════════════════════════════════════ */
     .payment-amount-banner {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       border-radius: var(--radius-sm); padding: 20px; text-align: center;
@@ -678,9 +620,7 @@
       font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px;
     }
 
-    .payment-steps {
-      margin-top: 16px;
-    }
+    .payment-steps { margin-top: 16px; }
     .payment-step {
       display: flex; gap: 14px; padding: 12px 0;
       border-bottom: 1px solid var(--border);
@@ -697,18 +637,12 @@
     }
     .payment-step-text strong { color: var(--text-primary); }
 
-    /* ═══════════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════════ */
     .app-footer {
       text-align: center; padding: 16px 0 8px;
       border-top: 1px solid var(--border); margin-top: 12px;
     }
     .app-footer p { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
 
-    /* ═══════════════════════════════════════════════════════
-       RESPONSIVE
-       ═══════════════════════════════════════════════════════ */
     @media (max-width: 380px) {
       .app-container { padding: 12px 12px 32px; }
       .stats-bar { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
@@ -718,9 +652,6 @@
       .payment-amount-banner .pay-amount { font-size: 28px; }
     }
 
-    /* ═══════════════════════════════════════════════════════
-       CONFETTI
-       ═══════════════════════════════════════════════════════ */
     .confetti-container {
       position: fixed; inset: 0; z-index: 1001; pointer-events: none; overflow: hidden;
     }
@@ -738,24 +669,20 @@
 </head>
 <body>
 
-  <!-- Background Effects -->
   <div class="bg-effects">
     <div class="bg-orb"></div>
     <div class="bg-orb"></div>
     <div class="bg-orb"></div>
   </div>
 
-  <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Maintenance Overlay -->
   <div class="maintenance-overlay" id="maintenanceOverlay">
     <i class="fas fa-tools"></i>
     <h2>Under Maintenance</h2>
     <p>We're working on something amazing. Please check back soon!</p>
   </div>
 
-  <!-- Generating Numbers Overlay -->
   <div class="generating-overlay" id="generatingOverlay">
     <div class="gen-container">
       <div class="gen-icon-wrapper">
@@ -771,32 +698,33 @@
     </div>
   </div>
 
-  <!-- Confetti Container -->
   <div class="confetti-container" id="confettiContainer"></div>
 
-  <!-- Main App -->
   <div class="app-container">
 
-    <!-- Header -->
     <header class="app-header">
       <div class="logo-container"><i class="fas fa-ticket-alt"></i></div>
       <h1 class="app-title" id="appTitle">PISO PALARO</h1>
       <p class="app-subtitle">Your lucky number awaits</p>
     </header>
 
-    <!-- Announcement -->
     <div class="announcement-banner" id="announcementBanner">
       <i class="fas fa-bullhorn"></i>
       <p id="announcementText"></p>
     </div>
 
-    <!-- Draw Date -->
+    <!-- FIX #3: Sold-out banner -->
+    <div class="soldout-banner" id="soldoutBanner">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h3>SOLD OUT!</h3>
+      <p>All numbers have been sold. Check back for the next draw!</p>
+    </div>
+
     <div class="draw-date-banner" id="drawDateBanner">
       <div class="label">Next Draw Date</div>
       <div class="date" id="drawDateText"></div>
     </div>
 
-    <!-- Stats Bar -->
     <div class="stats-bar">
       <div class="stat-item">
         <div class="stat-value" id="statSold">—</div>
@@ -812,7 +740,6 @@
       </div>
     </div>
 
-    <!-- Progress -->
     <div class="progress-section">
       <div class="progress-header">
         <span>Numbers Sold</span>
@@ -823,12 +750,8 @@
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════
-         STEP 1: BUYER INFO
-         ═══════════════════════════════════════════════════ -->
+    <!-- STEP 1 -->
     <div class="section active" id="sectionStep1">
-
-      <!-- Step Indicator -->
       <div class="steps" id="stepIndicator">
         <div class="step active" id="step1">
           <div class="step-circle">1</div>
@@ -875,7 +798,7 @@
           <div class="quantity-control">
             <button type="button" class="qty-btn" onclick="adjustQty(-100)">−</button>
             <input type="number" class="form-input qty-input" id="inputQuantity"
-                   min="100" max="10000" value="100">
+                   min="100" max="10000" value="100" step="100">
             <button type="button" class="qty-btn" onclick="adjustQty(100)">+</button>
           </div>
           <div class="form-hint" id="qtyHint">
@@ -899,7 +822,7 @@
         </div>
 
         <div style="margin-top:24px;">
-          <button type="button" class="btn btn-primary" onclick="goToStep2()">
+          <button type="button" class="btn btn-primary" id="btnContinue" onclick="goToStep2()">
             <span>Continue to Payment</span>
             <i class="fas fa-arrow-right"></i>
           </button>
@@ -907,41 +830,36 @@
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════
-         STEP 2: PAYMENT INFO
-         ═══════════════════════════════════════════════════ -->
+    <!-- STEP 2 -->
     <div class="section" id="sectionStep2">
-
       <div class="steps">
-        <div class="step done" id="s2step1">
+        <div class="step done">
           <div class="step-circle"><i class="fas fa-check" style="font-size:12px"></i></div>
           <div class="step-label">Info</div>
         </div>
         <div class="step-line done"></div>
-        <div class="step active" id="s2step2">
+        <div class="step active">
           <div class="step-circle">2</div>
           <div class="step-label">Pay</div>
         </div>
         <div class="step-line"></div>
-        <div class="step" id="s2step3">
+        <div class="step">
           <div class="step-circle">3</div>
           <div class="step-label">Proof</div>
         </div>
         <div class="step-line"></div>
-        <div class="step" id="s2step4">
+        <div class="step">
           <div class="step-circle">4</div>
           <div class="step-label">Done</div>
         </div>
       </div>
 
-      <!-- Amount to Pay -->
       <div class="payment-amount-banner">
         <div class="pay-label">Amount to Pay</div>
         <div class="pay-amount" id="payAmount">₱100.00</div>
         <div class="pay-qty" id="payQty">for 100 numbers</div>
       </div>
 
-      <!-- GCash Info Card -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon blue"><i class="fas fa-wallet"></i></div>
@@ -992,11 +910,8 @@
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════
-         STEP 3: PROOF OF PAYMENT
-         ═══════════════════════════════════════════════════ -->
+    <!-- STEP 3 -->
     <div class="section" id="sectionStep3">
-
       <div class="steps">
         <div class="step done">
           <div class="step-circle"><i class="fas fa-check" style="font-size:12px"></i></div>
@@ -1031,12 +946,12 @@
 
         <div class="form-group" style="margin-bottom:0;">
           <label class="form-label">GCash Reference Number</label>
-          <input type="text" class="form-input" id="inputGcashRef" placeholder="e.g. 1234 5678 90123"
-                 maxlength="13" style="font-size:18px; text-align:center; letter-spacing:2px; font-weight:600;">
+          <input type="text" class="form-input" id="inputGcashRef" placeholder="e.g. 1234567890123"
+                 maxlength="13" inputmode="numeric"
+                 style="font-size:18px; text-align:center; letter-spacing:2px; font-weight:600;">
           <div class="form-hint"><i class="fas fa-info-circle"></i> 13-digit number found in your GCash receipt</div>
         </div>
 
-        <!-- Summary -->
         <div class="price-summary" style="margin-top:24px;">
           <div class="price-row">
             <span>Name</span>
@@ -1069,11 +984,8 @@
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════
-         STEP 4: RECEIPT / ENTRIES SUBMITTED
-         ═══════════════════════════════════════════════════ -->
+    <!-- STEP 4 -->
     <div class="section" id="sectionStep4">
-
       <div class="steps">
         <div class="step done">
           <div class="step-circle"><i class="fas fa-check" style="font-size:12px"></i></div>
@@ -1164,19 +1076,16 @@
       </button>
     </div>
 
-    <!-- Footer -->
     <div class="app-footer">
       <p>© 2024 Piso Palaro · All rights reserved<br>Numbers are randomly generated and securely stored</p>
     </div>
 
-    <!-- Admin Link -->
     <div class="admin-link">
       <a href="javascript:void(0)" onclick="showAdminLogin()">
         <i class="fas fa-lock"></i> Admin Panel
       </a>
     </div>
 
-    <!-- Admin Login -->
     <div class="section admin-section" id="sectionAdmin">
       <div class="card">
         <div class="card-header">
@@ -1202,35 +1111,31 @@
       </div>
     </div>
 
-  </div><!-- /app-container -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       JAVASCRIPT
-       ═══════════════════════════════════════════════════════ -->
   <script>
     // ═══════════════════════════════════════════════════════
-    // ▶▶▶ PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW ◀◀◀
+    // CONFIGURATION
     // ═══════════════════════════════════════════════════════
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwNc8qJr-8LPZ--PAbNUpwyho_Rpr0LambNTMVe_YpvVSbS8HpaH3KWJdajZwZBtxR1/exec';
-    // ═══════════════════════════════════════════════════════
 
     const API_BASE = WEB_APP_URL;
     let appSettings = {};
     let isSubmitting = false;
+    let isSoldOut = false; // FIX #3: Track sold-out state
 
-    // Stored form data across steps
     let formData = { name: '', phone: '', quantity: 100, gcashRef: '' };
 
     // ─── Init ───
     document.addEventListener('DOMContentLoaded', function() {
       if (API_BASE === 'YOUR_WEB_APP_URL_HERE' || !API_BASE) {
         showToast('⚠️ Web App URL not configured. Set WEB_APP_URL in the script.', 'error');
-        console.error('PISO PALARO: Please set the WEB_APP_URL constant.');
         return;
       }
       loadPublicSettings();
       loadStats();
       setupQuantityListener();
+      setupGcashRefListener(); // FIX #6: Auto-format and validate
       setInterval(loadStats, 30000);
     });
 
@@ -1273,7 +1178,6 @@
       document.getElementById('appTitle').textContent = res.lottery_name || 'PISO PALARO';
       document.title = res.lottery_name || 'PISO PALARO';
 
-      // GCash info (Step 2)
       document.getElementById('gcashName2').textContent = res.gcash_name || '—';
       document.getElementById('gcashNumber2').textContent = res.gcash_number || '—';
 
@@ -1284,6 +1188,7 @@
       const maxQ = res.max_quantity || 10000;
       const qtyInput = document.getElementById('inputQuantity');
       qtyInput.min = minQ; qtyInput.max = maxQ; qtyInput.value = minQ;
+      qtyInput.step = minQ; // FIX #4: Step matches min quantity
       document.getElementById('qtyHint').innerHTML =
         '<i class="fas fa-info-circle"></i> Min: ' + formatNum(minQ) + ' — Max: ' + formatNum(maxQ);
       updatePriceSummary();
@@ -1311,6 +1216,20 @@
       const pct = res.total > 0 ? ((res.sold / res.total) * 100) : 0;
       document.getElementById('progressFill').style.width = pct.toFixed(1) + '%';
       document.getElementById('progressPercent').textContent = pct.toFixed(1) + '%';
+
+      // FIX #3: Check sold-out state and disable purchase flow
+      isSoldOut = res.remaining <= 0;
+      const soldoutBanner = document.getElementById('soldoutBanner');
+      const btnContinue = document.getElementById('btnContinue');
+      if (isSoldOut) {
+        soldoutBanner.classList.add('visible');
+        btnContinue.disabled = true;
+        btnContinue.innerHTML = '<i class="fas fa-ban"></i><span>Sold Out</span>';
+      } else {
+        soldoutBanner.classList.remove('visible');
+        btnContinue.disabled = false;
+        btnContinue.innerHTML = '<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
+      }
     }
 
     function animateCounter(id, target) {
@@ -1330,7 +1249,28 @@
 
     // ─── Quantity ───
     function setupQuantityListener() {
-      document.getElementById('inputQuantity').addEventListener('input', updatePriceSummary);
+      const inp = document.getElementById('inputQuantity');
+      inp.addEventListener('input', updatePriceSummary);
+      // FIX #4: Round to nearest valid step on blur
+      inp.addEventListener('blur', function() {
+        const minQ = parseInt(inp.min) || 100;
+        const maxQ = parseInt(inp.max) || 10000;
+        let val = parseInt(inp.value) || minQ;
+        // Round to nearest multiple of minQ
+        val = Math.round(val / minQ) * minQ;
+        val = Math.min(maxQ, Math.max(minQ, val));
+        inp.value = val;
+        updatePriceSummary();
+      });
+    }
+
+    // FIX #6: GCash Ref listener — digits only, exact 13
+    function setupGcashRefListener() {
+      const inp = document.getElementById('inputGcashRef');
+      inp.addEventListener('input', function() {
+        // Strip non-digits
+        this.value = this.value.replace(/\D/g, '').substring(0, 13);
+      });
     }
 
     function adjustQty(delta) {
@@ -1351,6 +1291,15 @@
       document.getElementById('summaryTotal').textContent = '₱' + formatNum(total) + '.00';
     }
 
+    // ─── Utility: Strip leading apostrophes from backend data ───
+    // FIX #2/#8: Backend stores "'09171234567" — strip for display
+    function cleanField(val) {
+      if (!val) return '';
+      let s = String(val);
+      while (s.charAt(0) === "'") s = s.substring(1);
+      return s.trim();
+    }
+
     // ─── Navigation ───
     function showSection(id) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1360,6 +1309,12 @@
 
     // Step 1 → Step 2
     function goToStep2() {
+      // FIX #3: Block if sold out
+      if (isSoldOut) {
+        showToast('All numbers have been sold out!', 'error');
+        return;
+      }
+
       const name = document.getElementById('inputName').value.trim();
       const phone = document.getElementById('inputPhone').value.trim();
       const quantity = parseInt(document.getElementById('inputQuantity').value);
@@ -1372,9 +1327,12 @@
       if (!quantity || quantity < minQ || quantity > maxQ)
         errors.push('Quantity must be between ' + formatNum(minQ) + ' and ' + formatNum(maxQ));
 
+      // FIX #4: Ensure quantity is multiple of minQ
+      if (quantity % minQ !== 0)
+        errors.push('Quantity must be a multiple of ' + formatNum(minQ));
+
       if (errors.length > 0) { errors.forEach(e => showToast(e, 'error')); return; }
 
-      // Save
       formData.name = name;
       formData.phone = phone;
       formData.quantity = quantity;
@@ -1382,7 +1340,6 @@
       const price = appSettings.price_per_number || 1;
       const total = quantity * price;
 
-      // Update Step 2 display
       document.getElementById('payAmount').textContent = '₱' + formatNum(total) + '.00';
       document.getElementById('payQty').textContent = 'for ' + formatNum(quantity) + ' numbers';
       document.getElementById('payAmountStep').textContent = '₱' + formatNum(total) + '.00';
@@ -1390,7 +1347,6 @@
       showSection('sectionStep2');
     }
 
-    // Step 2 → Step 1
     function goToStep1() {
       showSection('sectionStep1');
     }
@@ -1405,8 +1361,10 @@
       document.getElementById('step3Qty').textContent = formatNum(formData.quantity) + ' numbers';
       document.getElementById('step3Amount').textContent = '₱' + formatNum(total) + '.00';
 
+      // Clear previous ref input
+      document.getElementById('inputGcashRef').value = '';
+
       showSection('sectionStep3');
-      // Focus the reference input
       setTimeout(() => document.getElementById('inputGcashRef').focus(), 400);
     }
 
@@ -1422,7 +1380,6 @@
       }).catch(() => showToast('Could not copy', 'error'));
     }
 
-    // ─── Copy Receipt Fields ───
     function copyReceiptField(elementId, btn) {
       const text = document.getElementById(elementId).textContent;
       navigator.clipboard.writeText(text).then(() => {
@@ -1439,8 +1396,27 @@
 
       const gcashRef = document.getElementById('inputGcashRef').value.trim();
 
-      if (!gcashRef || !/^\d{1,13}$/.test(gcashRef)) {
-        showToast('Enter a valid GCash reference number', 'error');
+      // FIX #6: Require exactly 13 digits
+      if (!gcashRef || !/^\d{13}$/.test(gcashRef)) {
+        showToast('GCash reference must be exactly 13 digits', 'error');
+        document.getElementById('inputGcashRef').classList.add('error');
+        setTimeout(() => document.getElementById('inputGcashRef').classList.remove('error'), 3000);
+        return;
+      }
+
+      // FIX #5: Re-validate form data before submit
+      if (!formData.name || formData.name.length < 2) {
+        showToast('Invalid name. Please go back and re-enter.', 'error');
+        return;
+      }
+      if (!/^09\d{9}$/.test(formData.phone)) {
+        showToast('Invalid phone. Please go back and re-enter.', 'error');
+        return;
+      }
+      const minQ = appSettings.min_quantity || 100;
+      const maxQ = appSettings.max_quantity || 10000;
+      if (!formData.quantity || formData.quantity < minQ || formData.quantity > maxQ) {
+        showToast('Invalid quantity. Please go back and re-enter.', 'error');
         return;
       }
 
@@ -1449,7 +1425,6 @@
       const price = appSettings.price_per_number || 1;
       const total = formData.quantity * price;
 
-      // Show generating overlay
       isSubmitting = true;
       const btn = document.getElementById('btnSubmit');
       btn.disabled = true;
@@ -1457,7 +1432,6 @@
 
       showGeneratingOverlay();
 
-      // Actual API call
       const res = await apiPost('purchase', {
         name: formData.name,
         phone: formData.phone,
@@ -1465,9 +1439,7 @@
         quantity: formData.quantity
       });
 
-      // Let animation finish (minimum 3.5s)
       await waitForGenerating();
-
       hideGeneratingOverlay();
 
       btn.disabled = false;
@@ -1479,21 +1451,17 @@
         return;
       }
 
-      // Fill receipt
+      // FIX #2: Clean apostrophes from displayed data
       document.getElementById('receiptTxId').textContent = res.transactionId;
       document.getElementById('receiptName').textContent = formData.name;
-      document.getElementById('receiptPhone').textContent = formData.phone;
-      document.getElementById('receiptGcashRef').textContent = formData.gcashRef;
+      document.getElementById('receiptPhone').textContent = cleanField(formData.phone);
+      document.getElementById('receiptGcashRef').textContent = cleanField(formData.gcashRef);
       document.getElementById('receiptQty').textContent = formatNum(res.quantity) + ' numbers';
       document.getElementById('receiptAmount').textContent = '₱' + formatNum(res.amount) + '.00';
       document.getElementById('receiptDate').textContent = res.timestamp;
 
-      // Show Step 4
       showSection('sectionStep4');
-
-      // Confetti!
       launchConfetti();
-
       showToast('Entries submitted successfully! 🎉', 'success');
       loadStats();
     }
@@ -1513,7 +1481,6 @@
       status.textContent = 'Initializing...';
       overlay.classList.add('active');
 
-      // Animate random numbers appearing
       const statuses = [
         'Connecting to server...',
         'Verifying payment...',
@@ -1529,10 +1496,9 @@
 
       const numInterval = setInterval(() => {
         if (numCount >= maxNums) { clearInterval(numInterval); return; }
-
         const num = document.createElement('div');
         num.className = 'gen-num';
-        num.textContent = Math.floor(Math.random() * 90 + 10);
+        num.textContent = String(Math.floor(Math.random() * 20000)).padStart(5, '0');
         numContainer.appendChild(num);
         numCount++;
       }, 400);
@@ -1543,7 +1509,6 @@
         statusIndex++;
       }, 600);
 
-      // Progress bar animation
       let progress = 0;
       const progressInterval = setInterval(() => {
         progress += Math.random() * 15 + 5;
@@ -1552,14 +1517,13 @@
         if (progress >= 90) clearInterval(progressInterval);
       }, 500);
 
-      // Store intervals for cleanup
       overlay._intervals = [numInterval, statusInterval, progressInterval];
     }
 
     function waitForGenerating() {
       return new Promise(resolve => {
         const elapsed = Date.now() - genStartTime;
-        const minTime = 3500; // minimum 3.5 seconds
+        const minTime = 3500;
         const remaining = Math.max(0, minTime - elapsed);
         setTimeout(resolve, remaining);
       });
@@ -1570,18 +1534,14 @@
       const progressFill = document.getElementById('genProgressFill');
       const status = document.getElementById('genStatus');
 
-      // Complete the progress
       progressFill.style.width = '100%';
       status.textContent = 'Complete! ✓';
 
-      // Clean up intervals
       if (overlay._intervals) {
         overlay._intervals.forEach(i => clearInterval(i));
       }
 
-      setTimeout(() => {
-        overlay.classList.remove('active');
-      }, 500);
+      setTimeout(() => { overlay.classList.remove('active'); }, 500);
     }
 
     // ─── Confetti ───
@@ -1602,8 +1562,6 @@
         if (Math.random() > 0.5) confetti.style.borderRadius = '50%';
         container.appendChild(confetti);
       }
-
-      // Clean up after animation
       setTimeout(() => { container.innerHTML = ''; }, 5000);
     }
 
@@ -1670,4 +1628,4 @@
     }
   </script>
 </body>
-</html> 
+</html>
