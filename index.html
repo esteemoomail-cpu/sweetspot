@@ -267,8 +267,42 @@
     .confetti-container { position:fixed; inset:0; z-index:1001; pointer-events:none; overflow:hidden; }
     .confetti { position:absolute; width:10px; height:10px; top:-10px; border-radius:2px; animation:confettiFall linear forwards; }
     @keyframes confettiFall { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 80%{opacity:1} 100%{transform:translateY(100vh) rotate(720deg) scale(0.3);opacity:0} }
-    @media(max-width:380px) { .app-container{padding:12px 12px 32px} .app-title{font-size:24px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} }
-    @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} }
+
+    /* ═══════════ DRAW WINNER STYLES ═══════════ */
+    .draw-stage { text-align:center; padding:20px 0; }
+    .draw-title-text { font-family:'Poppins',sans-serif; font-size:16px; font-weight:700; color:var(--text-secondary); margin-bottom:24px; text-transform:uppercase; letter-spacing:2px; }
+    .slot-container { display:flex; justify-content:center; gap:10px; margin:32px 0; }
+    .slot-digit { width:64px; height:88px; background:var(--bg-secondary); border:2px solid var(--border); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:40px; font-weight:900; color:var(--text-muted); position:relative; overflow:hidden; transition:border-color 0.3s, box-shadow 0.3s; }
+    .slot-digit.spinning { border-color:var(--primary-light); box-shadow:0 0 20px var(--primary-glow); }
+    .slot-digit.spinning .slot-value { animation:slotSpin 0.1s linear infinite; }
+    .slot-digit.revealed { border-color:var(--secondary); box-shadow:0 0 24px rgba(245,158,11,0.4); color:var(--secondary); animation:digitReveal 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+    .slot-digit.revealed .slot-value { animation:none; }
+    .slot-value { display:block; }
+    @keyframes slotSpin { 0%{transform:translateY(-100%);opacity:0} 50%{transform:translateY(0);opacity:1} 100%{transform:translateY(100%);opacity:0} }
+    @keyframes digitReveal { 0%{transform:scale(1.8);opacity:0} 50%{transform:scale(0.9)} 100%{transform:scale(1);opacity:1} }
+    .draw-status { font-size:14px; color:var(--text-secondary); margin:16px 0; min-height:24px; font-weight:500; }
+    .winner-reveal { display:none; animation:winnerAppear 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+    .winner-reveal.visible { display:block; }
+    @keyframes winnerAppear { 0%{transform:scale(0.5) translateY(30px);opacity:0} 100%{transform:scale(1) translateY(0);opacity:1} }
+    .winner-card { background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04)); border:2px solid rgba(245,158,11,0.3); border-radius:var(--radius); padding:32px 24px; text-align:center; margin-top:24px; position:relative; overflow:hidden; }
+    .winner-card::before { content:''; position:absolute; inset:-2px; border-radius:var(--radius); background:linear-gradient(135deg,var(--secondary),var(--primary-light),var(--accent),var(--secondary)); background-size:300% 300%; animation:winnerGlow 3s ease infinite; z-index:-1; opacity:0.3; }
+    @keyframes winnerGlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .winner-trophy { font-size:56px; margin-bottom:16px; animation:trophyBounce 1s ease-in-out infinite; }
+    @keyframes trophyBounce { 0%,100%{transform:translateY(0) rotate(0deg)} 25%{transform:translateY(-8px) rotate(-5deg)} 75%{transform:translateY(-4px) rotate(5deg)} }
+    .winner-label { font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); font-weight:700; margin-bottom:8px; }
+    .winner-number { font-family:'Poppins',sans-serif; font-size:48px; font-weight:900; color:var(--secondary); letter-spacing:8px; text-shadow:0 0 30px rgba(245,158,11,0.5); margin-bottom:16px; }
+    .winner-name { font-family:'Poppins',sans-serif; font-size:24px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+    .winner-phone { font-size:14px; color:var(--text-secondary); margin-bottom:4px; }
+    .winner-txid { font-size:11px; color:var(--text-muted); font-family:'Courier New',monospace; }
+    .draw-history-item { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
+    .draw-history-item:last-child { border-bottom:none; }
+    .draw-history-left { display:flex; align-items:center; gap:12px; }
+    .draw-history-num { font-family:'Poppins',sans-serif; font-size:18px; font-weight:800; color:var(--secondary); letter-spacing:2px; }
+    .draw-history-name { font-size:13px; color:var(--text-primary); font-weight:600; }
+    .draw-history-date { font-size:11px; color:var(--text-muted); }
+
+    @media(max-width:380px) { .app-container{padding:12px 12px 32px} .app-title{font-size:24px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:48px;height:68px;font-size:28px} .winner-number{font-size:36px;letter-spacing:4px} }
+    @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} .slot-digit{width:52px;height:72px;font-size:32px} }
   </style>
 </head>
 <body>
@@ -383,26 +417,77 @@
           <button class="admin-nav-btn active" data-tab="dashboard" onclick="switchAdminTab('dashboard')"><i class="fas fa-chart-pie"></i> Dashboard</button>
           <button class="admin-nav-btn" data-tab="transactions" onclick="switchAdminTab('transactions')"><i class="fas fa-list"></i> Transactions <span class="badge" id="pendingBadge" style="display:none">0</span></button>
           <button class="admin-nav-btn" data-tab="numbers" onclick="switchAdminTab('numbers')"><i class="fas fa-hashtag"></i> Numbers</button>
+          <button class="admin-nav-btn" data-tab="draw" onclick="switchAdminTab('draw')"><i class="fas fa-trophy"></i> Draw</button>
           <button class="admin-nav-btn" data-tab="search" onclick="switchAdminTab('search')"><i class="fas fa-search"></i> Search</button>
           <button class="admin-nav-btn" data-tab="settings" onclick="switchAdminTab('settings')"><i class="fas fa-cog"></i> Settings</button>
         </div>
+
+        <!-- Dashboard Tab -->
         <div class="admin-tab active" id="tabDashboard">
           <div class="admin-stats"><div class="admin-stat purple"><div class="as-value" id="asSold">0</div><div class="as-label">Numbers Sold</div></div><div class="admin-stat green"><div class="as-value" id="asRemaining">0</div><div class="as-label">Remaining</div></div><div class="admin-stat amber"><div class="as-value" id="asRevenue">₱0</div><div class="as-label">Revenue</div></div><div class="admin-stat red"><div class="as-value" id="asPending">0</div><div class="as-label">Pending</div></div><div class="admin-stat green"><div class="as-value" id="asApproved">0</div><div class="as-label">Approved</div></div><div class="admin-stat blue"><div class="as-value" id="asBuyers">0</div><div class="as-label">Buyers</div></div></div>
           <div class="card"><div class="card-header"><div class="card-icon purple"><i class="fas fa-clock"></i></div><div class="card-title">Recent Activity</div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>TX ID</th><th>Name</th><th>Qty</th><th>Amount</th><th>Status</th><th>Time</th></tr></thead><tbody id="recentBody"></tbody></table></div><div class="empty-state" id="recentEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No transactions yet</p></div></div>
         </div>
+
+        <!-- Transactions Tab -->
         <div class="admin-tab" id="tabTransactions" style="display:none;">
           <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-list-alt"></i></div><div class="card-title-row"><div class="card-title">All Transactions</div><div style="display:flex;gap:8px;align-items:center;"><button class="btn btn-xs btn-danger" onclick="deleteAllTransactions()" id="btnDeleteAll"><i class="fas fa-trash-alt"></i> Delete All</button><button class="btn btn-xs btn-secondary" onclick="loadTransactions()"><i class="fas fa-sync-alt"></i> Refresh</button></div></div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>TX ID</th><th>Name</th><th>Phone</th><th>GCash Ref</th><th>Qty</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="txBody"></tbody></table></div><div class="empty-state" id="txEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No transactions found</p></div><div class="pagination" id="txPagination"></div></div>
         </div>
+
+        <!-- Numbers Tab -->
         <div class="admin-tab" id="tabNumbers" style="display:none;">
           <div class="card"><div class="card-header"><div class="card-icon green"><i class="fas fa-plus-circle"></i></div><div class="card-title">Add Number Manually</div></div><div class="add-number-form"><div class="form-group"><label class="form-label">Number (00000-19999)</label><input type="text" class="form-input" id="addNumInput" placeholder="e.g. 00123" maxlength="5" inputmode="numeric"></div><div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="addNumName" placeholder="Manual" maxlength="40"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="addNumPhone" placeholder="Optional" maxlength="11"></div><button class="btn btn-sm btn-success" onclick="addNumber()" style="height:48px;margin-bottom:0;"><i class="fas fa-plus"></i> Add</button></div></div>
           <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-minus-circle"></i></div><div class="card-title">Remove Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Number to Remove</label><input type="text" class="form-input" id="removeNumInput" placeholder="e.g. 00123" maxlength="5" inputmode="numeric"></div><button class="btn btn-sm btn-danger" onclick="removeNumber()" style="height:48px;"><i class="fas fa-trash"></i> Remove</button></div></div>
           <div class="card"><div class="card-header"><div class="card-icon purple"><i class="fas fa-list-ol"></i></div><div class="card-title-row"><div class="card-title">Sold Numbers</div><button class="btn btn-xs btn-secondary" onclick="loadSoldNumbers()"><i class="fas fa-sync-alt"></i> Refresh</button></div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>Number</th><th>TX ID</th><th>Name</th><th>Phone</th><th>Timestamp</th></tr></thead><tbody id="soldBody"></tbody></table></div><div class="empty-state" id="soldEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No sold numbers</p></div><div class="pagination" id="soldPagination"></div></div>
         </div>
+
+        <!-- Draw Winner Tab -->
+        <div class="admin-tab" id="tabDraw" style="display:none;">
+          <div class="card">
+            <div class="card-header"><div class="card-icon amber"><i class="fas fa-trophy"></i></div><div class="card-title">Winner Drawing</div></div>
+            <div class="draw-stage" id="drawStage">
+              <div class="draw-title-text" id="drawTitleText">Ready to Draw</div>
+              <div class="slot-container" id="slotContainer">
+                <div class="slot-digit" id="slot0"><span class="slot-value">?</span></div>
+                <div class="slot-digit" id="slot1"><span class="slot-value">?</span></div>
+                <div class="slot-digit" id="slot2"><span class="slot-value">?</span></div>
+                <div class="slot-digit" id="slot3"><span class="slot-value">?</span></div>
+                <div class="slot-digit" id="slot4"><span class="slot-value">?</span></div>
+              </div>
+              <div class="draw-status" id="drawStatus">Click the button below to draw a winner</div>
+              <button class="btn btn-primary" id="btnDrawWinner" onclick="startDraw()" style="max-width:320px;margin:20px auto 0;">
+                <i class="fas fa-dice"></i><span>Draw a Winner</span>
+              </button>
+              <div class="winner-reveal" id="winnerReveal">
+                <div class="winner-card">
+                  <div class="winner-trophy">🏆</div>
+                  <div class="winner-label">Winning Number</div>
+                  <div class="winner-number" id="winnerNumber">—</div>
+                  <div class="winner-name" id="winnerName">—</div>
+                  <div class="winner-phone" id="winnerPhone">—</div>
+                  <div class="winner-txid" id="winnerTxId">—</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary" id="btnDrawAgain" onclick="resetDraw()" style="max-width:320px;margin:16px auto 0;display:none;">
+                <i class="fas fa-redo"></i><span>Draw Again</span>
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-icon purple"><i class="fas fa-history"></i></div><div class="card-title">Draw History</div></div>
+            <div id="drawHistoryList">
+              <div class="empty-state" id="drawHistoryEmpty"><i class="fas fa-trophy" style="font-size:32px"></i><p>No draws yet</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Tab -->
         <div class="admin-tab" id="tabSearch" style="display:none;">
           <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-search"></i></div><div class="card-title">Search Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Number (00000-19999)</label><input type="text" class="form-input" id="searchNumInput" placeholder="e.g. 00123" maxlength="5" inputmode="numeric"></div><button class="btn btn-sm btn-primary" onclick="searchNumber()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchNumResults" style="margin-top:16px;"></div></div>
           <div class="card"><div class="card-header"><div class="card-icon amber"><i class="fas fa-user-search"></i></div><div class="card-title">Search Buyer</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Name, Phone, TX ID, or GCash Ref</label><input type="text" class="form-input" id="searchBuyerInput" placeholder="Search..." maxlength="50"></div><button class="btn btn-sm btn-primary" onclick="searchBuyer()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchBuyerResults" style="margin-top:16px;"></div></div>
           <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-clone"></i></div><div class="card-title">Duplicate Check</div></div><button class="btn btn-sm btn-secondary" onclick="searchDuplicates()" id="btnDupCheck"><i class="fas fa-search"></i> Check for Duplicates</button><div id="searchDupResults" style="margin-top:16px;"></div></div>
         </div>
+
+        <!-- Settings Tab -->
         <div class="admin-tab" id="tabSettings" style="display:none;">
           <div class="card"><div class="card-header"><div class="card-icon amber"><i class="fas fa-cog"></i></div><div class="card-title">Settings</div></div>
             <div class="settings-grid">
@@ -439,6 +524,8 @@
     var formData={name:'',phone:'',quantity:100,gcashRef:''};
     var adminToken=null;
     var txPage=1,soldPage=1;
+    var drawHistory=[];
+    var isDrawing=false;
 
     function censorName(name){if(!name)return'—';var parts=name.trim().split(/\s+/);if(parts.length===1)return parts[0].charAt(0)+'*'.repeat(Math.max(0,parts[0].length-1));return parts.map(function(p,i){return i===0?p:p.charAt(0)+'*'.repeat(Math.max(0,p.length-1));}).join(' ');}
     function censorPhone(phone){if(!phone||phone.length<4)return'****';return'*'.repeat(phone.length-4)+phone.slice(-4);}
@@ -458,7 +545,24 @@
 
     async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.getElementById('appTitle').textContent=r.lottery_name||'SWEETSPOT';document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||100,maxQ=r.max_quantity||10000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=minQ;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');}
 
-    function formatDrawDate(dateStr){if(!dateStr)return'';try{var parts=dateStr.split('-');if(parts.length===3){var mm=String(parseInt(parts[1])).padStart(2,'0');var dd=String(parseInt(parts[2])).padStart(2,'0');var yy=String(parts[0]).slice(-2);return mm+'/'+dd+'/'+yy;}}catch(e){}return dateStr;}
+    function formatDrawDate(dateStr){
+      if(!dateStr)return'';
+      var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+      try{
+        // Handle YYYY-MM-DD format
+        if(/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateStr)){
+          var parts=dateStr.split('-');
+          var y=parseInt(parts[0]),m=parseInt(parts[1])-1,d=parseInt(parts[2]);
+          return months[m]+' '+d+', '+y;
+        }
+        // Handle any Date-parseable string
+        var dt=new Date(dateStr);
+        if(!isNaN(dt.getTime())){
+          return months[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();
+        }
+      }catch(e){}
+      return dateStr;
+    }
 
     async function loadStats(){var r=await apiGet('stats');if(!r.success)return;var pct=r.total>0?(r.sold/r.total*100):0;document.getElementById('progressFill').style.width=pct.toFixed(1)+'%';document.getElementById('progressPercent').textContent=pct.toFixed(1)+'%';animateNum('statBuyers',r.uniqueBuyers||0);isSoldOut=r.remaining<=0;if(isSoldOut){document.getElementById('purchaseFlow').style.display='none';document.getElementById('soldoutBanner').classList.add('visible');}else{document.getElementById('purchaseFlow').style.display='';document.getElementById('soldoutBanner').classList.remove('visible');}}
 
@@ -505,7 +609,7 @@
     function adminLogout(){apiPost('adminLogout',{token:adminToken});adminToken=null;sessionStorage.removeItem('adminToken');showToast('Logged out','info');showAdminSection('adminLoginSection');}
     async function checkAdminSession(){var r=await apiGet('adminInit');if(!r.success){adminToken=null;sessionStorage.removeItem('adminToken');showAdminSection('adminLoginSection');return;}showAdminSection('adminDashSection');loadDashboard();}
 
-    function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}else if(tab==='search'){document.getElementById('tabSearch').style.display='';}else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}}
+    function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}else if(tab==='draw'){document.getElementById('tabDraw').style.display='';loadDrawHistory();}else if(tab==='search'){document.getElementById('tabSearch').style.display='';}else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}}
 
     async function loadDashboard(){var r=await apiGet('adminDashboard');if(!r.success)return;document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='₱'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" onclick="viewTransaction(\''+esc(tx.transactionId)+'\')">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});}
 
@@ -536,6 +640,176 @@
     async function loadSettingsForm(){var r=await apiGet('adminInit');if(!r.success)return;var s=r.settings;document.getElementById('setLotteryName').value=s.lottery_name||'';var dv=s.draw_date||'';if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}document.getElementById('setDrawDate').value=dv;document.getElementById('setAnnouncement').value=s.announcement||'';document.getElementById('setPricePerNumber').value=s.price_per_number||'1';document.getElementById('setMinQuantity').value=s.min_quantity||'100';document.getElementById('setMaxQuantity').value=s.max_quantity||'10000';document.getElementById('setGcashName').value=s.gcash_name||'';document.getElementById('setGcashNumber').value=s.gcash_number||'';document.getElementById('setMaintenance').checked=s.maintenance_mode==='true';document.getElementById('setNewPassword').value='';}
 
     async function saveSettings(){var btn=document.getElementById('btnSaveSettings');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';var data={lottery_name:document.getElementById('setLotteryName').value,draw_date:document.getElementById('setDrawDate').value,announcement:document.getElementById('setAnnouncement').value,price_per_number:document.getElementById('setPricePerNumber').value,min_quantity:document.getElementById('setMinQuantity').value,max_quantity:document.getElementById('setMaxQuantity').value,gcash_name:document.getElementById('setGcashName').value,gcash_number:document.getElementById('setGcashNumber').value,maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false'};var pw=document.getElementById('setNewPassword').value;if(pw)data.new_password=pw;var r=await apiPost('adminUpdateSettings',data);btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';showToast(r.success?'Settings saved!':(r.error||'Failed'),r.success?'success':'error');}
+
+    /* ═══════════════════════════════════════════════════════════
+       DRAW WINNER SYSTEM
+       ═══════════════════════════════════════════════════════════ */
+
+    async function startDraw(){
+      if(isDrawing)return;
+      isDrawing=true;
+
+      var btn=document.getElementById('btnDrawWinner');
+      btn.disabled=true;
+      btn.innerHTML='<div class="spinner"></div><span>Drawing...</span>';
+
+      document.getElementById('winnerReveal').classList.remove('visible');
+      document.getElementById('btnDrawAgain').style.display='none';
+      document.getElementById('drawTitleText').textContent='Drawing Winner...';
+      document.getElementById('drawStatus').textContent='Fetching random winner from sold numbers...';
+
+      // Reset slots
+      for(var i=0;i<5;i++){
+        var slot=document.getElementById('slot'+i);
+        slot.className='slot-digit';
+        slot.querySelector('.slot-value').textContent='?';
+      }
+
+      // Call backend to get random winner
+      var res=await apiGet('adminDrawWinner');
+
+      if(!res.success){
+        showToast(res.error||'Draw failed','error');
+        btn.disabled=false;
+        btn.innerHTML='<i class="fas fa-dice"></i><span>Draw a Winner</span>';
+        document.getElementById('drawTitleText').textContent='Ready to Draw';
+        document.getElementById('drawStatus').textContent='Click the button below to draw a winner';
+        isDrawing=false;
+        return;
+      }
+
+      var winningNumber=res.number;
+      var digits=winningNumber.split('');
+
+      // Start all slots spinning
+      for(var j=0;j<5;j++){
+        var slotEl=document.getElementById('slot'+j);
+        slotEl.classList.add('spinning');
+        startSlotAnimation(slotEl);
+      }
+
+      document.getElementById('drawStatus').textContent='Shuffling numbers...';
+
+      // Reveal each digit one by one with 5 second delays
+      await delay(2000); // Initial spin time
+
+      for(var k=0;k<5;k++){
+        await revealDigit(k,digits[k]);
+        if(k<4){
+          document.getElementById('drawStatus').textContent='Revealing digit '+(k+2)+' of 5...';
+          await delay(5000);
+        }
+      }
+
+      // All digits revealed — show winner
+      document.getElementById('drawStatus').textContent='';
+      document.getElementById('drawTitleText').textContent='🎉 Winner Found!';
+
+      await delay(800);
+
+      // Show winner card
+      document.getElementById('winnerNumber').textContent=winningNumber;
+      document.getElementById('winnerName').textContent=res.name||'—';
+      document.getElementById('winnerPhone').textContent=res.phone||'—';
+      document.getElementById('winnerTxId').textContent='TX: '+(res.transactionId||'—');
+      document.getElementById('winnerReveal').classList.add('visible');
+
+      btn.style.display='none';
+      document.getElementById('btnDrawAgain').style.display='';
+
+      // Launch confetti
+      launchConfetti();
+
+      // Add to history
+      drawHistory.unshift({
+        number:winningNumber,
+        name:res.name||'—',
+        phone:res.phone||'—',
+        transactionId:res.transactionId||'—',
+        timestamp:new Date().toLocaleString()
+      });
+      renderDrawHistory();
+
+      isDrawing=false;
+    }
+
+    function startSlotAnimation(slotEl){
+      var val=slotEl.querySelector('.slot-value');
+      slotEl._spinInterval=setInterval(function(){
+        val.textContent=Math.floor(Math.random()*10);
+      },80);
+    }
+
+    function stopSlotAnimation(slotEl){
+      if(slotEl._spinInterval){
+        clearInterval(slotEl._spinInterval);
+        slotEl._spinInterval=null;
+      }
+    }
+
+    function revealDigit(index,digit){
+      return new Promise(function(resolve){
+        var slot=document.getElementById('slot'+index);
+
+        // Slow down the spinning before reveal
+        stopSlotAnimation(slot);
+
+        var slowCount=0;
+        var slowInterval=setInterval(function(){
+          slot.querySelector('.slot-value').textContent=Math.floor(Math.random()*10);
+          slowCount++;
+          if(slowCount>=8){
+            clearInterval(slowInterval);
+            // Final reveal
+            slot.classList.remove('spinning');
+            slot.classList.add('revealed');
+            slot.querySelector('.slot-value').textContent=digit;
+            resolve();
+          }
+        },150);
+      });
+    }
+
+    function resetDraw(){
+      isDrawing=false;
+      var btn=document.getElementById('btnDrawWinner');
+      btn.style.display='';
+      btn.disabled=false;
+      btn.innerHTML='<i class="fas fa-dice"></i><span>Draw a Winner</span>';
+      document.getElementById('btnDrawAgain').style.display='none';
+      document.getElementById('winnerReveal').classList.remove('visible');
+      document.getElementById('drawTitleText').textContent='Ready to Draw';
+      document.getElementById('drawStatus').textContent='Click the button below to draw a winner';
+      for(var i=0;i<5;i++){
+        var slot=document.getElementById('slot'+i);
+        stopSlotAnimation(slot);
+        slot.className='slot-digit';
+        slot.querySelector('.slot-value').textContent='?';
+      }
+    }
+
+    function loadDrawHistory(){
+      renderDrawHistory();
+    }
+
+    function renderDrawHistory(){
+      var list=document.getElementById('drawHistoryList');
+      var empty=document.getElementById('drawHistoryEmpty');
+      if(drawHistory.length===0){
+        list.innerHTML='';
+        list.appendChild(empty);
+        empty.style.display='';
+        return;
+      }
+      empty.style.display='none';
+      var html='';
+      drawHistory.forEach(function(d){
+        html+='<div class="draw-history-item"><div class="draw-history-left"><div class="draw-history-num">'+esc(d.number)+'</div><div><div class="draw-history-name">'+esc(d.name)+'</div><div class="draw-history-date">'+esc(d.timestamp)+'</div></div></div><div style="font-size:11px;color:var(--text-muted);font-family:monospace;cursor:pointer" onclick="viewTransaction(\''+esc(d.transactionId)+'\')">'+esc(d.transactionId)+'</div></div>';
+      });
+      list.innerHTML=html;
+    }
+
+    function delay(ms){return new Promise(function(r){setTimeout(r,ms);});}
 
     function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
     document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
