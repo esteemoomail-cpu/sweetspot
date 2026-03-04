@@ -726,16 +726,19 @@
         <div class="admin-tab" id="tabTransactions" style="display:none;">
           <div class="card">
             <div class="card-header">
-              <div class="card-icon blue"><i class="fas fa-list-alt"></i></div>
-              <div class="card-title-row"><div class="card-title">All Transactions</div><button class="btn btn-xs btn-secondary" onclick="loadTransactions()"><i class="fas fa-sync-alt"></i> Refresh</button></div>
-            </div>
-            <div class="table-wrapper">
-              <table class="admin-table"><thead><tr><th>TX ID</th><th>Name</th><th>Phone</th><th>GCash Ref</th><th>Qty</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="txBody"></tbody></table>
-            </div>
-            <div class="empty-state" id="txEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No transactions found</p></div>
-            <div class="pagination" id="txPagination"></div>
-          </div>
-        </div>
+  <div class="card-icon blue"><i class="fas fa-list-alt"></i></div>
+  <div class="card-title-row">
+    <div class="card-title">All Transactions</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="btn btn-xs btn-danger" onclick="deleteAllTransactions()" id="btnDeleteAll">
+        <i class="fas fa-trash-alt"></i> Delete All
+      </button>
+      <button class="btn btn-xs btn-secondary" onclick="loadTransactions()">
+        <i class="fas fa-sync-alt"></i> Refresh
+      </button>
+    </div>
+  </div>
+</div>
 
         <!-- Numbers Tab -->
         <div class="admin-tab" id="tabNumbers" style="display:none;">
@@ -1138,7 +1141,54 @@
       const pg=document.getElementById('txPagination');
       pg.innerHTML=`<button ${r.page<=1?'disabled':''} onclick="txPage=${r.page-1};loadTransactions()"><i class="fas fa-chevron-left"></i></button><span>Page ${r.page} of ${r.totalPages}</span><button ${r.page>=r.totalPages?'disabled':''} onclick="txPage=${r.page+1};loadTransactions()"><i class="fas fa-chevron-right"></i></button>`;
     }
+// ═══ DELETE ALL TRANSACTIONS ═══
 
+async function deleteAllTransactions() {
+  // First confirmation
+  if (!confirm(
+    '⚠️ DELETE ALL TRANSACTIONS\n\n' +
+    'This will permanently delete ALL transactions and free ALL sold numbers.\n\n' +
+    'This action CANNOT be undone.\n\n' +
+    'Are you sure?'
+  )) return;
+
+  // Second confirmation — type check
+  var typed = prompt(
+    '🔴 FINAL CONFIRMATION\n\n' +
+    'Type "DELETE ALL" to confirm:',
+    ''
+  );
+
+  if (!typed || typed.trim().toUpperCase() !== 'DELETE ALL') {
+    showToast('Cancelled. Nothing was deleted.', 'info');
+    return;
+  }
+
+  var btn = document.getElementById('btnDeleteAll');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Deleting...';
+
+  // First call — get confirmation requirement
+  var res = await apiPost('adminDeleteAllTransactions', {});
+
+  if (!res.success && res.error === 'CONFIRM_REQUIRED') {
+    // Second call with confirmation
+    res = await apiPost('adminDeleteAllTransactions', {
+      confirm: res.confirmType
+    });
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete All';
+
+  if (res.success) {
+    showToast(res.message, 'success');
+    loadTransactions();
+    loadDashboard();
+  } else {
+    showToast(res.error || 'Failed to delete', 'error');
+  }
+}
     async function viewTransaction(txId){
       const r=await apiGet('adminGetTransaction',{transactionId:txId});
       if(!r.success){showToast(r.error||'Not found','error');return;}
