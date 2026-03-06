@@ -352,7 +352,7 @@
             <div class="card-header"><div class="card-icon purple"><i class="fas fa-user"></i></div><div class="card-title">Your Information</div></div>
             <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="inputName" placeholder="Juan Dela Cruz" maxlength="40" autocomplete="name"></div>
             <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" id="inputPhone" placeholder="09171234567" maxlength="11" autocomplete="tel"><div class="form-hint"><i class="fas fa-info-circle"></i> Must start with 09</div></div>
-            <div class="form-group"><label class="form-label">Quantity</label><div class="quantity-control"><button type="button" class="qty-btn" onclick="adjustQty(-100)">−</button><input type="number" class="form-input qty-input" id="inputQuantity" min="100" max="10000" value="100" step="100"><button type="button" class="qty-btn" onclick="adjustQty(100)">+</button></div><div class="form-hint" id="qtyHint"><i class="fas fa-info-circle"></i> Min: 100 — Max: 10,000</div></div>
+            <div class="form-group"><label class="form-label">Quantity</label><div class="quantity-control"><button type="button" class="qty-btn" onclick="adjustQty(-100)">−</button><input type="number" class="form-input qty-input" id="inputQuantity" min="20" max="1000" value="20" step="1"><button type="button" class="qty-btn" onclick="adjustQty(100)">+</button></div><div class="form-hint" id="qtyHint"><i class="fas fa-info<div class="form-hint" id="qtyHint"><i class="fas fa-info-circle"></i> Min: 20 — Max: 1,000</div>-circle"></i> Min: 100 — Max: 10,000</div></div>
             <div class="price-summary"><div class="price-row"><span>Price per number</span><span id="pricePerNumber">₱1.00</span></div><div class="price-total"><span class="label">Total</span><span class="amount" id="summaryTotal">₱100.00</span></div></div>
             <div style="margin-top:24px;"><button type="button" class="btn btn-primary" onclick="goToStep2()"><span>Continue to Payment</span><i class="fas fa-arrow-right"></i></button></div>
           </div>
@@ -521,7 +521,7 @@
     var appSettings={};
     var isSubmitting=false;
     var isSoldOut=false;
-    var formData={name:'',phone:'',quantity:100,gcashRef:''};
+    var formData={name:'',phone:'',quantity:20,gcashRef:''};
     var adminToken=null;
     var txPage=1,soldPage=1;
     var drawHistory=[];
@@ -590,7 +590,9 @@
     function showAdminPanel(){document.getElementById('publicView').style.display='none';document.getElementById('adminView').style.display='';document.getElementById('appContainer').classList.add('admin-mode');document.getElementById('mainSiteLink').href=window.location.href.split('#')[0];adminToken=sessionStorage.getItem('adminToken');if(adminToken)checkAdminSession();else showAdminSection('adminLoginSection');}
 
     var listenersReady=false;
-    function setupListeners(){if(listenersReady)return;listenersReady=true;document.getElementById('inputQuantity').addEventListener('input',updatePriceSummary);document.getElementById('inputQuantity').addEventListener('blur',function(){var min=parseInt(this.min)||100,max=parseInt(this.max)||10000;var v=Math.round((parseInt(this.value)||min)/min)*min;this.value=Math.min(max,Math.max(min,v));updatePriceSummary();});document.getElementById('inputGcashRef').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,13);});setInterval(loadStats,30000);}
+    function setupListeners(){if(listenersReady)return;listenersReady=true;document.getElementById('inputQuantity').addEventListener('input',updatePriceSummary);document.getElementById('inputQuantity').addEventListener('blur',function(){var min=parseInt(this.min)||20,max=parseInt(this.max)||1000;
+var v=parseInt(this.value)||min;
+if(v<min)v=min;if(v>max)v=max;;this.value=Math.min(max,Math.max(min,v));updatePriceSummary();});document.getElementById('inputGcashRef').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,13);});setInterval(loadStats,30000);}
 
     /* ═══ PUBLIC ═══ */
     async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.getElementById('appTitle').textContent=r.lottery_name||'SWEETSPOT';document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||100,maxQ=r.max_quantity||10000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=minQ;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');}
@@ -651,8 +653,8 @@
   document.getElementById('inputName').value='';
   document.getElementById('inputPhone').value='';
   document.getElementById('inputGcashRef').value='';
-  document.getElementById('inputQuantity').value=appSettings.min_quantity||100;
-  formData={name:'',phone:'',quantity:appSettings.min_quantity||100,gcashRef:''};
+  document.getElementById('inputQuantity').value=appSettings.min_quantity||20;
+formData={name:'',phone:'',quantity:appSettings.min_quantity||20,gcashRef:''};
   updatePriceSummary();
 
   // If sold out when they click "New Purchase", show the banner now
