@@ -31,7 +31,14 @@
     .app-container.admin-mode { max-width: 900px; }
     .app-header { text-align: center; padding: 32px 0 24px; }
     .logo-container { display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); box-shadow: 0 8px 32px var(--primary-glow); margin-bottom: 16px; position: relative; }
-    .logo-img { width: 52px; height: 52px; object-fit: contain; border-radius: 8px; }
+    .logo-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--primary-glow);
+}
     .logo-container::after { content:''; position:absolute; inset:-3px; border-radius:22px; background:linear-gradient(135deg,var(--primary-light),var(--secondary)); z-index:-1; opacity:0.4; }
     .app-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; line-height: 1.2; }
     .app-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
@@ -333,7 +340,7 @@
   <div class="app-container" id="appContainer">
     <div id="publicView">
       <header class="app-header">
-        <div class="logo-container"><img src="logo.png" alt="Sweetspot Logo" class="logo-img"></div>
+        <img src="logo.png" alt="Sweetspot Logo" class="logo-img">
         <h1 class="app-title" id="appTitle">SWEETSPOT</h1>
         <p class="app-subtitle">Your lucky number awaits</p>
       </header>
