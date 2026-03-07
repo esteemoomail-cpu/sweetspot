@@ -306,7 +306,7 @@
     @media(max-width:380px) { .app-container{padding:12px 12px 32px} .app-title{font-size:24px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:48px;height:68px;font-size:28px} .winner-number{font-size:36px;letter-spacing:4px} }
     @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} .slot-digit{width:52px;height:72px;font-size:32px} }
   </style>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 </head>
 <body>
   <div class="bg-effects"><div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div></div>
@@ -400,23 +400,24 @@
       <div class="price-total"><span class="label">Amount</span><span class="amount" id="step3Amount">₱100.00</span></div>
     </div>
 
-    <!-- ═══ reCAPTCHA WIDGET ═══ -->
-    <div style="margin-top:20px;">
-      <label class="form-label">Verify you're human</label>
-      <div id="recaptchaContainer" style="display:flex;justify-content:center;">
-        <div class="g-recaptcha"
-             data-sitekey="6Ld_X4IsAAAAAPVbEOclGLZcQuNviyw9iNniBqSc"
-             data-theme="dark"
-             data-callback="onCaptchaSuccess"
-             data-expired-callback="onCaptchaExpired"
-             data-error-callback="onCaptchaError"
-             id="recaptchaWidget">
-        </div>
-      </div>
-      <div class="form-hint" id="captchaHint" style="justify-content:center;margin-top:8px;">
-        <i class="fas fa-shield-alt"></i> Complete the captcha to submit
-      </div>
-    </div>
+    <!-- ═══ reCAPTCHA WIDGET (Explicit Render) ═══ -->
+<div style="margin-top:20px;">
+  <label class="form-label">Verify you're human</label>
+  <div id="recaptchaContainer" style="display:flex;justify-content:center;min-height:78px;align-items:center;">
+    <div id="recaptchaWidget"></div>
+  </div>
+  <div class="form-hint" id="captchaHint" style="justify-content:center;margin-top:8px;">
+    <i class="fas fa-shield-alt"></i> Complete the captcha to submit
+  </div>
+  <div id="captchaLoadError" style="display:none;text-align:center;margin-top:8px;">
+    <p style="font-size:12px;color:var(--danger);margin-bottom:8px;">
+      <i class="fas fa-exclamation-triangle"></i> Captcha failed to load
+    </p>
+    <button class="btn btn-xs btn-secondary" onclick="retryLoadCaptcha()" style="margin:0 auto;">
+      <i class="fas fa-redo"></i> Retry
+    </button>
+  </div>
+</div>
 
     <div class="btn-group">
       <button type="button" class="btn btn-secondary" onclick="goToStep2()">
@@ -606,53 +607,158 @@
     var txPage=1,soldPage=1;
     var drawHistory=[];
     var isDrawing=false;
-    var captchaToken=null;
-    var captchaWidgetId=null;
+    var captchaToken = null;
+var captchaWidgetId = null;
+var recaptchaReady = false;
+var RECAPTCHA_SITE_KEY = '6Ld_X4IsAAAAAPVbEOclGLZcQuNviyw9iNniBqSc';
 
-    /* ═══ reCAPTCHA CALLBACKS ═══ */
-    function onCaptchaSuccess(token) {
-      captchaToken = token;
-      document.getElementById('btnSubmit').disabled = false;
-      var hint = document.getElementById('captchaHint');
-      hint.className = 'form-hint captcha-verified';
-      hint.innerHTML = '<i class="fas fa-check-circle"></i> Verified! You can now submit';
-      console.log('[reCAPTCHA] Verified successfully');
-    }
+/* ═══ reCAPTCHA EXPLICIT LOAD ═══ */
+function onRecaptchaLoad() {
+  console.log('[reCAPTCHA] API loaded, grecaptcha ready');
+  recaptchaReady = true;
+  renderCaptchaIfNeeded();
+}
 
-    function onCaptchaExpired() {
-      captchaToken = null;
-      document.getElementById('btnSubmit').disabled = true;
-      var hint = document.getElementById('captchaHint');
-      hint.className = 'form-hint captcha-error';
-      hint.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Captcha expired — please verify again';
-      showToast('Captcha expired. Please verify again.', 'error');
-      console.log('[reCAPTCHA] Token expired');
-    }
+function renderCaptchaIfNeeded() {
+  if (!recaptchaReady) {
+    console.log('[reCAPTCHA] API not ready yet, will render later');
+    return;
+  }
 
-    function onCaptchaError() {
-      captchaToken = null;
-      document.getElementById('btnSubmit').disabled = true;
-      var hint = document.getElementById('captchaHint');
-      hint.className = 'form-hint captcha-error';
-      hint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Captcha error — check your connection';
-      showToast('Captcha error. Check your internet connection.', 'error');
-      console.log('[reCAPTCHA] Error occurred');
-    }
+  if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render !== 'function') {
+    console.log('[reCAPTCHA] grecaptcha.render not available');
+    return;
+  }
 
-    function resetCaptcha() {
-      captchaToken = null;
-      document.getElementById('btnSubmit').disabled = true;
-      var hint = document.getElementById('captchaHint');
-      hint.className = 'form-hint';
-      hint.innerHTML = '<i class="fas fa-shield-alt"></i> Complete the captcha to submit';
-      try {
-        if (typeof grecaptcha !== 'undefined') {
-          grecaptcha.reset();
-        }
-      } catch (e) {
-        console.log('[reCAPTCHA] Reset error:', e);
-      }
+  var container = document.getElementById('recaptchaWidget');
+  if (!container) {
+    console.log('[reCAPTCHA] Container #recaptchaWidget not found');
+    return;
+  }
+
+  /* Don't re-render if already rendered */
+  if (captchaWidgetId !== null) {
+    console.log('[reCAPTCHA] Already rendered (widgetId: ' + captchaWidgetId + '), resetting');
+    try {
+      grecaptcha.reset(captchaWidgetId);
+    } catch (e) {
+      console.log('[reCAPTCHA] Reset failed, re-rendering:', e);
+      container.innerHTML = '';
+      captchaWidgetId = null;
+      renderCaptchaFresh(container);
     }
+    return;
+  }
+
+  renderCaptchaFresh(container);
+}
+
+function renderCaptchaFresh(container) {
+  try {
+    console.log('[reCAPTCHA] Rendering widget with sitekey:', RECAPTCHA_SITE_KEY.substring(0, 15) + '...');
+
+    captchaWidgetId = grecaptcha.render(container, {
+      'sitekey': RECAPTCHA_SITE_KEY,
+      'theme': 'dark',
+      'callback': onCaptchaSuccess,
+      'expired-callback': onCaptchaExpired,
+      'error-callback': onCaptchaError
+    });
+
+    console.log('[reCAPTCHA] ✅ Widget rendered successfully (widgetId: ' + captchaWidgetId + ')');
+
+    /* Hide error, show widget */
+    var errEl = document.getElementById('captchaLoadError');
+    if (errEl) errEl.style.display = 'none';
+
+  } catch (e) {
+    console.error('[reCAPTCHA] ❌ Render failed:', e.message);
+
+    var errEl = document.getElementById('captchaLoadError');
+    if (errEl) errEl.style.display = 'block';
+  }
+}
+
+function retryLoadCaptcha() {
+  console.log('[reCAPTCHA] Retrying...');
+
+  var errEl = document.getElementById('captchaLoadError');
+  if (errEl) errEl.style.display = 'none';
+
+  var container = document.getElementById('recaptchaWidget');
+  if (container) container.innerHTML = '';
+  captchaWidgetId = null;
+  captchaToken = null;
+
+  if (recaptchaReady && typeof grecaptcha !== 'undefined') {
+    renderCaptchaFresh(container);
+  } else {
+    /* Reload the script entirely */
+    var oldScript = document.querySelector('script[src*="recaptcha/api.js"]');
+    if (oldScript) oldScript.remove();
+
+    recaptchaReady = false;
+    var s = document.createElement('script');
+    s.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+    showToast('Reloading captcha...', 'info');
+  }
+}
+
+/* ═══ reCAPTCHA CALLBACKS ═══ */
+function onCaptchaSuccess(token) {
+  captchaToken = token;
+  document.getElementById('btnSubmit').disabled = false;
+  var hint = document.getElementById('captchaHint');
+  hint.className = 'form-hint captcha-verified';
+  hint.innerHTML = '<i class="fas fa-check-circle"></i> Verified! You can now submit';
+  console.log('[reCAPTCHA] ✅ User verified (token length: ' + token.length + ')');
+}
+
+function onCaptchaExpired() {
+  captchaToken = null;
+  document.getElementById('btnSubmit').disabled = true;
+  var hint = document.getElementById('captchaHint');
+  hint.className = 'form-hint captcha-error';
+  hint.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Captcha expired — please verify again';
+  showToast('Captcha expired. Please verify again.', 'error');
+  console.log('[reCAPTCHA] Token expired');
+}
+
+function onCaptchaError() {
+  captchaToken = null;
+  document.getElementById('btnSubmit').disabled = true;
+  var hint = document.getElementById('captchaHint');
+  hint.className = 'form-hint captcha-error';
+  hint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Captcha error — check your connection';
+  showToast('Captcha error. Check your internet connection.', 'error');
+  console.log('[reCAPTCHA] Error occurred');
+}
+
+function resetCaptcha() {
+  captchaToken = null;
+
+  var btnSubmit = document.getElementById('btnSubmit');
+  if (btnSubmit) btnSubmit.disabled = true;
+
+  var hint = document.getElementById('captchaHint');
+  if (hint) {
+    hint.className = 'form-hint';
+    hint.innerHTML = '<i class="fas fa-shield-alt"></i> Complete the captcha to submit';
+  }
+
+  if (captchaWidgetId !== null && typeof grecaptcha !== 'undefined') {
+    try {
+      grecaptcha.reset(captchaWidgetId);
+      console.log('[reCAPTCHA] Widget reset');
+    } catch (e) {
+      console.log('[reCAPTCHA] Reset error, will re-render on next step:', e);
+      captchaWidgetId = null;
+    }
+  }
+}
 
     /* ═══ UTILITIES ═══ */
     function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
