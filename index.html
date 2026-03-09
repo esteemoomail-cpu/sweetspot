@@ -555,6 +555,37 @@
               <div class="settings-section-title">GCash</div>
               <div class="form-group"><label class="form-label">GCash Name</label><input type="text" class="form-input" id="setGcashName" maxlength="50"></div>
               <div class="form-group"><label class="form-label">GCash Number</label><input type="tel" class="form-input" id="setGcashNumber" maxlength="11"></div>
+                           <div class="settings-section-title">Number Pool</div>
+              <div class="form-group">
+                <label class="form-label">Pool Size</label>
+                <select class="form-input" id="setPoolSize" style="cursor:pointer;">
+                  <option value="10000">10,000 — 5-digit (00000–09999)</option>
+                  <option value="20000">20,000 — 5-digit (00000–19999)</option>
+                  <option value="30000">30,000 — 5-digit (00000–29999)</option>
+                  <option value="40000">40,000 — 5-digit (00000–39999)</option>
+                  <option value="50000">50,000 — 5-digit (00000–49999)</option>
+                  <option value="60000">60,000 — 5-digit (00000–59999)</option>
+                  <option value="70000">70,000 — 5-digit (00000–69999)</option>
+                  <option value="80000">80,000 — 5-digit (00000–79999)</option>
+                  <option value="90000">90,000 — 5-digit (00000–89999)</option>
+                  <option value="100000">100,000 — 5-digit (00000–99999)</option>
+                  <option value="110000">110,000 — 6-digit (000000–109999)</option>
+                  <option value="120000">120,000 — 6-digit (000000–119999)</option>
+                  <option value="130000">130,000 — 6-digit (000000–129999)</option>
+                  <option value="140000">140,000 — 6-digit (000000–139999)</option>
+                  <option value="150000">150,000 — 6-digit (000000–149999)</option>
+                  <option value="160000">160,000 — 6-digit (000000–159999)</option>
+                  <option value="170000">170,000 — 6-digit (000000–169999)</option>
+                  <option value="180000">180,000 — 6-digit (000000–179999)</option>
+                  <option value="190000">190,000 — 6-digit (000000–189999)</option>
+                  <option value="200000">200,000 — 6-digit (000000–199999)</option>
+                </select>
+                <div class="form-hint"><i class="fas fa-exclamation-triangle"></i> Changing pool size affects number range. Cannot reduce below sold count.</div>
+              </div>
+              <div id="poolInfo" style="background:rgba(108,60,225,0.08);border:1px solid rgba(108,60,225,0.15);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:8px;">
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Current Pool Info</div>
+                <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;" id="poolInfoText">Loading...</div>
+              </div>
               <div class="settings-section-title">System</div>
               <div class="toggle-row"><span class="toggle-label">Maintenance Mode</span><label class="toggle-switch"><input type="checkbox" id="setMaintenance"><span class="toggle-slider"></span></label></div>
               <div class="settings-section-title">Change Password</div>
@@ -641,7 +672,9 @@
     var txPage=1,soldPage=1;
     var drawHistory=[];
     var isDrawing=false;
-
+    var poolDigits=5;
+    var poolSize=20000;
+    var poolMax=19999;
     /* ═══ UTILITIES ═══ */
     function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
 
@@ -725,13 +758,14 @@
     }
 
     /* ═══ PUBLIC ═══ */
-    async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=1;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');}
+        async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=1;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');poolDigits=r.pool_digits||5;poolSize=r.pool_size||20000;poolMax=r.pool_max||19999;}
 
     function formatDrawDate(dateStr){if(!dateStr)return'';var months=['January','February','March','April','May','June','July','August','September','October','November','December'];try{if(/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateStr)){var parts=dateStr.split('-');return months[parseInt(parts[1])-1]+' '+parseInt(parts[2])+', '+parts[0];}var dt=new Date(dateStr);if(!isNaN(dt.getTime()))return months[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();}catch(e){}return dateStr;}
 
-    async function loadStats(){
+        async function loadStats(){
       var r=await apiGet('stats');
       if(!r.success)return;
+      if(r.pool_digits)poolDigits=r.pool_digits;
       var pct=r.total>0?(r.sold/r.total*100):0;
       document.getElementById('progressFill').style.width=pct.toFixed(1)+'%';
       document.getElementById('progressPercent').textContent=pct.toFixed(1)+'%';
@@ -954,7 +988,7 @@
     function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}else if(tab==='draw'){document.getElementById('tabDraw').style.display='';loadDrawHistory();}else if(tab==='search'){document.getElementById('tabSearch').style.display='';}else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}}
 
     /* ═══ ADMIN DASHBOARD ═══ */
-    async function loadDashboard(){var r=await apiGet('adminDashboard');if(!r.success)return;document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='₱'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" onclick="viewTransaction(\''+esc(tx.transactionId)+'\')">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});}
+        async function loadDashboard(){var r=await apiGet('adminDashboard');if(!r.success)return;if(r.poolDigits)poolDigits=r.poolDigits;if(r.totalPool){poolSize=r.totalPool;poolMax=r.totalPool-1;}document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='₱'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" onclick="viewTransaction(\''+esc(tx.transactionId)+'\')">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});}
 
     /* ═══ ADMIN TRANSACTIONS ═══ */
     async function loadTransactions(){var r=await apiGet('adminTransactions',{page:txPage,perPage:20});if(!r.success)return;var body=document.getElementById('txBody'),empty=document.getElementById('txEmpty');body.innerHTML='';if(!r.transactions||r.transactions.length===0){empty.style.display='';document.getElementById('txPagination').innerHTML='';return;}empty.style.display='none';r.transactions.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" onclick="viewTransaction(\''+esc(tx.transactionId)+'\')">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+esc(tx.phone)+'</td><td style="font-family:monospace;font-size:11px">'+esc(tx.gcashRef)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td><div class="table-actions"><button onclick="viewTransaction(\''+esc(tx.transactionId)+'\')"><i class="fas fa-eye"></i></button>'+(tx.status==='PENDING'?'<button onclick="approveTx(\''+esc(tx.transactionId)+'\')"><i class="fas fa-check"></i></button><button class="danger" onclick="declineTx(\''+esc(tx.transactionId)+'\')"><i class="fas fa-times"></i></button>':'')+(tx.status!=='PENDING'?'<button class="danger" onclick="deleteTx(\''+esc(tx.transactionId)+'\',\''+tx.status+'\')"><i class="fas fa-trash"></i></button>':'')+'</div></td></tr>';});var pg=document.getElementById('txPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="txPage='+(r.page-1)+';loadTransactions()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="txPage='+(r.page+1)+';loadTransactions()"><i class="fas fa-chevron-right"></i></button>';}
@@ -983,27 +1017,56 @@
     async function searchDuplicates(){var btn=document.getElementById('btnDupCheck');btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Checking...';var r=await apiGet('adminSearchDuplicates');btn.disabled=false;btn.innerHTML='<i class="fas fa-search"></i> Check for Duplicates';var c=document.getElementById('searchDupResults');if(!r.success){c.innerHTML='<p style="color:var(--text-muted)">Error</p>';return;}if(r.uniqueDuplicatedNumbers===0){c.innerHTML='<div class="empty-state" style="padding:24px"><i class="fas fa-check-circle" style="font-size:24px;color:var(--accent)"></i><p style="color:var(--accent)">No duplicates found! ✓</p></div>';return;}c.innerHTML='<p style="font-size:12px;color:var(--danger);margin-bottom:12px">⚠️ '+r.uniqueDuplicatedNumbers+' duplicated number(s)</p>'+r.duplicates.map(function(d){return'<div class="search-result-card" style="border-color:rgba(239,68,68,0.3)"><div class="sr-row"><span class="sr-label">Number</span><span class="sr-value" style="color:var(--danger);font-family:monospace">'+esc(d.number)+' (×'+d.occurrences+')</span></div><div class="sr-row"><span class="sr-label">First TX</span><span class="sr-value" style="font-size:11px;cursor:pointer;color:var(--primary-light)" onclick="viewTransaction(\''+esc(d.transactionId)+'\')">'+esc(d.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(d.name)+'</span></div></div>';}).join('');}
 
     /* ═══ ADMIN SETTINGS ═══ */
-    async function loadSettingsForm(){var r=await apiGet('adminInit');if(!r.success)return;var s=r.settings;document.getElementById('setLotteryName').value=s.lottery_name||'';var dv=s.draw_date||'';if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}document.getElementById('setDrawDate').value=dv;document.getElementById('setAnnouncement').value=s.announcement||'';document.getElementById('setPricePerNumber').value=s.price_per_number||'1';document.getElementById('setMinQuantity').value=s.min_quantity||'20';document.getElementById('setMaxQuantity').value=s.max_quantity||'1000';document.getElementById('setGcashName').value=s.gcash_name||'';document.getElementById('setGcashNumber').value=s.gcash_number||'';document.getElementById('setMaintenance').checked=s.maintenance_mode==='true';document.getElementById('setNewPassword').value='';}
+        async function loadSettingsForm(){var r=await apiGet('adminInit');if(!r.success)return;var s=r.settings;document.getElementById('setLotteryName').value=s.lottery_name||'';var dv=s.draw_date||'';if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}document.getElementById('setDrawDate').value=dv;document.getElementById('setAnnouncement').value=s.announcement||'';document.getElementById('setPricePerNumber').value=s.price_per_number||'1';document.getElementById('setMinQuantity').value=s.min_quantity||'20';document.getElementById('setMaxQuantity').value=s.max_quantity||'1000';document.getElementById('setGcashName').value=s.gcash_name||'';document.getElementById('setGcashNumber').value=s.gcash_number||'';document.getElementById('setMaintenance').checked=s.maintenance_mode==='true';document.getElementById('setNewPassword').value='';var ps=parseInt(s.pool_size)||20000;var sel=document.getElementById('setPoolSize');sel.value=String(ps);if(sel.value!==String(ps)){var closest=20000;for(var oi=0;oi<sel.options.length;oi++){var ov=parseInt(sel.options[oi].value);if(Math.abs(ov-ps)<Math.abs(closest-ps))closest=ov;}sel.value=String(closest);}updatePoolInfo();}
 
-    async function saveSettings(){var btn=document.getElementById('btnSaveSettings');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';var data={lottery_name:document.getElementById('setLotteryName').value,draw_date:document.getElementById('setDrawDate').value,announcement:document.getElementById('setAnnouncement').value,price_per_number:document.getElementById('setPricePerNumber').value,min_quantity:document.getElementById('setMinQuantity').value,max_quantity:document.getElementById('setMaxQuantity').value,gcash_name:document.getElementById('setGcashName').value,gcash_number:document.getElementById('setGcashNumber').value,maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false'};var pw=document.getElementById('setNewPassword').value;if(pw)data.new_password=pw;var r=await apiPost('adminUpdateSettings',data);btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';showToast(r.success?'Settings saved!':(r.error||'Failed'),r.success?'success':'error');}
+        async function saveSettings(){var btn=document.getElementById('btnSaveSettings');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';var data={lottery_name:document.getElementById('setLotteryName').value,draw_date:document.getElementById('setDrawDate').value,announcement:document.getElementById('setAnnouncement').value,price_per_number:document.getElementById('setPricePerNumber').value,min_quantity:document.getElementById('setMinQuantity').value,max_quantity:document.getElementById('setMaxQuantity').value,gcash_name:document.getElementById('setGcashName').value,gcash_number:document.getElementById('setGcashNumber').value,maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false',pool_size:document.getElementById('setPoolSize').value};var pw=document.getElementById('setNewPassword').value;if(pw)data.new_password=pw;var r=await apiPost('adminUpdateSettings',data);btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';if(r.success){showToast('Settings saved!','success');var newPool=parseInt(data.pool_size)||20000;poolSize=newPool;poolMax=newPool-1;poolDigits=newPool>100000?6:5;}else{showToast(r.error||'Failed','error');}}}
 
+        function updatePoolInfo(){
+      var sel=document.getElementById('setPoolSize');
+      if(!sel)return;
+      var ps=parseInt(sel.value)||20000;
+      var digits=ps>100000?6:5;
+      var maxNum=ps-1;
+      var minStr=String(0).padStart(digits,'0');
+      var maxStr=String(maxNum).padStart(digits,'0');
+      var maxFirst=digits===5?Math.floor(maxNum/10000):Math.floor(maxNum/100000);
+      var info='<strong>'+fmtN(ps)+'</strong> numbers | <strong>'+digits+'-digit</strong><br>';
+      info+='Range: <strong>'+minStr+' – '+maxStr+'</strong><br>';
+      info+='1st digit: <strong>0–'+maxFirst+'</strong>, remaining digits: <strong>0–9</strong>';
+      document.getElementById('poolInfoText').innerHTML=info;
+    }
+        function updatePoolInfo(){
+      var sel=document.getElementById('setPoolSize');
+      if(!sel)return;
+      var ps=parseInt(sel.value)||20000;
+      var digits=ps>100000?6:5;
+      var maxNum=ps-1;
+      var minStr=String(0).padStart(digits,'0');
+      var maxStr=String(maxNum).padStart(digits,'0');
+      var maxFirst=digits===5?Math.floor(maxNum/10000):Math.floor(maxNum/100000);
+      var info='<strong>'+fmtN(ps)+'</strong> numbers | <strong>'+digits+'-digit</strong><br>';
+      info+='Range: <strong>'+minStr+' – '+maxStr+'</strong><br>';
+      info+='1st digit: <strong>0–'+maxFirst+'</strong>, remaining digits: <strong>0–9</strong>';
+      document.getElementById('poolInfoText').innerHTML=info;
+    }
     /* ═══════════════════════════════════════════════════════════
        DRAW WINNER SYSTEM
        ═══════════════════════════════════════════════════════════ */
 
-    function generateDrawNumber() {
-      var d0 = Math.floor(Math.random() * 2);
-      var d1 = Math.floor(Math.random() * 10);
-      var d2 = Math.floor(Math.random() * 10);
-      var d3 = Math.floor(Math.random() * 10);
-      var d4 = Math.floor(Math.random() * 10);
-      return [String(d0), String(d1), String(d2), String(d3), String(d4)];
+        function generateDrawNumber() {
+      var num = Math.floor(Math.random() * (poolMax + 1));
+      var str = String(num).padStart(poolDigits, '0');
+      var digits = [];
+      for (var i = 0; i < str.length; i++) {
+        digits.push(str.charAt(i));
+      }
+      return digits;
     }
 
-    function startSlotAnimation(slotEl, isFirstDigit) {
+        function startSlotAnimation(slotEl) {
       var val = slotEl.querySelector('.slot-value');
       slotEl._spinInterval = setInterval(function() {
-        val.textContent = isFirstDigit ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 10);
+        val.textContent = Math.floor(Math.random() * 10);
       }, 80);
     }
 
@@ -1014,14 +1077,13 @@
       }
     }
 
-    function revealDigit(index, digit) {
+        function revealDigit(index, digit) {
       return new Promise(function(resolve) {
         var slot = document.getElementById('slot' + index);
         stopSlotAnimation(slot);
-        var isFirst = (index === 0);
         var count = 0;
         var si = setInterval(function() {
-          slot.querySelector('.slot-value').textContent = isFirst ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 10);
+          slot.querySelector('.slot-value').textContent = Math.floor(Math.random() * 10);
           count++;
           if (count >= 8) {
             clearInterval(si);
@@ -1034,9 +1096,19 @@
       });
     }
 
-    async function startDraw() {
+        async function startDraw() {
       if (isDrawing) return;
       isDrawing = true;
+
+      var slotContainer = document.getElementById('slotContainer');
+      slotContainer.innerHTML = '';
+      for (var si = 0; si < poolDigits; si++) {
+        var div = document.createElement('div');
+        div.className = 'slot-digit';
+        div.id = 'slot' + si;
+        div.innerHTML = '<span class="slot-value">?</span>';
+        slotContainer.appendChild(div);
+      }
 
       var btn = document.getElementById('btnDrawWinner');
       btn.disabled = true;
@@ -1047,30 +1119,22 @@
       document.getElementById('drawTitleText').textContent = 'Drawing Winner...';
       document.getElementById('drawStatus').textContent = 'Generating random number...';
 
-      for (var i = 0; i < 5; i++) {
-        var s = document.getElementById('slot' + i);
-        stopSlotAnimation(s);
-        s.className = 'slot-digit';
-        s.style.opacity = '';
-        s.querySelector('.slot-value').textContent = '?';
-      }
-
       var digits = generateDrawNumber();
       var drawnNumber = digits.join('');
 
-      for (var j = 0; j < 5; j++) {
+      for (var j = 0; j < poolDigits; j++) {
         var se = document.getElementById('slot' + j);
         se.classList.add('spinning');
-        startSlotAnimation(se, j === 0);
+        startSlotAnimation(se);
       }
 
       document.getElementById('drawStatus').textContent = 'Shuffling numbers...';
       await delay(2000);
 
-      for (var k = 0; k < 5; k++) {
-        document.getElementById('drawStatus').textContent = 'Revealing digit ' + (k + 1) + ' of 5...';
+      for (var k = 0; k < poolDigits; k++) {
+        document.getElementById('drawStatus').textContent = 'Revealing digit ' + (k + 1) + ' of ' + poolDigits + '...';
         await revealDigit(k, digits[k]);
-        if (k < 4) {
+        if (k < poolDigits - 1) {
           for (var cd = 5; cd > 0; cd--) {
             document.getElementById('drawStatus').textContent = 'Next digit in ' + cd + 's...';
             await delay(1000);
@@ -1099,7 +1163,7 @@
         document.getElementById('drawTitleText').textContent = '🎉 Winner Found!';
         await delay(500);
 
-        for (var w = 0; w < 5; w++) {
+        for (var w = 0; w < poolDigits; w++) {
           document.getElementById('slot' + w).classList.add('revealed');
         }
 
@@ -1125,7 +1189,7 @@
         document.getElementById('drawTitleText').textContent = 'No Match';
         document.getElementById('drawStatus').textContent = drawnNumber + ' is not a sold number. Draw again!';
 
-        for (var nm = 0; nm < 5; nm++) {
+        for (var nm = 0; nm < poolDigits; nm++) {
           document.getElementById('slot' + nm).style.opacity = '0.4';
         }
 
@@ -1143,7 +1207,7 @@
       isDrawing = false;
     }
 
-    function resetDraw() {
+        function resetDraw() {
       isDrawing = false;
       var btn = document.getElementById('btnDrawWinner');
       btn.style.display = '';
@@ -1153,12 +1217,15 @@
       document.getElementById('winnerReveal').classList.remove('visible');
       document.getElementById('drawTitleText').textContent = 'Ready to Draw';
       document.getElementById('drawStatus').textContent = 'Click the button below to draw a winner';
-      for (var i = 0; i < 5; i++) {
-        var slot = document.getElementById('slot' + i);
-        stopSlotAnimation(slot);
-        slot.className = 'slot-digit';
-        slot.style.opacity = '';
-        slot.querySelector('.slot-value').textContent = '?';
+
+      var slotContainer = document.getElementById('slotContainer');
+      slotContainer.innerHTML = '';
+      for (var i = 0; i < poolDigits; i++) {
+        var div = document.createElement('div');
+        div.className = 'slot-digit';
+        div.id = 'slot' + i;
+        div.innerHTML = '<span class="slot-value">?</span>';
+        slotContainer.appendChild(div);
       }
     }
 
@@ -1192,6 +1259,10 @@
     /* ═══ MODAL ═══ */
     function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
     document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+    document.addEventListener('DOMContentLoaded', function() {
+      var poolSelect = document.getElementById('setPoolSize');
+      if (poolSelect) poolSelect.addEventListener('change', updatePoolInfo);
+    });
 </script>
 </body>
 </html>
