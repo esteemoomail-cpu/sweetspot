@@ -30,10 +30,9 @@
     .app-container { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; padding: 16px 16px 40px; min-height: 100vh; }
     .app-container.admin-mode { max-width: 900px; }
     .app-header { text-align: center; padding: 32px 0 24px; }
-    .logo-container { display: inline-flex; align-items: center; justify-content: center; width: 120px; height: 120px; border-radius: 28px; margin-bottom: 20px; position: relative; overflow: hidden; }
+    .logo-container { display: inline-flex; align-items: center; justify-content: center; width: 180px; height: 180px; border-radius: 36px; margin-bottom: 8px; position: relative; overflow: hidden; }
     .logo-container img { width: 100%; height: 100%; object-fit: contain; }
-    .app-title { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; line-height: 1.2; }
-    .app-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+    .app-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
     .announcement-banner { background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.06)); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; display: none; animation: slideDown 0.4s ease; }
     .announcement-banner.visible { display: flex; gap: 12px; align-items: flex-start; }
     .announcement-banner i { color: var(--secondary); font-size: 18px; margin-top: 1px; flex-shrink: 0; }
@@ -340,7 +339,7 @@
       display: flex;
     }
 
-    @media(max-width:380px) { .app-container{padding:12px 12px 32px} .app-title{font-size:24px} .logo-container{width:96px;height:96px;border-radius:24px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:48px;height:68px;font-size:28px} .winner-number{font-size:36px;letter-spacing:4px} }
+    @media(max-width:380px) { .app-container{padding:12px 12px 32px} .logo-container{width:140px;height:140px;border-radius:30px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:48px;height:68px;font-size:28px} .winner-number{font-size:36px;letter-spacing:4px} }
     @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} .slot-digit{width:52px;height:72px;font-size:32px} }
   </style>
 </head>
@@ -373,7 +372,6 @@
     <div id="publicView">
       <header class="app-header">
         <div class="logo-container"><img src="logo.svg" alt="Sweetspot Logo"></div>
-        <h1 class="app-title" id="appTitle">SWEETSPOT</h1>
         <p class="app-subtitle">Your lucky number awaits</p>
       </header>
       <div class="announcement-banner" id="announcementBanner"><i class="fas fa-bullhorn"></i><p id="announcementText"></p></div>
@@ -727,7 +725,7 @@
     }
 
     /* ═══ PUBLIC ═══ */
-    async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.getElementById('appTitle').textContent=r.lottery_name||'SWEETSPOT';document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=1;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');}
+    async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=1;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');}
 
     function formatDrawDate(dateStr){if(!dateStr)return'';var months=['January','February','March','April','May','June','July','August','September','October','November','December'];try{if(/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateStr)){var parts=dateStr.split('-');return months[parseInt(parts[1])-1]+' '+parseInt(parts[2])+', '+parts[0];}var dt=new Date(dateStr);if(!isNaN(dt.getTime()))return months[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();}catch(e){}return dateStr;}
 
@@ -798,7 +796,6 @@
         return;
       }
 
-      // Check availability from server
       var btn=document.getElementById('btnContinue');
       btn.disabled=true;
       btn.innerHTML='<div class="spinner"></div><span>Checking availability...</span>';
@@ -827,7 +824,6 @@
           return;
         }
 
-        // Enough available — proceed
         btn.disabled=false;
         btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
 
@@ -855,12 +851,10 @@
       document.getElementById('step3Amount').textContent='₱'+fmtN(total)+'.00';
       document.getElementById('inputGcashRef').value='';
 
-      // Reset reCAPTCHA when entering step 3
       resetRecaptcha();
 
       showSection('sectionStep3');
 
-      // Render reCAPTCHA if not yet rendered
       setTimeout(function(){
         renderRecaptchaIfNeeded();
         document.getElementById('inputGcashRef').focus();
@@ -876,23 +870,19 @@
       if(!/^\d{13}$/.test(ref)){showToast('GCash ref must be exactly 13 digits','error');return;}
       if(!formData.name||formData.name.length<2||!/^09\d{9}$/.test(formData.phone)){showToast('Invalid data. Go back.','error');return;}
 
-      // ═══ RECAPTCHA VALIDATION ═══
       if(!recaptchaToken){
         document.getElementById('recaptchaError').classList.add('visible');
         document.getElementById('recaptchaSuccess').classList.remove('visible');
         showToast('Please complete the CAPTCHA verification','error');
-        // Scroll to reCAPTCHA
         var recapEl = document.getElementById('recaptchaWidget');
         if(recapEl) recapEl.scrollIntoView({behavior:'smooth', block:'center'});
         return;
       }
       document.getElementById('recaptchaError').classList.remove('visible');
-      // ═══ END RECAPTCHA VALIDATION ═══
 
       formData.gcashRef=ref;isSubmitting=true;
       var btn=document.getElementById('btnSubmit');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Verifying...</span>';
 
-      // Include reCAPTCHA token in the purchase request
       var res=await apiPost('purchase',{
         name:formData.name,
         phone:formData.phone,
@@ -905,7 +895,6 @@
         btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i><span>Submit</span>';isSubmitting=false;
         showToast(res.error||'Failed','error');
 
-        // Reset reCAPTCHA on failure so user must re-verify
         resetRecaptcha();
 
         if(res.error&&res.error.toLowerCase().indexOf('gcash')!==-1){
@@ -926,7 +915,6 @@
       document.getElementById('receiptName').textContent=censorName(formData.name);document.getElementById('receiptPhone').textContent=censorPhone(formData.phone);document.getElementById('receiptAmount').textContent='₱'+fmtN(res.amount)+'.00';document.getElementById('receiptDate').textContent=res.timestamp;document.getElementById('receiptTxId').textContent=res.transactionId;document.getElementById('receiptGcashRef').textContent=formData.gcashRef;
       showSection('sectionStep4');launchConfetti();showToast('Entries submitted! 🎉','success');loadStats();
 
-      // Reset reCAPTCHA after successful submission
       resetRecaptcha();
     }
 
@@ -938,7 +926,6 @@
       formData={name:'',phone:'',quantity:appSettings.min_quantity||50,gcashRef:''};
       updatePriceSummary();
 
-      // Reset reCAPTCHA on form reset
       resetRecaptcha();
 
       if(isSoldOut){
@@ -1001,7 +988,7 @@
     async function saveSettings(){var btn=document.getElementById('btnSaveSettings');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';var data={lottery_name:document.getElementById('setLotteryName').value,draw_date:document.getElementById('setDrawDate').value,announcement:document.getElementById('setAnnouncement').value,price_per_number:document.getElementById('setPricePerNumber').value,min_quantity:document.getElementById('setMinQuantity').value,max_quantity:document.getElementById('setMaxQuantity').value,gcash_name:document.getElementById('setGcashName').value,gcash_number:document.getElementById('setGcashNumber').value,maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false'};var pw=document.getElementById('setNewPassword').value;if(pw)data.new_password=pw;var r=await apiPost('adminUpdateSettings',data);btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';showToast(r.success?'Settings saved!':(r.error||'Failed'),r.success?'success':'error');}
 
     /* ═══════════════════════════════════════════════════════════
-       DRAW WINNER SYSTEM — Client-side RNG + Backend Lookup
+       DRAW WINNER SYSTEM
        ═══════════════════════════════════════════════════════════ */
 
     function generateDrawNumber() {
@@ -1048,12 +1035,10 @@
     }
 
     async function startDraw() {
-      console.log('[DRAW] startDraw called, isDrawing:', isDrawing);
       if (isDrawing) return;
       isDrawing = true;
 
       var btn = document.getElementById('btnDrawWinner');
-      console.log('[DRAW] btn found:', !!btn);
       btn.disabled = true;
       btn.innerHTML = '<div class="spinner"></div><span>Drawing...</span>';
 
@@ -1062,7 +1047,6 @@
       document.getElementById('drawTitleText').textContent = 'Drawing Winner...';
       document.getElementById('drawStatus').textContent = 'Generating random number...';
 
-      // Reset slots
       for (var i = 0; i < 5; i++) {
         var s = document.getElementById('slot' + i);
         stopSlotAnimation(s);
@@ -1071,12 +1055,9 @@
         s.querySelector('.slot-value').textContent = '?';
       }
 
-      // Generate random number
       var digits = generateDrawNumber();
       var drawnNumber = digits.join('');
-      console.log('[DRAW] Generated number:', drawnNumber);
 
-      // Start spinning
       for (var j = 0; j < 5; j++) {
         var se = document.getElementById('slot' + j);
         se.classList.add('spinning');
@@ -1086,7 +1067,6 @@
       document.getElementById('drawStatus').textContent = 'Shuffling numbers...';
       await delay(2000);
 
-      // Reveal digits one by one
       for (var k = 0; k < 5; k++) {
         document.getElementById('drawStatus').textContent = 'Revealing digit ' + (k + 1) + ' of 5...';
         await revealDigit(k, digits[k]);
@@ -1098,14 +1078,11 @@
         }
       }
 
-      // Check number against backend
       document.getElementById('drawStatus').textContent = 'Checking number ' + drawnNumber + '...';
       document.getElementById('drawTitleText').textContent = 'Checking...';
       await delay(1500);
 
-      console.log('[DRAW] Calling adminDrawWinner with number:', drawnNumber);
       var res = await apiGet('adminDrawWinner', { number: drawnNumber });
-      console.log('[DRAW] Response:', JSON.stringify(res));
 
       if (!res.success) {
         showToast(res.error || 'Lookup failed', 'error');
@@ -1118,8 +1095,6 @@
       }
 
       if (res.matched) {
-        // WINNER
-        console.log('[DRAW] WINNER FOUND:', res.name, res.number);
         document.getElementById('drawStatus').textContent = '';
         document.getElementById('drawTitleText').textContent = '🎉 Winner Found!';
         await delay(500);
@@ -1147,8 +1122,6 @@
         showToast('🏆 Winner: ' + (res.name || res.number), 'success');
 
       } else {
-        // NO MATCH
-        console.log('[DRAW] No match for:', drawnNumber);
         document.getElementById('drawTitleText').textContent = 'No Match';
         document.getElementById('drawStatus').textContent = drawnNumber + ' is not a sold number. Draw again!';
 
@@ -1171,7 +1144,6 @@
     }
 
     function resetDraw() {
-      console.log('[DRAW] resetDraw called');
       isDrawing = false;
       var btn = document.getElementById('btnDrawWinner');
       btn.style.display = '';
