@@ -269,7 +269,7 @@
     /* ═══════════ DRAW WINNER STYLES ═══════════ */
     .draw-stage { text-align:center; padding:20px 0; }
     .draw-title-text { font-family:'Poppins',sans-serif; font-size:16px; font-weight:700; color:var(--text-secondary); margin-bottom:24px; text-transform:uppercase; letter-spacing:2px; }
-    .slot-container { display:flex; justify-content:center; gap:10px; margin:32px 0; }
+    .slot-container { display:flex; justify-content:center; gap:10px; margin:32px 0; flex-wrap:wrap; }
     .slot-digit { width:64px; height:88px; background:var(--bg-secondary); border:2px solid var(--border); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-size:40px; font-weight:900; color:var(--text-muted); position:relative; overflow:hidden; transition:border-color 0.3s, box-shadow 0.3s; }
     .slot-digit.spinning { border-color:var(--primary-light); box-shadow:0 0 20px var(--primary-glow); }
     .slot-digit.spinning .slot-value { animation:slotSpin 0.1s linear infinite; }
@@ -298,9 +298,10 @@
     .draw-history-num { font-family:'Poppins',sans-serif; font-size:18px; font-weight:800; color:var(--secondary); letter-spacing:2px; }
     .draw-history-name { font-size:13px; color:var(--text-primary); font-weight:600; }
     .draw-history-date { font-size:11px; color:var(--text-muted); }
+    .pool-info-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:99px; font-size:11px; font-weight:700; background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.2); color:var(--primary-light); margin-left:8px; }
 
-    @media(max-width:380px) { .app-container{padding:12px 12px 32px} .logo-container{width:140px;height:140px;border-radius:30px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:48px;height:68px;font-size:28px} .winner-number{font-size:36px;letter-spacing:4px} }
-    @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} .slot-digit{width:52px;height:72px;font-size:32px} }
+    @media(max-width:380px) { .app-container{padding:12px 12px 32px} .logo-container{width:140px;height:140px;border-radius:30px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:44px;height:62px;font-size:24px} .winner-number{font-size:32px;letter-spacing:4px} }
+    @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} .slot-digit{width:48px;height:68px;font-size:28px} }
   </style>
 </head>
 <body>
@@ -371,7 +372,6 @@
             <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6;">Enter the <strong style="color:var(--text-primary)">GCash Reference Number</strong> from your receipt.</p>
             <div class="form-group" style="margin-bottom:0;"><label class="form-label">GCash Reference Number</label><input type="text" class="form-input" id="inputGcashRef" placeholder="e.g. 1234567890123" maxlength="13" inputmode="numeric" style="font-size:18px;text-align:center;letter-spacing:2px;font-weight:600;"><div class="form-hint"><i class="fas fa-info-circle"></i> 13-digit number from your GCash receipt</div></div>
             <div class="price-summary" style="margin-top:24px;"><div class="price-row"><span>Name</span><span id="step3Name" style="font-weight:600;color:var(--text-primary)">—</span></div><div class="price-row"><span>Phone</span><span id="step3Phone" style="font-weight:600;color:var(--text-primary)">—</span></div><div class="price-total"><span class="label">Amount</span><span class="amount" id="step3Amount">₱100.00</span></div></div>
-
             <div class="btn-group"><button type="button" class="btn btn-secondary" onclick="goToStep2()"><i class="fas fa-arrow-left"></i><span>Back</span></button><button type="button" class="btn btn-success" id="btnSubmit" onclick="submitPurchase()"><i class="fas fa-paper-plane"></i><span>Submit</span></button></div>
           </div>
         </div>
@@ -408,7 +408,7 @@
       </div>
       <div class="section" id="adminDashSection">
         <div class="admin-header">
-          <div class="admin-header-left"><div class="admin-logo"><img src="logo.svg" alt="Sweetspot Logo"></div><div><h2>Sweetspot</h2><small>Admin Panel</small></div></div>
+          <div class="admin-header-left"><div class="admin-logo"><img src="logo.svg" alt="Sweetspot Logo"></div><div><h2>Sweetspot</h2><small>Admin Panel <span class="pool-info-badge" id="adminPoolBadge"><i class="fas fa-database"></i> <span id="adminPoolBadgeText">20,000 Pool</span></span></small></div></div>
           <div class="admin-header-right"><a class="admin-link" id="mainSiteLink" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Main Site</a><button class="btn btn-xs btn-secondary" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
         </div>
         <div class="admin-nav" id="adminNav">
@@ -433,8 +433,8 @@
 
         <!-- Numbers Tab -->
         <div class="admin-tab" id="tabNumbers" style="display:none;">
-          <div class="card"><div class="card-header"><div class="card-icon green"><i class="fas fa-plus-circle"></i></div><div class="card-title">Add Number Manually</div></div><div class="add-number-form"><div class="form-group"><label class="form-label">Number (00000-19999)</label><input type="text" class="form-input" id="addNumInput" placeholder="e.g. 00123" maxlength="5" inputmode="numeric"></div><div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="addNumName" placeholder="Manual" maxlength="40"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="addNumPhone" placeholder="Optional" maxlength="11"></div><button class="btn btn-sm btn-success" onclick="addNumber()" style="height:48px;margin-bottom:0;"><i class="fas fa-plus"></i> Add</button></div></div>
-          <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-minus-circle"></i></div><div class="card-title">Remove Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Number to Remove</label><input type="text" class="form-input" id="removeNumInput" placeholder="e.g. 00123" maxlength="5" inputmode="numeric"></div><button class="btn btn-sm btn-danger" onclick="removeNumber()" style="height:48px;"><i class="fas fa-trash"></i> Remove</button></div></div>
+          <div class="card"><div class="card-header"><div class="card-icon green"><i class="fas fa-plus-circle"></i></div><div class="card-title">Add Number Manually</div></div><div class="add-number-form"><div class="form-group"><label class="form-label" id="addNumLabel">Number</label><input type="text" class="form-input" id="addNumInput" placeholder="e.g. 00123" maxlength="6" inputmode="numeric"></div><div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="addNumName" placeholder="Manual" maxlength="40"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="addNumPhone" placeholder="Optional" maxlength="11"></div><button class="btn btn-sm btn-success" onclick="addNumber()" style="height:48px;margin-bottom:0;"><i class="fas fa-plus"></i> Add</button></div></div>
+          <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-minus-circle"></i></div><div class="card-title">Remove Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label" id="removeNumLabel">Number to Remove</label><input type="text" class="form-input" id="removeNumInput" placeholder="e.g. 00123" maxlength="6" inputmode="numeric"></div><button class="btn btn-sm btn-danger" onclick="removeNumber()" style="height:48px;"><i class="fas fa-trash"></i> Remove</button></div></div>
           <div class="card"><div class="card-header"><div class="card-icon purple"><i class="fas fa-list-ol"></i></div><div class="card-title-row"><div class="card-title">Sold Numbers</div><button class="btn btn-xs btn-secondary" onclick="loadSoldNumbers()"><i class="fas fa-sync-alt"></i> Refresh</button></div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>Number</th><th>TX ID</th><th>Name</th><th>Phone</th><th>Timestamp</th></tr></thead><tbody id="soldBody"></tbody></table></div><div class="empty-state" id="soldEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No sold numbers</p></div><div class="pagination" id="soldPagination"></div></div>
         </div>
 
@@ -445,11 +445,7 @@
             <div class="draw-stage" id="drawStage">
               <div class="draw-title-text" id="drawTitleText">Ready to Draw</div>
               <div class="slot-container" id="slotContainer">
-                <div class="slot-digit" id="slot0"><span class="slot-value">?</span></div>
-                <div class="slot-digit" id="slot1"><span class="slot-value">?</span></div>
-                <div class="slot-digit" id="slot2"><span class="slot-value">?</span></div>
-                <div class="slot-digit" id="slot3"><span class="slot-value">?</span></div>
-                <div class="slot-digit" id="slot4"><span class="slot-value">?</span></div>
+                <!-- Slots generated dynamically by buildSlots() -->
               </div>
               <div class="draw-status" id="drawStatus">Click the button below to draw a winner</div>
               <button class="btn btn-primary" id="btnDrawWinner" onclick="startDraw()" style="max-width:320px;margin:20px auto 0;">
@@ -480,7 +476,7 @@
 
         <!-- Search Tab -->
         <div class="admin-tab" id="tabSearch" style="display:none;">
-          <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-search"></i></div><div class="card-title">Search Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Number (00000-19999)</label><input type="text" class="form-input" id="searchNumInput" placeholder="e.g. 00123" maxlength="5" inputmode="numeric"></div><button class="btn btn-sm btn-primary" onclick="searchNumber()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchNumResults" style="margin-top:16px;"></div></div>
+          <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-search"></i></div><div class="card-title">Search Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label" id="searchNumLabel">Number</label><input type="text" class="form-input" id="searchNumInput" placeholder="e.g. 00123" maxlength="6" inputmode="numeric"></div><button class="btn btn-sm btn-primary" onclick="searchNumber()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchNumResults" style="margin-top:16px;"></div></div>
           <div class="card"><div class="card-header"><div class="card-icon amber"><i class="fas fa-user-search"></i></div><div class="card-title">Search Buyer</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Name, Phone, TX ID, or GCash Ref</label><input type="text" class="form-input" id="searchBuyerInput" placeholder="Search..." maxlength="50"></div><button class="btn btn-sm btn-primary" onclick="searchBuyer()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchBuyerResults" style="margin-top:16px;"></div></div>
           <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-clone"></i></div><div class="card-title">Duplicate Check</div></div><button class="btn btn-sm btn-secondary" onclick="searchDuplicates()" id="btnDupCheck"><i class="fas fa-search"></i> Check for Duplicates</button><div id="searchDupResults" style="margin-top:16px;"></div></div>
         </div>
@@ -493,6 +489,15 @@
               <div class="form-group"><label class="form-label">Lottery Name</label><input type="text" class="form-input" id="setLotteryName" maxlength="50"></div>
               <div class="form-group"><label class="form-label">Draw Date</label><input type="date" class="form-input" id="setDrawDate"><div class="form-hint"><i class="fas fa-info-circle"></i> Click to pick a date</div></div>
               <div class="form-group"><label class="form-label">Announcement</label><textarea class="form-input" id="setAnnouncement" maxlength="500" placeholder="Leave blank to hide"></textarea></div>
+
+              <div class="settings-section-title">Number Pool</div>
+              <div class="form-group">
+                <label class="form-label">Total Pool Size</label>
+                <input type="number" class="form-input" id="setTotalPool" min="10000" max="200000" step="10000">
+                <div class="form-hint" id="poolHint"><i class="fas fa-info-circle"></i> Must be a multiple of 10,000. Min: 10,000 — Max: 200,000</div>
+                <div class="form-hint" id="poolPreview" style="margin-top:4px;color:var(--primary-light);font-weight:600;"></div>
+              </div>
+
               <div class="settings-section-title">Pricing & Limits</div>
               <div class="form-group"><label class="form-label">Price Per Number (₱)</label><input type="number" class="form-input" id="setPricePerNumber" min="0.5" step="0.5"></div>
               <div class="form-group"><label class="form-label">Min Quantity</label><input type="number" class="form-input" id="setMinQuantity" min="1"></div>
@@ -526,14 +531,14 @@
     var isDrawing=false;
     var statsInterval=null;
 
+    /* ═══ POOL STATE — DYNAMIC ═══ */
+    var poolConfig={totalPool:20000,numberDigits:5,numberMax:19999};
+
     /* ═══ UTILITIES ═══ */
     function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
-
     function censorName(name){if(!name)return'—';var parts=name.trim().split(/\s+/);if(parts.length===1)return parts[0].charAt(0)+'*'.repeat(Math.max(0,parts[0].length-1));return parts.map(function(p,i){return i===0?p:p.charAt(0)+'*'.repeat(Math.max(0,p.length-1));}).join(' ');}
     function censorPhone(phone){if(!phone||phone.length<4)return'****';return'*'.repeat(phone.length-4)+phone.slice(-4);}
     function fmtN(n){return Number(n).toLocaleString();}
-
-    /* ═══ FIX #4: XSS-SAFE ESCAPING ═══ */
     function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
     function escAttr(s){return esc(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
 
@@ -541,7 +546,6 @@
 
     function showToast(msg,type){type=type||'info';var c=document.getElementById('toastContainer');var t=document.createElement('div');t.className='toast '+type;var icon=type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle';t.innerHTML='<i class="fas '+icon+'"></i><span class="msg">'+esc(msg)+'</span>';c.appendChild(t);setTimeout(function(){t.classList.add('removing');setTimeout(function(){t.remove();},300);},4000);}
 
-    /* ═══ FIX: FRIENDLY ERROR MESSAGES ═══ */
     function friendlyError(msg){
       if(!msg)return'Something went wrong. Please try again.';
       var s=String(msg).toLowerCase();
@@ -554,6 +558,74 @@
       if(s.indexOf('quota')!==-1||s.indexOf('limit')!==-1&&s.indexOf('rate')!==-1)return'Too many requests. Please wait a moment.';
       if(s.indexOf('purchase failed')!==-1)return'Purchase could not be completed. Please try again.';
       return msg;
+    }
+
+    /* ═══ POOL HELPERS ═══ */
+    function updatePoolConfig(settings){
+      if(settings.total_pool) poolConfig.totalPool=parseInt(settings.total_pool)||20000;
+      if(settings.number_digits) poolConfig.numberDigits=parseInt(settings.number_digits)||5;
+      if(settings.number_max!==undefined) poolConfig.numberMax=parseInt(settings.number_max);
+      else poolConfig.numberMax=poolConfig.totalPool-1;
+      if(!poolConfig.numberDigits) poolConfig.numberDigits=String(poolConfig.numberMax).length;
+    }
+
+    function poolRangeStr(){
+      var minS=String(0).padStart(poolConfig.numberDigits,'0');
+      var maxS=String(poolConfig.numberMax).padStart(poolConfig.numberDigits,'0');
+      return minS+'–'+maxS;
+    }
+
+    function poolPreviewText(poolSize){
+      var ps=parseInt(poolSize);
+      if(isNaN(ps)||ps<10000)return'';
+      ps=Math.round(ps/10000)*10000;
+      if(ps<10000)ps=10000;
+      if(ps>200000)ps=200000;
+      var mx=ps-1;
+      var digits=String(mx).length;
+      var minS=String(0).padStart(digits,'0');
+      var maxS=String(mx).padStart(digits,'0');
+      return fmtN(ps)+' numbers: '+minS+' – '+maxS+' ('+digits+' digits)';
+    }
+
+    function updateAdminPoolLabels(){
+      var range=poolRangeStr();
+      var digits=poolConfig.numberDigits;
+      var placeholder='e.g. '+String(0).padStart(digits,'0').substring(0,digits-3)+'123';
+
+      // Update pool badge
+      var badgeText=document.getElementById('adminPoolBadgeText');
+      if(badgeText) badgeText.textContent=fmtN(poolConfig.totalPool)+' Pool';
+
+      // Update number input labels & placeholders
+      var addLabel=document.getElementById('addNumLabel');
+      if(addLabel) addLabel.textContent='Number ('+range+')';
+      var addInput=document.getElementById('addNumInput');
+      if(addInput){addInput.placeholder=placeholder;addInput.maxLength=digits;}
+
+      var removeLabel=document.getElementById('removeNumLabel');
+      if(removeLabel) removeLabel.textContent='Number to Remove ('+range+')';
+      var removeInput=document.getElementById('removeNumInput');
+      if(removeInput){removeInput.placeholder=placeholder;removeInput.maxLength=digits;}
+
+      var searchLabel=document.getElementById('searchNumLabel');
+      if(searchLabel) searchLabel.textContent='Number ('+range+')';
+      var searchInput=document.getElementById('searchNumInput');
+      if(searchInput){searchInput.placeholder=placeholder;searchInput.maxLength=digits;}
+    }
+
+    /* ═══ BUILD SLOT DIGITS DYNAMICALLY ═══ */
+    function buildSlots(){
+      var container=document.getElementById('slotContainer');
+      if(!container)return;
+      container.innerHTML='';
+      for(var i=0;i<poolConfig.numberDigits;i++){
+        var div=document.createElement('div');
+        div.className='slot-digit';
+        div.id='slot'+i;
+        div.innerHTML='<span class="slot-value">?</span>';
+        container.appendChild(div);
+      }
     }
 
     /* ═══ API ═══ */
@@ -602,7 +674,6 @@
       document.getElementById('adminView').style.display='none';
       document.getElementById('appContainer').classList.remove('admin-mode');
       loadPublicSettings();loadStats();setupListeners();
-      /* ═══ FIX #13: START POLLING ONLY FOR PUBLIC VIEW ═══ */
       if(statsInterval)clearInterval(statsInterval);
       statsInterval=setInterval(loadStats,30000);
     }
@@ -611,7 +682,6 @@
       document.getElementById('adminView').style.display='';
       document.getElementById('appContainer').classList.add('admin-mode');
       document.getElementById('mainSiteLink').href=window.location.href.split('#')[0];
-      /* ═══ FIX #13: STOP PUBLIC POLLING IN ADMIN VIEW ═══ */
       if(statsInterval){clearInterval(statsInterval);statsInterval=null;}
       adminToken=sessionStorage.getItem('adminToken');
       if(adminToken)checkAdminSession();
@@ -629,7 +699,6 @@
         var v=parseInt(this.value);
         if(isNaN(v)||v<min) v=min;
         if(v>max) v=max;
-        /* ═══ FIX #5: SNAP TO NEAREST 50 ═══ */
         v=Math.round(v/50)*50;
         if(v<min) v=min;
         if(v>max) v=max;
@@ -639,23 +708,52 @@
       document.getElementById('inputGcashRef').addEventListener('input',function(){
         this.value=this.value.replace(/\D/g,'').substring(0,13);
       });
+
+      /* Pool preview in settings */
+      var poolInput=document.getElementById('setTotalPool');
+      if(poolInput){
+        poolInput.addEventListener('input',function(){
+          var preview=document.getElementById('poolPreview');
+          if(preview) preview.textContent=poolPreviewText(this.value);
+        });
+      }
     }
 
     /* ═══ PUBLIC ═══ */
-    async function loadPublicSettings(){var r=await apiGet('publicSettings');if(!r.success)return;appSettings=r;document.title=r.lottery_name||'SWEETSPOT';document.getElementById('gcashName2').textContent=r.gcash_name||'—';document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;var qi=document.getElementById('inputQuantity');qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=50;document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);updatePriceSummary();if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');}
+    async function loadPublicSettings(){
+      var r=await apiGet('publicSettings');
+      if(!r.success)return;
+      appSettings=r;
+
+      /* Update pool config from server */
+      updatePoolConfig(r);
+
+      document.title=r.lottery_name||'SWEETSPOT';
+      document.getElementById('gcashName2').textContent=r.gcash_name||'—';
+      document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';
+      document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);
+      var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;
+      var qi=document.getElementById('inputQuantity');
+      qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=50;
+      document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);
+      updatePriceSummary();
+      if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}
+      if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}
+      if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');
+    }
 
     function formatDrawDate(dateStr){if(!dateStr)return'';var months=['January','February','March','April','May','June','July','August','September','October','November','December'];try{if(/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateStr)){var parts=dateStr.split('-');return months[parseInt(parts[1])-1]+' '+parseInt(parts[2])+', '+parts[0];}var dt=new Date(dateStr);if(!isNaN(dt.getTime()))return months[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();}catch(e){}return dateStr;}
 
     async function loadStats(){
       var r=await apiGet('stats');
       if(!r.success)return;
-      var pct=r.total>0?(r.sold/r.total*100):0;
+      var total=r.total||poolConfig.totalPool;
+      var pct=total>0?(r.sold/total*100):0;
       document.getElementById('progressFill').style.width=pct.toFixed(1)+'%';
       document.getElementById('progressPercent').textContent=pct.toFixed(1)+'%';
       animateNum('statBuyers',r.uniqueBuyers||0);
       isSoldOut=r.remaining<=0;
       if(isSoldOut){
-        /* ═══ FIX #17: DON'T HIDE FLOW MID-TRANSACTION ═══ */
         var inProgress=document.getElementById('sectionStep2').classList.contains('active')||document.getElementById('sectionStep3').classList.contains('active')||document.getElementById('sectionStep4').classList.contains('active');
         if(!inProgress){
           document.getElementById('purchaseFlow').style.display='none';
@@ -667,7 +765,6 @@
       }
     }
 
-    /* ═══ FIX #10: PREVENT STACKING animateNum INTERVALS ═══ */
     function animateNum(id,target){
       var el=document.getElementById(id);
       if(el._animInterval){clearInterval(el._animInterval);el._animInterval=null;}
@@ -683,7 +780,6 @@
 
     function showSection(id){document.querySelectorAll('#purchaseFlow .section').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
 
-    /* ═══ FIX #5: QTY BUTTONS ±50 ═══ */
     function adjustQty(d){
       var inp=document.getElementById('inputQuantity');
       var min=parseInt(inp.min)||50;
@@ -701,19 +797,15 @@
 
     async function goToStep2(){
       if(isSoldOut){showToast('All numbers are sold out!','error');return;}
-
       var name=document.getElementById('inputName').value.trim();
       var phone=document.getElementById('inputPhone').value.trim();
       var qtyInput=document.getElementById('inputQuantity');
       var qty=parseInt(qtyInput.value);
-
       var errs=[];
       if(!name||name.length<2) errs.push('Enter your full name');
       if(!/^09\d{9}$/.test(phone)) errs.push('Phone: 11 digits starting with 09');
-
       var minQ=appSettings.min_quantity||50;
       var maxQ=appSettings.max_quantity||1000;
-
       if(isNaN(qty)||qty<minQ){
         errs.push('Minimum quantity is '+fmtN(minQ));
         qtyInput.value=minQ;
@@ -723,55 +815,32 @@
         qtyInput.value=maxQ;
         updatePriceSummary();
       }
-
-      if(errs.length){
-        errs.forEach(function(e){showToast(e,'error');});
-        return;
-      }
-
+      if(errs.length){errs.forEach(function(e){showToast(e,'error');});return;}
       var btn=document.getElementById('btnContinue');
       btn.disabled=true;
       btn.innerHTML='<div class="spinner"></div><span>Checking availability...</span>';
-
       try{
         var r=await apiGet('checkAvailability',{quantity:qty});
-
         if(!r.success){
           btn.disabled=false;
           btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
-
-          if(r.available!==undefined && r.available>=0){
-            if(r.available===0){
-              showToast('All numbers are sold out!','error');
-            }else{
+          if(r.available!==undefined&&r.available>=0){
+            if(r.available===0){showToast('All numbers are sold out!','error');}
+            else{
               showToast('Only '+fmtN(r.available)+' numbers remaining. Please reduce your quantity.','error');
-              if(r.available>=minQ){
-                var adjusted=Math.floor(r.available/50)*50;
-                if(adjusted<minQ) adjusted=minQ;
-                qtyInput.value=adjusted;
-                updatePriceSummary();
-                showToast('Quantity adjusted to '+fmtN(adjusted),'info');
-              }
+              if(r.available>=minQ){var adjusted=Math.floor(r.available/50)*50;if(adjusted<minQ)adjusted=minQ;qtyInput.value=adjusted;updatePriceSummary();showToast('Quantity adjusted to '+fmtN(adjusted),'info');}
             }
-          }else{
-            showToast(friendlyError(r.error),'error');
-          }
+          }else{showToast(friendlyError(r.error),'error');}
           return;
         }
-
         btn.disabled=false;
         btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
-
-        formData.name=name;
-        formData.phone=phone;
-        formData.quantity=qty;
-
+        formData.name=name;formData.phone=phone;formData.quantity=qty;
         var total=qty*(appSettings.price_per_number||1);
         document.getElementById('payAmount').textContent='₱'+fmtN(total)+'.00';
         document.getElementById('payQty').textContent='for '+fmtN(qty)+' numbers';
         document.getElementById('payAmountStep').textContent='₱'+fmtN(total)+'.00';
         showSection('sectionStep2');
-
       }catch(e){
         btn.disabled=false;
         btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
@@ -789,19 +858,10 @@
       setTimeout(function(){document.getElementById('inputGcashRef').focus();},400);
     }
 
-    /* ═══ FIX #14: CLIPBOARD FALLBACK ═══ */
     function copyToClipboard(text){
-      if(navigator.clipboard&&navigator.clipboard.writeText){
-        return navigator.clipboard.writeText(text);
-      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(text);}
       return new Promise(function(resolve,reject){
-        try{
-          var ta=document.createElement('textarea');
-          ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';
-          document.body.appendChild(ta);ta.select();
-          document.execCommand('copy');document.body.removeChild(ta);
-          resolve();
-        }catch(e){reject(e);}
+        try{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);resolve();}catch(e){reject(e);}
       });
     }
 
@@ -828,21 +888,12 @@
       var ref=document.getElementById('inputGcashRef').value.trim();
       if(!/^\d{13}$/.test(ref)){showToast('GCash ref must be exactly 13 digits','error');return;}
       if(!formData.name||formData.name.length<2||!/^09\d{9}$/.test(formData.phone)){showToast('Invalid data. Please go back and check your info.','error');return;}
-
       formData.gcashRef=ref;isSubmitting=true;
       var btn=document.getElementById('btnSubmit');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Verifying...</span>';
-
-      var res=await apiPost('purchase',{
-        name:formData.name,
-        phone:formData.phone,
-        gcashRef:formData.gcashRef,
-        quantity:formData.quantity
-      });
-
+      var res=await apiPost('purchase',{name:formData.name,phone:formData.phone,gcashRef:formData.gcashRef,quantity:formData.quantity});
       if(!res.success){
         btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i><span>Submit</span>';isSubmitting=false;
         showToast(friendlyError(res.error),'error');
-
         if(res.error&&res.error.toLowerCase().indexOf('gcash')!==-1){
           document.getElementById('inputGcashRef').value='';
           document.getElementById('inputGcashRef').classList.add('error');
@@ -851,10 +902,14 @@
         }
         return;
       }
-
       showGenOverlay();await waitGen();hideGenOverlay();
       btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i><span>Submit</span>';isSubmitting=false;
-      document.getElementById('receiptName').textContent=censorName(formData.name);document.getElementById('receiptPhone').textContent=censorPhone(formData.phone);document.getElementById('receiptAmount').textContent='₱'+fmtN(res.amount)+'.00';document.getElementById('receiptDate').textContent=res.timestamp;document.getElementById('receiptTxId').textContent=res.transactionId;document.getElementById('receiptGcashRef').textContent=formData.gcashRef;
+      document.getElementById('receiptName').textContent=censorName(formData.name);
+      document.getElementById('receiptPhone').textContent=censorPhone(formData.phone);
+      document.getElementById('receiptAmount').textContent='₱'+fmtN(res.amount)+'.00';
+      document.getElementById('receiptDate').textContent=res.timestamp;
+      document.getElementById('receiptTxId').textContent=res.transactionId;
+      document.getElementById('receiptGcashRef').textContent=formData.gcashRef;
       showSection('sectionStep4');launchConfetti();showToast('Entries submitted! 🎉','success');loadStats();
     }
 
@@ -865,7 +920,6 @@
       document.getElementById('inputQuantity').value=appSettings.min_quantity||50;
       formData={name:'',phone:'',quantity:appSettings.min_quantity||50,gcashRef:''};
       updatePriceSummary();
-
       if(isSoldOut){
         document.getElementById('purchaseFlow').style.display='none';
         document.getElementById('soldoutBanner').classList.add('visible');
@@ -886,27 +940,42 @@
     function showAdminSection(id){document.querySelectorAll('#adminView .section').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
     async function adminLogin(){var u=document.getElementById('adminUsername').value.trim(),p=document.getElementById('adminPassword').value;if(!u||!p){showToast('Enter credentials','error');return;}var btn=document.getElementById('btnAdminLogin');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Logging in...</span>';var res=await apiPost('adminLogin',{username:u,password:p});btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i><span>Login</span>';if(!res.success){showToast(friendlyError(res.error),'error');return;}adminToken=res.token;sessionStorage.setItem('adminToken',adminToken);document.getElementById('adminPassword').value='';showToast('Welcome back!','success');showAdminSection('adminDashSection');loadDashboard();}
     function adminLogout(){apiPost('adminLogout',{token:adminToken});adminToken=null;sessionStorage.removeItem('adminToken');showToast('Logged out','info');showAdminSection('adminLoginSection');}
-    async function checkAdminSession(){var r=await apiGet('adminInit');if(!r.success){adminToken=null;sessionStorage.removeItem('adminToken');showAdminSection('adminLoginSection');return;}showAdminSection('adminDashSection');loadDashboard();}
+    async function checkAdminSession(){var r=await apiGet('adminInit');if(!r.success){adminToken=null;sessionStorage.removeItem('adminToken');showAdminSection('adminLoginSection');return;}
+      /* Update pool from admin init settings */
+      if(r.settings&&r.settings.total_pool){
+        var tp=parseInt(r.settings.total_pool)||20000;
+        var mx=tp-1;
+        poolConfig.totalPool=tp;
+        poolConfig.numberMax=mx;
+        poolConfig.numberDigits=String(mx).length;
+      }
+      buildSlots();
+      updateAdminPoolLabels();
+      showAdminSection('adminDashSection');loadDashboard();
+    }
 
     /* ═══ ADMIN TABS ═══ */
-    function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}else if(tab==='draw'){document.getElementById('tabDraw').style.display='';loadDrawHistory();}else if(tab==='search'){document.getElementById('tabSearch').style.display='';}else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}}
+    function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}else if(tab==='draw'){document.getElementById('tabDraw').style.display='';buildSlots();loadDrawHistory();}else if(tab==='search'){document.getElementById('tabSearch').style.display='';}else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}}
 
     /* ═══ ADMIN DASHBOARD ═══ */
-    async function loadDashboard(){var r=await apiGet('adminDashboard');if(!r.success)return;document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='₱'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});}
+    async function loadDashboard(){var r=await apiGet('adminDashboard');if(!r.success)return;
+      /* Update pool config from dashboard response */
+      if(r.totalPool){
+        poolConfig.totalPool=r.totalPool;
+        poolConfig.numberMax=r.totalPool-1;
+        poolConfig.numberDigits=r.numberDigits||String(poolConfig.numberMax).length;
+        updateAdminPoolLabels();
+      }
+      document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='₱'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});}
 
-    /* ═══ FIX #4: EVENT DELEGATION FOR TX CLICKS ═══ */
     document.addEventListener('click',function(e){
       var txEl=e.target.closest('[data-txid]');
-      if(txEl){
-        var txId=txEl.getAttribute('data-txid');
-        if(txId)viewTransaction(txId);
-      }
+      if(txEl){var txId=txEl.getAttribute('data-txid');if(txId)viewTransaction(txId);}
     });
 
     /* ═══ ADMIN TRANSACTIONS ═══ */
     async function loadTransactions(){var r=await apiGet('adminTransactions',{page:txPage,perPage:20});if(!r.success)return;var body=document.getElementById('txBody'),empty=document.getElementById('txEmpty');body.innerHTML='';if(!r.transactions||r.transactions.length===0){empty.style.display='';document.getElementById('txPagination').innerHTML='';return;}empty.style.display='none';r.transactions.forEach(function(tx){var actions='<div class="table-actions"><button data-action="view" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-eye"></i></button>';if(tx.status==='PENDING'){actions+='<button data-action="approve" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-check"></i></button><button class="danger" data-action="decline" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-times"></i></button>';}if(tx.status!=='PENDING'){actions+='<button class="danger" data-action="delete" data-txid="'+escAttr(tx.transactionId)+'" data-status="'+escAttr(tx.status)+'"><i class="fas fa-trash"></i></button>';}actions+='</div>';body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+esc(tx.phone)+'</td><td style="font-family:monospace;font-size:11px">'+esc(tx.gcashRef)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td>'+actions+'</td></tr>';});var pg=document.getElementById('txPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="txPage='+(r.page-1)+';loadTransactions()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="txPage='+(r.page+1)+';loadTransactions()"><i class="fas fa-chevron-right"></i></button>';}
 
-    /* ═══ FIX #4: EVENT DELEGATION FOR TABLE ACTIONS ═══ */
     document.addEventListener('click',function(e){
       var btn=e.target.closest('[data-action]');
       if(!btn)return;
@@ -939,7 +1008,6 @@
     /* ═══ ADMIN NUMBERS ═══ */
     async function loadSoldNumbers(){var r=await apiGet('adminSoldNumbers',{page:soldPage,perPage:50});if(!r.success)return;var body=document.getElementById('soldBody'),empty=document.getElementById('soldEmpty');body.innerHTML='';if(!r.numbers||r.numbers.length===0){empty.style.display='';document.getElementById('soldPagination').innerHTML='';return;}empty.style.display='none';r.numbers.forEach(function(n){body.innerHTML+='<tr><td style="font-family:monospace;font-weight:700;color:var(--primary-light)">'+esc(n.number)+'</td><td class="tx-id" data-txid="'+escAttr(n.transactionId)+'">'+esc(n.transactionId)+'</td><td>'+esc(n.name)+'</td><td>'+esc(n.phone)+'</td><td style="font-size:11px">'+esc(n.timestamp)+'</td></tr>';});var pg=document.getElementById('soldPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="soldPage='+(r.page-1)+';loadSoldNumbers()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="soldPage='+(r.page+1)+';loadSoldNumbers()"><i class="fas fa-chevron-right"></i></button>';}
 
-    /* ═══ FIX #18: LOADING STATES FOR ADMIN ACTIONS ═══ */
     async function addNumber(){
       var btn=event.target.closest('button');
       var num=document.getElementById('addNumInput').value.trim();
@@ -995,15 +1063,88 @@
     async function searchDuplicates(){var btn=document.getElementById('btnDupCheck');btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Checking...';var r=await apiGet('adminSearchDuplicates');btn.disabled=false;btn.innerHTML='<i class="fas fa-search"></i> Check for Duplicates';var c=document.getElementById('searchDupResults');if(!r.success){c.innerHTML='<p style="color:var(--text-muted)">Check failed</p>';return;}if(r.uniqueDuplicatedNumbers===0){c.innerHTML='<div class="empty-state" style="padding:24px"><i class="fas fa-check-circle" style="font-size:24px;color:var(--accent)"></i><p style="color:var(--accent)">No duplicates found! ✓</p></div>';return;}c.innerHTML='<p style="font-size:12px;color:var(--danger);margin-bottom:12px">⚠️ '+r.uniqueDuplicatedNumbers+' duplicated number(s)</p>'+r.duplicates.map(function(d){return'<div class="search-result-card" style="border-color:rgba(239,68,68,0.3)"><div class="sr-row"><span class="sr-label">Number</span><span class="sr-value" style="color:var(--danger);font-family:monospace">'+esc(d.number)+' (×'+d.occurrences+')</span></div><div class="sr-row"><span class="sr-label">First TX</span><span class="sr-value" style="font-size:11px;cursor:pointer;color:var(--primary-light)" data-txid="'+escAttr(d.transactionId)+'">'+esc(d.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(d.name)+'</span></div></div>';}).join('');}
 
     /* ═══ ADMIN SETTINGS ═══ */
-    async function loadSettingsForm(){var r=await apiGet('adminInit');if(!r.success)return;var s=r.settings;document.getElementById('setLotteryName').value=s.lottery_name||'';var dv=s.draw_date||'';if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}document.getElementById('setDrawDate').value=dv;document.getElementById('setAnnouncement').value=s.announcement||'';document.getElementById('setPricePerNumber').value=s.price_per_number||'1';document.getElementById('setMinQuantity').value=s.min_quantity||'50';document.getElementById('setMaxQuantity').value=s.max_quantity||'1000';document.getElementById('setGcashName').value=s.gcash_name||'';document.getElementById('setGcashNumber').value=s.gcash_number||'';document.getElementById('setMaintenance').checked=s.maintenance_mode==='true';document.getElementById('setNewPassword').value='';}
+    async function loadSettingsForm(){
+      var r=await apiGet('adminInit');
+      if(!r.success)return;
+      var s=r.settings;
 
-    async function saveSettings(){var btn=document.getElementById('btnSaveSettings');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';var data={lottery_name:document.getElementById('setLotteryName').value,draw_date:document.getElementById('setDrawDate').value,announcement:document.getElementById('setAnnouncement').value,price_per_number:document.getElementById('setPricePerNumber').value,min_quantity:document.getElementById('setMinQuantity').value,max_quantity:document.getElementById('setMaxQuantity').value,gcash_name:document.getElementById('setGcashName').value,gcash_number:document.getElementById('setGcashNumber').value,maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false'};var pw=document.getElementById('setNewPassword').value;if(pw)data.new_password=pw;var r=await apiPost('adminUpdateSettings',data);btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';showToast(r.success?'Settings saved!':friendlyError(r.error),r.success?'success':'error');}
+      /* Update pool config from settings */
+      if(s.total_pool){
+        var tp=parseInt(s.total_pool)||20000;
+        var mx=tp-1;
+        poolConfig.totalPool=tp;
+        poolConfig.numberMax=mx;
+        poolConfig.numberDigits=String(mx).length;
+        updateAdminPoolLabels();
+        buildSlots();
+      }
+
+      document.getElementById('setLotteryName').value=s.lottery_name||'';
+      var dv=s.draw_date||'';
+      if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}
+      document.getElementById('setDrawDate').value=dv;
+      document.getElementById('setAnnouncement').value=s.announcement||'';
+      document.getElementById('setTotalPool').value=s.total_pool||'20000';
+      document.getElementById('setPricePerNumber').value=s.price_per_number||'1';
+      document.getElementById('setMinQuantity').value=s.min_quantity||'50';
+      document.getElementById('setMaxQuantity').value=s.max_quantity||'1000';
+      document.getElementById('setGcashName').value=s.gcash_name||'';
+      document.getElementById('setGcashNumber').value=s.gcash_number||'';
+      document.getElementById('setMaintenance').checked=s.maintenance_mode==='true';
+      document.getElementById('setNewPassword').value='';
+
+      /* Show pool preview */
+      var preview=document.getElementById('poolPreview');
+      if(preview) preview.textContent=poolPreviewText(s.total_pool||'20000');
+
+      /* Setup pool preview listener (only once via setupListeners) */
+    }
+
+    async function saveSettings(){
+      var btn=document.getElementById('btnSaveSettings');
+      btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';
+
+      var poolVal=document.getElementById('setTotalPool').value;
+
+      var data={
+        lottery_name:document.getElementById('setLotteryName').value,
+        draw_date:document.getElementById('setDrawDate').value,
+        announcement:document.getElementById('setAnnouncement').value,
+        total_pool:poolVal,
+        price_per_number:document.getElementById('setPricePerNumber').value,
+        min_quantity:document.getElementById('setMinQuantity').value,
+        max_quantity:document.getElementById('setMaxQuantity').value,
+        gcash_name:document.getElementById('setGcashName').value,
+        gcash_number:document.getElementById('setGcashNumber').value,
+        maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false'
+      };
+      var pw=document.getElementById('setNewPassword').value;
+      if(pw)data.new_password=pw;
+
+      var r=await apiPost('adminUpdateSettings',data);
+      btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';
+
+      if(r.success){
+        showToast('Settings saved!','success');
+        /* Refresh pool config after save */
+        var tp=parseInt(poolVal)||20000;
+        tp=Math.round(tp/10000)*10000;
+        if(tp<10000)tp=10000;if(tp>200000)tp=200000;
+        poolConfig.totalPool=tp;
+        poolConfig.numberMax=tp-1;
+        poolConfig.numberDigits=String(tp-1).length;
+        updateAdminPoolLabels();
+        buildSlots();
+        loadDashboard();
+      }else{
+        showToast(friendlyError(r.error),'error');
+      }
+    }
 
     /* ═══════════════════════════════════════════════════════════
-       DRAW WINNER SYSTEM
+       DRAW WINNER SYSTEM — DYNAMIC DIGITS
        ═══════════════════════════════════════════════════════════ */
 
-    /* ═══ FIX #8: USE crypto.getRandomValues FOR SECURE DRAW ═══ */
     function secureRandom(max){
       var arr=new Uint32Array(1);
       crypto.getRandomValues(arr);
@@ -1011,15 +1152,29 @@
     }
 
     function generateDrawNumber() {
-      var num=secureRandom(20000);
-      var s=String(num).padStart(5,'0');
+      var num=secureRandom(poolConfig.totalPool);
+      var s=String(num).padStart(poolConfig.numberDigits,'0');
       return s.split('');
     }
 
-    function startSlotAnimation(slotEl, isFirstDigit) {
+    /**
+     * Get the max value for a digit at a given position during slot animation.
+     * For the first digit, it's limited based on the pool's max first digit.
+     * For other digits, it's always 0-9.
+     */
+    function getDigitMax(digitIndex){
+      if(digitIndex===0){
+        var maxFirstDigit=parseInt(String(poolConfig.numberMax).charAt(0));
+        return maxFirstDigit+1; // e.g. for 19999 -> first digit max is 1, so range is 0-1
+      }
+      return 10;
+    }
+
+    function startSlotAnimation(slotEl, digitIndex) {
+      var maxVal=getDigitMax(digitIndex);
       var val = slotEl.querySelector('.slot-value');
       slotEl._spinInterval = setInterval(function() {
-        val.textContent = isFirstDigit ? secureRandom(2) : secureRandom(10);
+        val.textContent = secureRandom(maxVal);
       }, 80);
     }
 
@@ -1034,10 +1189,10 @@
       return new Promise(function(resolve) {
         var slot = document.getElementById('slot' + index);
         stopSlotAnimation(slot);
-        var isFirst = (index === 0);
+        var maxVal=getDigitMax(index);
         var count = 0;
         var si = setInterval(function() {
-          slot.querySelector('.slot-value').textContent = isFirst ? secureRandom(2) : secureRandom(10);
+          slot.querySelector('.slot-value').textContent = secureRandom(maxVal);
           count++;
           if (count >= 8) {
             clearInterval(si);
@@ -1054,6 +1209,8 @@
       if (isDrawing) return;
       isDrawing = true;
 
+      var numDigits=poolConfig.numberDigits;
+
       var btn = document.getElementById('btnDrawWinner');
       btn.disabled = true;
       btn.innerHTML = '<div class="spinner"></div><span>Drawing...</span>';
@@ -1063,8 +1220,9 @@
       document.getElementById('drawTitleText').textContent = 'Drawing Winner...';
       document.getElementById('drawStatus').textContent = 'Generating random number...';
 
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < numDigits; i++) {
         var s = document.getElementById('slot' + i);
+        if(!s)continue;
         stopSlotAnimation(s);
         s.className = 'slot-digit';
         s.style.opacity = '';
@@ -1074,19 +1232,20 @@
       var digits = generateDrawNumber();
       var drawnNumber = digits.join('');
 
-      for (var j = 0; j < 5; j++) {
+      for (var j = 0; j < numDigits; j++) {
         var se = document.getElementById('slot' + j);
+        if(!se)continue;
         se.classList.add('spinning');
-        startSlotAnimation(se, j === 0);
+        startSlotAnimation(se, j);
       }
 
       document.getElementById('drawStatus').textContent = 'Shuffling numbers...';
       await delay(2000);
 
-      for (var k = 0; k < 5; k++) {
-        document.getElementById('drawStatus').textContent = 'Revealing digit ' + (k + 1) + ' of 5...';
+      for (var k = 0; k < numDigits; k++) {
+        document.getElementById('drawStatus').textContent = 'Revealing digit ' + (k + 1) + ' of ' + numDigits + '...';
         await revealDigit(k, digits[k]);
-        if (k < 4) {
+        if (k < numDigits - 1) {
           for (var cd = 5; cd > 0; cd--) {
             document.getElementById('drawStatus').textContent = 'Next digit in ' + cd + 's...';
             await delay(1000);
@@ -1101,8 +1260,10 @@
       var res = await apiGet('adminDrawWinner', { number: drawnNumber });
 
       if (!res.success) {
-        /* ═══ FIX #19: STOP ALL SLOT ANIMATIONS ON ERROR ═══ */
-        for (var si = 0; si < 5; si++) stopSlotAnimation(document.getElementById('slot' + si));
+        for (var si2 = 0; si2 < numDigits; si2++) {
+          var slotEl=document.getElementById('slot' + si2);
+          if(slotEl)stopSlotAnimation(slotEl);
+        }
         showToast(friendlyError(res.error), 'error');
         document.getElementById('drawTitleText').textContent = 'Error';
         document.getElementById('drawStatus').textContent = 'Something went wrong. Please try again.';
@@ -1117,8 +1278,9 @@
         document.getElementById('drawTitleText').textContent = '🎉 Winner Found!';
         await delay(500);
 
-        for (var w = 0; w < 5; w++) {
-          document.getElementById('slot' + w).classList.add('revealed');
+        for (var w = 0; w < numDigits; w++) {
+          var wSlot=document.getElementById('slot' + w);
+          if(wSlot)wSlot.classList.add('revealed');
         }
 
         document.getElementById('winnerNumber').textContent = res.number;
@@ -1144,8 +1306,9 @@
         document.getElementById('drawTitleText').textContent = 'No Match';
         document.getElementById('drawStatus').textContent = drawnNumber + ' is not a sold number. Draw again!';
 
-        for (var nm = 0; nm < 5; nm++) {
-          document.getElementById('slot' + nm).style.opacity = '0.4';
+        for (var nm = 0; nm < numDigits; nm++) {
+          var nmSlot=document.getElementById('slot' + nm);
+          if(nmSlot)nmSlot.style.opacity = '0.4';
         }
 
         btn.style.display = 'none';
@@ -1165,6 +1328,7 @@
 
     function resetDraw() {
       isDrawing = false;
+      var numDigits=poolConfig.numberDigits;
       var btn = document.getElementById('btnDrawWinner');
       btn.style.display = '';
       btn.disabled = false;
@@ -1173,8 +1337,9 @@
       document.getElementById('winnerReveal').classList.remove('visible');
       document.getElementById('drawTitleText').textContent = 'Ready to Draw';
       document.getElementById('drawStatus').textContent = 'Click the button below to draw a winner';
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < numDigits; i++) {
         var slot = document.getElementById('slot' + i);
+        if(!slot)continue;
         stopSlotAnimation(slot);
         slot.className = 'slot-digit';
         slot.style.opacity = '';
@@ -1182,7 +1347,6 @@
       }
     }
 
-    /* ═══ FIX #9/#22: PERSIST DRAW HISTORY IN localStorage ═══ */
     function saveDrawHistory(){
       try{localStorage.setItem('sweetspot_draw_history',JSON.stringify(drawHistory.slice(0,100)));}catch(e){}
     }
@@ -1226,6 +1390,9 @@
     /* ═══ MODAL ═══ */
     function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
     document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+    /* ═══ INIT: Build initial slots ═══ */
+    buildSlots();
   </script>
 </body>
 </html>
