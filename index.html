@@ -1124,10 +1124,16 @@
       var r=await apiPost('adminUpdateSettings',data);
       btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';
 
-      if(r.success){
-        showToast('Settings saved!','success');
+        if(r.success){
+        /* Show warnings if any */
+        if(r.warnings&&r.warnings.length>0){
+          r.warnings.forEach(function(w){showToast('⚠️ '+w,'info');});
+          showToast(r.message||'Settings saved!','success');
+        }else{
+          showToast('Settings saved!','success');
+        }
         /* Refresh pool config after save */
-        var tp=parseInt(poolVal)||20000;
+        var tp=parseInt(document.getElementById('setTotalPool').value)||20000;
         tp=Math.round(tp/10000)*10000;
         if(tp<10000)tp=10000;if(tp>200000)tp=200000;
         poolConfig.totalPool=tp;
