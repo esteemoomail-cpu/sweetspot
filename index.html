@@ -265,8 +265,6 @@
     .confetti-container { position:fixed; inset:0; z-index:1001; pointer-events:none; overflow:hidden; }
     .confetti { position:absolute; width:10px; height:10px; top:-10px; border-radius:2px; animation:confettiFall linear forwards; }
     @keyframes confettiFall { 0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1} 80%{opacity:1} 100%{transform:translateY(100vh) rotate(720deg) scale(0.3);opacity:0} }
-
-    /* ═══════════ DRAW WINNER STYLES ═══════════ */
     .draw-stage { text-align:center; padding:20px 0; }
     .draw-title-text { font-family:'Poppins',sans-serif; font-size:16px; font-weight:700; color:var(--text-secondary); margin-bottom:24px; text-transform:uppercase; letter-spacing:2px; }
     .slot-container { display:flex; justify-content:center; gap:10px; margin:32px 0; flex-wrap:wrap; }
@@ -299,7 +297,7 @@
     .draw-history-name { font-size:13px; color:var(--text-primary); font-weight:600; }
     .draw-history-date { font-size:11px; color:var(--text-muted); }
     .pool-info-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:99px; font-size:11px; font-weight:700; background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.2); color:var(--primary-light); margin-left:8px; }
-        .quick-pick-section { margin-top: 14px; }
+    .quick-pick-section { margin-top: 14px; }
     .quick-pick-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
     .quick-pick-grid { display: flex; flex-wrap: wrap; gap: 8px; }
     .quick-pick-btn { padding: 10px 0; min-width: 72px; flex: 1; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-input); color: var(--text-secondary); font-size: 13px; font-weight: 700; font-family: 'Poppins', sans-serif; cursor: pointer; transition: var(--transition); text-align: center; position: relative; overflow: hidden; }
@@ -317,6 +315,47 @@
     .quick-pick-reset:hover { border-color: var(--danger); color: var(--danger); }
     .quick-pick-max:hover { border-color: var(--primary-light); color: var(--primary-light); }
     .qty-current-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; background: rgba(108, 60, 225, 0.12); color: var(--primary-light); margin-left: 8px; vertical-align: middle; }
+
+    /* HOW IT WORKS BANNER */
+    .how-it-works-banner { background: linear-gradient(135deg, rgba(108,60,225,0.12), rgba(139,92,246,0.06)); border: 1px solid rgba(139,92,246,0.25); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px; cursor: pointer; transition: var(--transition); animation: slideDown 0.4s ease; }
+    .how-it-works-banner:hover { border-color: var(--primary-light); background: linear-gradient(135deg, rgba(108,60,225,0.18), rgba(139,92,246,0.1)); transform: translateY(-1px); box-shadow: 0 4px 16px var(--primary-glow); }
+    .how-it-works-banner:active { transform: scale(0.98); }
+    .hiw-banner-content { display: flex; align-items: center; justify-content: space-between; }
+    .hiw-banner-left { display: flex; align-items: center; gap: 12px; }
+    .hiw-banner-left > i { font-size: 24px; color: var(--primary-light); flex-shrink: 0; }
+    .hiw-banner-title { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+    .hiw-banner-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .hiw-arrow { color: var(--primary-light); font-size: 14px; transition: var(--transition); }
+    .how-it-works-banner:hover .hiw-arrow { transform: translateX(3px); }
+    .hiw-banner-image img { width: 100%; height: auto; border-radius: var(--radius-sm); margin-top: 12px; }
+    .hiw-steps-list { display: flex; flex-direction: column; gap: 0; }
+    .hiw-step-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .hiw-step-item:last-child { border-bottom: none; }
+    .hiw-step-num-circle { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; background: rgba(108,60,225,0.15); color: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+    .hiw-step-content { flex: 1; }
+    .hiw-step-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+    .hiw-step-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* PAYMENT METHOD TABS */
+    .payment-method-tabs { display: flex; gap: 4px; margin-bottom: 20px; background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 4px; }
+    .payment-method-tab { flex: 1; padding: 12px 8px; border: none; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .payment-method-tab:hover { color: var(--text-primary); background: var(--bg-card); }
+    .payment-method-tab.active { color: #fff; background: var(--primary); box-shadow: 0 2px 8px var(--primary-glow); }
+    .payment-method-tab .pm-icon { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900; }
+    .payment-method-tab .pm-icon.gcash { background: #007BFF; color: #fff; }
+    .payment-method-tab .pm-icon.maya { background: #22B573; color: #fff; }
+    .payment-method-content { display: none; }
+    .payment-method-content.active { display: block; animation: fadeIn 0.3s ease; }
+    .payment-open-app { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border: 1.5px solid rgba(139,92,246,0.3); border-radius: var(--radius-sm); background: rgba(108,60,225,0.08); color: var(--primary-light); font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: var(--transition); text-decoration: none; margin-top: 12px; width: 100%; }
+    .payment-open-app:hover { background: rgba(108,60,225,0.15); border-color: var(--primary-light); transform: translateY(-1px); }
+    .payment-open-app:active { transform: scale(0.98); }
+    .payment-open-app i { font-size: 16px; }
+
+    /* GENERATE NUMBERS ADMIN */
+    .gen-numbers-info { background: rgba(108,60,225,0.08); border: 1px solid rgba(108,60,225,0.15); border-radius: var(--radius-sm); padding: 14px 16px; margin-top: 12px; }
+    .gen-numbers-info p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .gen-numbers-info strong { color: var(--primary-light); }
+
     @media(max-width:380px) { .app-container{padding:12px 12px 32px} .logo-container{width:140px;height:140px;border-radius:30px} .price-total .amount{font-size:20px} .payment-amount-banner .pay-amount{font-size:28px} .slot-digit{width:44px;height:62px;font-size:24px} .winner-number{font-size:32px;letter-spacing:4px} }
     @media(max-width:600px) { .admin-stats{grid-template-columns:1fr 1fr} .slot-digit{width:48px;height:68px;font-size:28px} }
   </style>
@@ -346,12 +385,82 @@
     </div>
   </div>
 
+  <!-- HOW IT WORKS MODAL -->
+  <div class="modal-overlay" id="hiwModalOverlay">
+    <div class="modal" id="hiwModal" style="max-width:480px;">
+      <div class="modal-header">
+        <h3><i class="fas fa-info-circle" style="color:var(--primary-light);margin-right:8px;"></i>How It Works</h3>
+        <button class="modal-close" onclick="closeHiwModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" style="padding:20px 24px;">
+        <div id="hiwModalImage" style="display:none;margin-bottom:20px;border-radius:var(--radius-sm);overflow:hidden;">
+          <img src="" alt="How It Works" style="width:100%;height:auto;display:block;" id="hiwModalImg">
+        </div>
+        <div class="hiw-steps-list">
+          <div class="hiw-step-item">
+            <div class="hiw-step-num-circle">1</div>
+            <div class="hiw-step-content">
+              <div class="hiw-step-title">Enter Your Info</div>
+              <div class="hiw-step-desc">Provide your name, phone number, and choose how many numbers you want.</div>
+            </div>
+          </div>
+          <div class="hiw-step-item">
+            <div class="hiw-step-num-circle">2</div>
+            <div class="hiw-step-content">
+              <div class="hiw-step-title">Send Payment</div>
+              <div class="hiw-step-desc">Pay via GCash or Maya. Copy the account number and send the exact amount.</div>
+            </div>
+          </div>
+          <div class="hiw-step-item">
+            <div class="hiw-step-num-circle">3</div>
+            <div class="hiw-step-content">
+              <div class="hiw-step-title">Enter Reference Number</div>
+              <div class="hiw-step-desc">After payment, enter the 13-digit reference number from your receipt.</div>
+            </div>
+          </div>
+          <div class="hiw-step-item">
+            <div class="hiw-step-num-circle">4</div>
+            <div class="hiw-step-content">
+              <div class="hiw-step-title">Get Your Numbers</div>
+              <div class="hiw-step-desc">Your lucky numbers are generated automatically and reserved for you. Save your Transaction ID!</div>
+            </div>
+          </div>
+          <div class="hiw-step-item">
+            <div class="hiw-step-num-circle" style="background:rgba(245,158,11,0.15);color:var(--secondary);">5</div>
+            <div class="hiw-step-content">
+              <div class="hiw-step-title" style="color:var(--secondary);">Wait for the Draw</div>
+              <div class="hiw-step-desc">Admin verifies payments and draws winners on the draw date. Good luck!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" onclick="closeHiwModal()"><i class="fas fa-thumbs-up"></i> Got It!</button>
+      </div>
+    </div>
+  </div>
+
   <div class="app-container" id="appContainer">
     <div id="publicView">
       <header class="app-header">
         <div class="logo-container"><img src="logo.svg" alt="Sweetspot Logo"></div>
         <p class="app-subtitle">Your lucky number awaits</p>
       </header>
+
+      <!-- HOW IT WORKS BANNER -->
+      <div class="how-it-works-banner" id="howItWorksBanner" onclick="showHowItWorks()">
+        <div class="hiw-banner-content">
+          <div class="hiw-banner-left">
+            <i class="fas fa-question-circle"></i>
+            <div>
+              <div class="hiw-banner-title">How It Works</div>
+              <div class="hiw-banner-subtitle">Tap to see the step-by-step process</div>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right hiw-arrow"></i>
+        </div>
+      </div>
+
       <div class="announcement-banner" id="announcementBanner"><i class="fas fa-bullhorn"></i><p id="announcementText"></p></div>
       <div class="soldout-banner" id="soldoutBanner"><i class="fas fa-exclamation-triangle"></i><h3>ALL NUMBERS SOLD OUT!</h3><p>All numbers have been claimed. Stay tuned for the draw date and the next round!</p></div>
       <div class="draw-date-banner" id="drawDateBanner"><div class="label">Next Draw Date</div><div class="date" id="drawDateText"></div></div>
@@ -360,74 +469,161 @@
         <div class="progress-header"><span>Numbers Sold</span><span id="progressPercent">0%</span></div>
         <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       </div>
+
       <div id="purchaseFlow">
+        <!-- STEP 1 -->
         <div class="section active" id="sectionStep1">
           <div class="steps"><div class="step active"><div class="step-circle">1</div><div class="step-label">Info</div></div><div class="step-line"></div><div class="step"><div class="step-circle">2</div><div class="step-label">Pay</div></div><div class="step-line"></div><div class="step"><div class="step-circle">3</div><div class="step-label">Proof</div></div><div class="step-line"></div><div class="step"><div class="step-circle">4</div><div class="step-label">Done</div></div></div>
           <div class="card">
             <div class="card-header"><div class="card-icon purple"><i class="fas fa-user"></i></div><div class="card-title">Your Information</div></div>
             <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="inputName" placeholder="Juan Dela Cruz" maxlength="40" autocomplete="name"></div>
             <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" id="inputPhone" placeholder="09171234567" maxlength="11" autocomplete="tel"><div class="form-hint"><i class="fas fa-info-circle"></i> Must start with 09</div></div>
-            <div class="form-group">               <label class="form-label">Quantity</label>               <div class="quantity-control">                 <button type="button" class="qty-btn" onclick="adjustQty(-50)">−</button>                 <input type="number" class="form-input qty-input" id="inputQuantity" min="50" max="1000" value="50" step="1">                 <button type="button" class="qty-btn" onclick="adjustQty(50)">+</button>               </div>               <div class="form-hint" id="qtyHint"><i class="fas fa-info-circle"></i> Min: 50 — Max: 1,000</div>               <div class="quick-pick-section" id="quickPickSection">                 <div class="quick-pick-label">Quick Add</div>                 <div class="quick-pick-grid" id="quickPickGrid"></div>               </div>               <div class="quick-pick-actions">                 <button type="button" class="quick-pick-reset" id="qtyResetBtn" onclick="resetQty()"><i class="fas fa-undo"></i> Reset to Min</button>                 <button type="button" class="quick-pick-max" id="qtyMaxBtn" onclick="setMaxQty()"><i class="fas fa-arrow-up"></i> Set Max</button>               </div>             </div>
-            <div class="price-summary"><div class="price-row"><span>Price per number</span><span id="pricePerNumber">₱1.00</span></div><div class="price-total"><span class="label">Total</span><span class="amount" id="summaryTotal">₱50.00</span></div></div>
+            <div class="form-group">
+              <label class="form-label">Quantity</label>
+              <div class="quantity-control">
+                <button type="button" class="qty-btn" onclick="adjustQty(-50)">-</button>
+                <input type="number" class="form-input qty-input" id="inputQuantity" min="50" max="1000" value="50" step="1">
+                <button type="button" class="qty-btn" onclick="adjustQty(50)">+</button>
+              </div>
+              <div class="form-hint" id="qtyHint"><i class="fas fa-info-circle"></i> Min: 50 - Max: 1,000</div>
+              <div class="quick-pick-section" id="quickPickSection">
+                <div class="quick-pick-label">Quick Add</div>
+                <div class="quick-pick-grid" id="quickPickGrid"></div>
+              </div>
+              <div class="quick-pick-actions">
+                <button type="button" class="quick-pick-reset" id="qtyResetBtn" onclick="resetQty()"><i class="fas fa-undo"></i> Reset to Min</button>
+                <button type="button" class="quick-pick-max" id="qtyMaxBtn" onclick="setMaxQty()"><i class="fas fa-arrow-up"></i> Set Max</button>
+              </div>
+            </div>
+            <div class="price-summary"><div class="price-row"><span>Price per number</span><span id="pricePerNumber">&#8369;1.00</span></div><div class="price-total"><span class="label">Total</span><span class="amount" id="summaryTotal">&#8369;50.00</span></div></div>
             <div style="margin-top:24px;"><button type="button" class="btn btn-primary" id="btnContinue" onclick="goToStep2()"><span>Continue to Payment</span><i class="fas fa-arrow-right"></i></button></div>
           </div>
         </div>
+
+        <!-- STEP 2 - PAYMENT with GCash + Maya -->
         <div class="section" id="sectionStep2">
           <div class="steps"><div class="step done"><div class="step-circle"><i class="fas fa-check" style="font-size:12px"></i></div><div class="step-label">Info</div></div><div class="step-line done"></div><div class="step active"><div class="step-circle">2</div><div class="step-label">Pay</div></div><div class="step-line"></div><div class="step"><div class="step-circle">3</div><div class="step-label">Proof</div></div><div class="step-line"></div><div class="step"><div class="step-circle">4</div><div class="step-label">Done</div></div></div>
-          <div class="payment-amount-banner"><div class="pay-label">Amount to Pay</div><div class="pay-amount" id="payAmount">₱100.00</div><div class="pay-qty" id="payQty">for 100 numbers</div></div>
+          <div class="payment-amount-banner"><div class="pay-label">Amount to Pay</div><div class="pay-amount" id="payAmount">&#8369;100.00</div><div class="pay-qty" id="payQty">for 100 numbers</div></div>
           <div class="card">
-            <div class="card-header"><div class="card-icon blue"><i class="fas fa-wallet"></i></div><div class="card-title">Send Payment via GCash</div></div>
-            <div style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);"><span style="font-size:12px;color:var(--text-muted)">Account Name</span><span style="font-size:14px;font-weight:600" id="gcashName2">—</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;"><span style="font-size:12px;color:var(--text-muted)">GCash Number</span><span style="font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px"><span id="gcashNumber2">—</span><button class="copy-btn" onclick="copyGcash()" id="copyGcashBtn"><i class="fas fa-copy"></i></button></span></div></div>
-            <div class="payment-steps"><div class="payment-step"><div class="payment-step-num">1</div><div class="payment-step-text">Open <strong>GCash app</strong> and tap <strong>Send Money</strong></div></div><div class="payment-step"><div class="payment-step-num">2</div><div class="payment-step-text">Enter the number above and amount of <strong id="payAmountStep">₱100.00</strong></div></div><div class="payment-step"><div class="payment-step-num">3</div><div class="payment-step-text">Complete payment and <strong>save the reference number</strong></div></div></div>
-            <div class="btn-group"><button type="button" class="btn btn-secondary" onclick="goToStep1()"><i class="fas fa-arrow-left"></i><span>Back</span></button><button type="button" class="btn btn-primary" onclick="goToStep3()"><span>I've Paid</span><i class="fas fa-arrow-right"></i></button></div>
+            <div class="card-header"><div class="card-icon blue"><i class="fas fa-wallet"></i></div><div class="card-title">Send Payment</div></div>
+
+            <!-- Payment Method Tabs -->
+            <div class="payment-method-tabs">
+              <button type="button" class="payment-method-tab active" data-method="gcash" onclick="switchPaymentMethod('gcash')">
+                <span class="pm-icon gcash">G</span> GCash
+              </button>
+              <button type="button" class="payment-method-tab" data-method="maya" onclick="switchPaymentMethod('maya')">
+                <span class="pm-icon maya">M</span> Maya
+              </button>
+            </div>
+
+            <!-- GCash Content -->
+            <div class="payment-method-content active" id="paymentGcash">
+              <div style="margin-bottom:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                  <span style="font-size:12px;color:var(--text-muted)">Account Name</span>
+                  <span style="font-size:14px;font-weight:600" id="gcashName2">-</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;">
+                  <span style="font-size:12px;color:var(--text-muted)">GCash Number</span>
+                  <span style="font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px">
+                    <span id="gcashNumber2">-</span>
+                    <button class="copy-btn" onclick="copyGcash()" id="copyGcashBtn"><i class="fas fa-copy"></i></button>
+                  </span>
+                </div>
+              </div>
+              <div class="payment-steps">
+                <div class="payment-step"><div class="payment-step-num">1</div><div class="payment-step-text">Open <strong>GCash app</strong> and tap <strong>Send Money</strong></div></div>
+                <div class="payment-step"><div class="payment-step-num">2</div><div class="payment-step-text">Enter the number above and amount of <strong id="payAmountStep">&#8369;100.00</strong></div></div>
+                <div class="payment-step"><div class="payment-step-num">3</div><div class="payment-step-text">Complete payment and <strong>save the reference number</strong></div></div>
+              </div>
+              <a href="#" id="gcashDeepLink" class="payment-open-app" onclick="openGcashApp(event)">
+                <i class="fas fa-external-link-alt"></i> Open GCash App
+              </a>
+            </div>
+
+            <!-- Maya Content -->
+            <div class="payment-method-content" id="paymentMaya">
+              <div style="margin-bottom:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+                  <span style="font-size:12px;color:var(--text-muted)">Account Name</span>
+                  <span style="font-size:14px;font-weight:600" id="mayaName">-</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;">
+                  <span style="font-size:12px;color:var(--text-muted)">Maya Number</span>
+                  <span style="font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px">
+                    <span id="mayaNumber">-</span>
+                    <button class="copy-btn" onclick="copyMaya()" id="copyMayaBtn"><i class="fas fa-copy"></i></button>
+                  </span>
+                </div>
+              </div>
+              <div class="payment-steps">
+                <div class="payment-step"><div class="payment-step-num">1</div><div class="payment-step-text">Open <strong>Maya app</strong> and tap <strong>Send Money</strong></div></div>
+                <div class="payment-step"><div class="payment-step-num">2</div><div class="payment-step-text">Enter the number above and amount of <strong id="payAmountStepMaya">&#8369;100.00</strong></div></div>
+                <div class="payment-step"><div class="payment-step-num">3</div><div class="payment-step-text">Complete payment and <strong>save the reference number</strong></div></div>
+              </div>
+              <a href="#" id="mayaDeepLink" class="payment-open-app" onclick="openMayaApp(event)">
+                <i class="fas fa-external-link-alt"></i> Open Maya App
+              </a>
+            </div>
+
+            <div class="btn-group" style="margin-top:24px;"><button type="button" class="btn btn-secondary" onclick="goToStep1()"><i class="fas fa-arrow-left"></i><span>Back</span></button><button type="button" class="btn btn-primary" onclick="goToStep3()"><span>I've Paid</span><i class="fas fa-arrow-right"></i></button></div>
           </div>
         </div>
+
+        <!-- STEP 3 -->
         <div class="section" id="sectionStep3">
           <div class="steps"><div class="step done"><div class="step-circle"><i class="fas fa-check" style="font-size:12px"></i></div><div class="step-label">Info</div></div><div class="step-line done"></div><div class="step done"><div class="step-circle"><i class="fas fa-check" style="font-size:12px"></i></div><div class="step-label">Pay</div></div><div class="step-line done"></div><div class="step active"><div class="step-circle">3</div><div class="step-label">Proof</div></div><div class="step-line"></div><div class="step"><div class="step-circle">4</div><div class="step-label">Done</div></div></div>
           <div class="card">
             <div class="card-header"><div class="card-icon amber"><i class="fas fa-receipt"></i></div><div class="card-title">Proof of Payment</div></div>
-            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6;">Enter the <strong style="color:var(--text-primary)">GCash Reference Number</strong> from your receipt.</p>
-            <div class="form-group" style="margin-bottom:0;"><label class="form-label">GCash Reference Number</label><input type="text" class="form-input" id="inputGcashRef" placeholder="e.g. 1234567890123" maxlength="13" inputmode="numeric" style="font-size:18px;text-align:center;letter-spacing:2px;font-weight:600;"><div class="form-hint"><i class="fas fa-info-circle"></i> 13-digit number from your GCash receipt</div></div>
-            <div class="price-summary" style="margin-top:24px;"><div class="price-row"><span>Name</span><span id="step3Name" style="font-weight:600;color:var(--text-primary)">—</span></div><div class="price-row"><span>Phone</span><span id="step3Phone" style="font-weight:600;color:var(--text-primary)">—</span></div><div class="price-total"><span class="label">Amount</span><span class="amount" id="step3Amount">₱100.00</span></div></div>
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6;">Enter the <strong style="color:var(--text-primary)">GCash/Maya Reference Number</strong> from your receipt.</p>
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">Reference Number</label><input type="text" class="form-input" id="inputGcashRef" placeholder="e.g. 1234567890123" maxlength="13" inputmode="numeric" style="font-size:18px;text-align:center;letter-spacing:2px;font-weight:600;"><div class="form-hint"><i class="fas fa-info-circle"></i> 13-digit number from your GCash/Maya receipt</div></div>
+            <div class="price-summary" style="margin-top:24px;"><div class="price-row"><span>Name</span><span id="step3Name" style="font-weight:600;color:var(--text-primary)">-</span></div><div class="price-row"><span>Phone</span><span id="step3Phone" style="font-weight:600;color:var(--text-primary)">-</span></div><div class="price-total"><span class="label">Amount</span><span class="amount" id="step3Amount">&#8369;100.00</span></div></div>
             <div class="btn-group"><button type="button" class="btn btn-secondary" onclick="goToStep2()"><i class="fas fa-arrow-left"></i><span>Back</span></button><button type="button" class="btn btn-success" id="btnSubmit" onclick="submitPurchase()"><i class="fas fa-paper-plane"></i><span>Submit</span></button></div>
           </div>
         </div>
+
+        <!-- STEP 4 -->
         <div class="section" id="sectionStep4">
           <div class="receipt-card">
             <div class="receipt-header"><div class="check-circle"><i class="fas fa-check"></i></div><h3>Entries Submitted!</h3><p>Your entry is being reviewed</p></div>
             <div class="receipt-body">
-              <div class="receipt-row"><span class="r-label">Name</span><span class="r-value" id="receiptName">—</span></div>
-              <div class="receipt-row"><span class="r-label">Phone</span><span class="r-value" id="receiptPhone">—</span></div>
-              <div class="receipt-row"><span class="r-label">Amount Paid</span><span class="r-value amount" id="receiptAmount">—</span></div>
-              <div class="receipt-row"><span class="r-label">Date</span><span class="r-value" id="receiptDate">—</span></div>
+              <div class="receipt-row"><span class="r-label">Name</span><span class="r-value" id="receiptName">-</span></div>
+              <div class="receipt-row"><span class="r-label">Phone</span><span class="r-value" id="receiptPhone">-</span></div>
+              <div class="receipt-row"><span class="r-label">Amount Paid</span><span class="r-value amount" id="receiptAmount">-</span></div>
+              <div class="receipt-row"><span class="r-label">Date</span><span class="r-value" id="receiptDate">-</span></div>
               <div class="receipt-row"><span class="r-label">Status</span><span class="r-value"><span class="status-badge pending"><i class="fas fa-clock"></i> Pending</span></span></div>
-              <div class="receipt-row"><span class="r-label">Transaction ID</span><span class="r-value txid"><span id="receiptTxId">—</span><button class="copy-btn-sm" onclick="copyField('receiptTxId',this)"><i class="fas fa-copy"></i></button></span></div>
-              <div class="receipt-row"><span class="r-label">GCash Ref#</span><span class="r-value ref"><span id="receiptGcashRef">—</span><button class="copy-btn-sm" onclick="copyField('receiptGcashRef',this)"><i class="fas fa-copy"></i></button></span></div>
+              <div class="receipt-row"><span class="r-label">Transaction ID</span><span class="r-value txid"><span id="receiptTxId">-</span><button class="copy-btn-sm" onclick="copyField('receiptTxId',this)"><i class="fas fa-copy"></i></button></span></div>
+              <div class="receipt-row"><span class="r-label">Ref#</span><span class="r-value ref"><span id="receiptGcashRef">-</span><button class="copy-btn-sm" onclick="copyField('receiptGcashRef',this)"><i class="fas fa-copy"></i></button></span></div>
             </div>
             <div class="receipt-notice"><i class="fas fa-info-circle"></i><p>Your numbers are reserved and will be confirmed once payment is verified. Save your <strong>Transaction ID</strong>.</p></div>
           </div>
           <button class="btn btn-primary" onclick="resetForm()" style="margin-bottom:12px;"><i class="fas fa-plus-circle"></i><span>New Purchase</span></button>
         </div>
       </div>
-      <div class="app-footer"><p>© 2025 Sweetspot · All rights reserved<br>Numbers are randomly generated and securely stored</p></div>
+
+      <div class="app-footer"><p>&copy; 2025 Sweetspot &middot; All rights reserved<br>Numbers are randomly generated and securely stored</p></div>
     </div>
 
+    <!-- ADMIN VIEW -->
     <div id="adminView" style="display:none;">
       <div class="section active" id="adminLoginSection">
         <div style="max-width:400px;margin:60px auto;">
           <div class="card">
             <div class="card-header"><div class="card-icon amber"><i class="fas fa-user-shield"></i></div><div class="card-title">Sweetspot Admin</div></div>
             <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-input" id="adminUsername" placeholder="admin"></div>
-            <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="adminPassword" placeholder="••••••••"></div>
+            <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="adminPassword" placeholder="********"></div>
             <button class="btn btn-primary" id="btnAdminLogin" onclick="adminLogin()" style="margin-top:8px;"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>
           </div>
         </div>
       </div>
+
       <div class="section" id="adminDashSection">
         <div class="admin-header">
           <div class="admin-header-left"><div class="admin-logo"><img src="logo.svg" alt="Sweetspot Logo"></div><div><h2>Sweetspot</h2><small>Admin Panel <span class="pool-info-badge" id="adminPoolBadge"><i class="fas fa-database"></i> <span id="adminPoolBadgeText">20,000 Pool</span></span></small></div></div>
           <div class="admin-header-right"><a class="admin-link" id="mainSiteLink" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Main Site</a><button class="btn btn-xs btn-secondary" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
         </div>
+
         <div class="admin-nav" id="adminNav">
           <button class="admin-nav-btn active" data-tab="dashboard" onclick="switchAdminTab('dashboard')"><i class="fas fa-chart-pie"></i> Dashboard</button>
           <button class="admin-nav-btn" data-tab="transactions" onclick="switchAdminTab('transactions')"><i class="fas fa-list"></i> Transactions <span class="badge" id="pendingBadge" style="display:none">0</span></button>
@@ -439,19 +635,43 @@
 
         <!-- Dashboard Tab -->
         <div class="admin-tab active" id="tabDashboard">
-          <div class="admin-stats"><div class="admin-stat purple"><div class="as-value" id="asSold">0</div><div class="as-label">Numbers Sold</div></div><div class="admin-stat green"><div class="as-value" id="asRemaining">0</div><div class="as-label">Remaining</div></div><div class="admin-stat amber"><div class="as-value" id="asRevenue">₱0</div><div class="as-label">Approved Revenue</div></div><div class="admin-stat red"><div class="as-value" id="asPending">0</div><div class="as-label">Pending</div></div><div class="admin-stat green"><div class="as-value" id="asApproved">0</div><div class="as-label">Approved</div></div><div class="admin-stat blue"><div class="as-value" id="asBuyers">0</div><div class="as-label">Buyers</div></div></div>
+          <div class="admin-stats"><div class="admin-stat purple"><div class="as-value" id="asSold">0</div><div class="as-label">Numbers Sold</div></div><div class="admin-stat green"><div class="as-value" id="asRemaining">0</div><div class="as-label">Remaining</div></div><div class="admin-stat amber"><div class="as-value" id="asRevenue">&#8369;0</div><div class="as-label">Approved Revenue</div></div><div class="admin-stat red"><div class="as-value" id="asPending">0</div><div class="as-label">Pending</div></div><div class="admin-stat green"><div class="as-value" id="asApproved">0</div><div class="as-label">Approved</div></div><div class="admin-stat blue"><div class="as-value" id="asBuyers">0</div><div class="as-label">Buyers</div></div></div>
           <div class="card"><div class="card-header"><div class="card-icon purple"><i class="fas fa-clock"></i></div><div class="card-title">Recent Activity</div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>TX ID</th><th>Name</th><th>Qty</th><th>Amount</th><th>Status</th><th>Time</th></tr></thead><tbody id="recentBody"></tbody></table></div><div class="empty-state" id="recentEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No transactions yet</p></div></div>
         </div>
 
         <!-- Transactions Tab -->
         <div class="admin-tab" id="tabTransactions" style="display:none;">
-          <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-list-alt"></i></div><div class="card-title-row"><div class="card-title">All Transactions</div><div style="display:flex;gap:8px;align-items:center;"><button class="btn btn-xs btn-danger" onclick="deleteAllTransactions()" id="btnDeleteAll"><i class="fas fa-trash-alt"></i> Delete All</button><button class="btn btn-xs btn-secondary" onclick="loadTransactions()"><i class="fas fa-sync-alt"></i> Refresh</button></div></div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>TX ID</th><th>Name</th><th>Phone</th><th>GCash Ref</th><th>Qty</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="txBody"></tbody></table></div><div class="empty-state" id="txEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No transactions found</p></div><div class="pagination" id="txPagination"></div></div>
+          <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-list-alt"></i></div><div class="card-title-row"><div class="card-title">All Transactions</div><div style="display:flex;gap:8px;align-items:center;"><button class="btn btn-xs btn-danger" onclick="deleteAllTransactions()" id="btnDeleteAll"><i class="fas fa-trash-alt"></i> Delete All</button><button class="btn btn-xs btn-secondary" onclick="loadTransactions()"><i class="fas fa-sync-alt"></i> Refresh</button></div></div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>TX ID</th><th>Name</th><th>Phone</th><th>Ref#</th><th>Qty</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="txBody"></tbody></table></div><div class="empty-state" id="txEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No transactions found</p></div><div class="pagination" id="txPagination"></div></div>
         </div>
 
         <!-- Numbers Tab -->
         <div class="admin-tab" id="tabNumbers" style="display:none;">
-          <div class="card"><div class="card-header"><div class="card-icon green"><i class="fas fa-plus-circle"></i></div><div class="card-title">Add Number Manually</div></div><div class="add-number-form"><div class="form-group"><label class="form-label" id="addNumLabel">Number</label><input type="text" class="form-input" id="addNumInput" placeholder="e.g. 00123" maxlength="6" inputmode="numeric"></div><div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="addNumName" placeholder="Manual" maxlength="40"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="addNumPhone" placeholder="Optional" maxlength="11"></div><button class="btn btn-sm btn-success" onclick="addNumber()" style="height:48px;margin-bottom:0;"><i class="fas fa-plus"></i> Add</button></div></div>
+          <!-- Generate Numbers (replaces Add Number Manually) -->
+          <div class="card">
+            <div class="card-header"><div class="card-icon green"><i class="fas fa-plus-circle"></i></div><div class="card-title">Generate Numbers</div></div>
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5;">Generate random numbers and assign them to a buyer. Numbers are randomly picked from the available pool.</p>
+            <div class="add-number-form">
+              <div class="form-group">
+                <label class="form-label">How Many Numbers</label>
+                <input type="number" class="form-input" id="addNumQuantity" placeholder="e.g. 100" min="1" max="10000" value="1" inputmode="numeric">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-input" id="addNumName" placeholder="Manual" maxlength="40">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input type="tel" class="form-input" id="addNumPhone" placeholder="Optional" maxlength="11">
+              </div>
+              <button class="btn btn-sm btn-success" onclick="generateNumbers()" id="btnGenerateNums" style="height:48px;margin-bottom:0;"><i class="fas fa-dice"></i> Generate</button>
+            </div>
+            <div class="gen-numbers-info" id="genNumsInfo" style="display:none;">
+              <p><strong id="genNumsCount">0</strong> number(s) generated and assigned to <strong id="genNumsName">-</strong></p>
+            </div>
+          </div>
+
           <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-minus-circle"></i></div><div class="card-title">Remove Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label" id="removeNumLabel">Number to Remove</label><input type="text" class="form-input" id="removeNumInput" placeholder="e.g. 00123" maxlength="6" inputmode="numeric"></div><button class="btn btn-sm btn-danger" onclick="removeNumber()" style="height:48px;"><i class="fas fa-trash"></i> Remove</button></div></div>
+
           <div class="card"><div class="card-header"><div class="card-icon purple"><i class="fas fa-list-ol"></i></div><div class="card-title-row"><div class="card-title">Sold Numbers</div><button class="btn btn-xs btn-secondary" onclick="loadSoldNumbers()"><i class="fas fa-sync-alt"></i> Refresh</button></div></div><div class="table-wrapper"><table class="admin-table"><thead><tr><th>Number</th><th>TX ID</th><th>Name</th><th>Phone</th><th>Timestamp</th></tr></thead><tbody id="soldBody"></tbody></table></div><div class="empty-state" id="soldEmpty" style="display:none;"><i class="fas fa-inbox"></i><p>No sold numbers</p></div><div class="pagination" id="soldPagination"></div></div>
         </div>
 
@@ -461,21 +681,19 @@
             <div class="card-header"><div class="card-icon amber"><i class="fas fa-trophy"></i></div><div class="card-title">Draw a Winner</div></div>
             <div class="draw-stage" id="drawStage">
               <div class="draw-title-text" id="drawTitleText">Ready to Draw</div>
-              <div class="slot-container" id="slotContainer">
-                <!-- Slots generated dynamically by buildSlots() -->
-              </div>
+              <div class="slot-container" id="slotContainer"></div>
               <div class="draw-status" id="drawStatus">Click the button below to draw a winner</div>
               <button class="btn btn-primary" id="btnDrawWinner" onclick="startDraw()" style="max-width:320px;margin:20px auto 0;">
                 <i class="fas fa-dice"></i><span>Draw a Winner</span>
               </button>
               <div class="winner-reveal" id="winnerReveal">
                 <div class="winner-card">
-                  <div class="winner-trophy">🏆</div>
+                  <div class="winner-trophy">&#127942;</div>
                   <div class="winner-label">Winning Number</div>
-                  <div class="winner-number" id="winnerNumber">—</div>
-                  <div class="winner-name" id="winnerName">—</div>
-                  <div class="winner-phone" id="winnerPhone">—</div>
-                  <div class="winner-txid" id="winnerTxId">—</div>
+                  <div class="winner-number" id="winnerNumber">-</div>
+                  <div class="winner-name" id="winnerName">-</div>
+                  <div class="winner-phone" id="winnerPhone">-</div>
+                  <div class="winner-txid" id="winnerTxId">-</div>
                 </div>
               </div>
               <button class="btn btn-secondary" id="btnDrawAgain" onclick="resetDraw()" style="max-width:320px;margin:16px auto 0;display:none;">
@@ -494,7 +712,7 @@
         <!-- Search Tab -->
         <div class="admin-tab" id="tabSearch" style="display:none;">
           <div class="card"><div class="card-header"><div class="card-icon blue"><i class="fas fa-search"></i></div><div class="card-title">Search Number</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label" id="searchNumLabel">Number</label><input type="text" class="form-input" id="searchNumInput" placeholder="e.g. 00123" maxlength="6" inputmode="numeric"></div><button class="btn btn-sm btn-primary" onclick="searchNumber()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchNumResults" style="margin-top:16px;"></div></div>
-          <div class="card"><div class="card-header"><div class="card-icon amber"><i class="fas fa-user-search"></i></div><div class="card-title">Search Buyer</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Name, Phone, TX ID, or GCash Ref</label><input type="text" class="form-input" id="searchBuyerInput" placeholder="Search..." maxlength="50"></div><button class="btn btn-sm btn-primary" onclick="searchBuyer()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchBuyerResults" style="margin-top:16px;"></div></div>
+          <div class="card"><div class="card-header"><div class="card-icon amber"><i class="fas fa-user-search"></i></div><div class="card-title">Search Buyer</div></div><div style="display:flex;gap:10px;align-items:flex-end;"><div class="form-group" style="flex:1;margin-bottom:0;"><label class="form-label">Name, Phone, TX ID, or Ref#</label><input type="text" class="form-input" id="searchBuyerInput" placeholder="Search..." maxlength="50"></div><button class="btn btn-sm btn-primary" onclick="searchBuyer()" style="height:48px;"><i class="fas fa-search"></i> Search</button></div><div id="searchBuyerResults" style="margin-top:16px;"></div></div>
           <div class="card"><div class="card-header"><div class="card-icon red"><i class="fas fa-clone"></i></div><div class="card-title">Duplicate Check</div></div><button class="btn btn-sm btn-secondary" onclick="searchDuplicates()" id="btnDupCheck"><i class="fas fa-search"></i> Check for Duplicates</button><div id="searchDupResults" style="margin-top:16px;"></div></div>
         </div>
 
@@ -511,19 +729,24 @@
               <div class="form-group">
                 <label class="form-label">Total Pool Size</label>
                 <input type="number" class="form-input" id="setTotalPool" min="10000" max="200000" step="10000">
-                <div class="form-hint" id="poolHint"><i class="fas fa-info-circle"></i> Must be a multiple of 10,000. Min: 10,000 — Max: 200,000</div>
+                <div class="form-hint" id="poolHint"><i class="fas fa-info-circle"></i> Must be a multiple of 10,000. Min: 10,000 - Max: 200,000</div>
                 <div class="form-hint" id="poolPreview" style="margin-top:4px;color:var(--primary-light);font-weight:600;"></div>
               </div>
 
-              <div class="settings-section-title">Pricing & Limits</div>
-              <div class="form-group"><label class="form-label">Price Per Number (₱)</label><input type="number" class="form-input" id="setPricePerNumber" min="0.5" step="0.5"></div>
+              <div class="settings-section-title">Pricing &amp; Limits</div>
+              <div class="form-group"><label class="form-label">Price Per Number (&#8369;)</label><input type="number" class="form-input" id="setPricePerNumber" min="0.5" step="0.5"></div>
               <div class="form-group"><label class="form-label">Min Quantity</label><input type="number" class="form-input" id="setMinQuantity" min="1"></div>
               <div class="form-group"><label class="form-label">Max Quantity</label><input type="number" class="form-input" id="setMaxQuantity" min="1"></div>
-              <div class="settings-section-title">GCash</div>
+
+              <div class="settings-section-title">Payment Accounts</div>
               <div class="form-group"><label class="form-label">GCash Name</label><input type="text" class="form-input" id="setGcashName" maxlength="50"></div>
               <div class="form-group"><label class="form-label">GCash Number</label><input type="tel" class="form-input" id="setGcashNumber" maxlength="11"></div>
+              <div class="form-group"><label class="form-label">Maya Name</label><input type="text" class="form-input" id="setMayaName" maxlength="50"></div>
+              <div class="form-group"><label class="form-label">Maya Number</label><input type="tel" class="form-input" id="setMayaNumber" maxlength="11"></div>
+
               <div class="settings-section-title">System</div>
               <div class="toggle-row"><span class="toggle-label">Maintenance Mode</span><label class="toggle-switch"><input type="checkbox" id="setMaintenance"><span class="toggle-slider"></span></label></div>
+
               <div class="settings-section-title">Change Password</div>
               <div class="form-group"><label class="form-label">New Password (leave blank to keep)</label><input type="password" class="form-input" id="setNewPassword" placeholder="Min 6 characters" minlength="6"></div>
             </div>
@@ -547,22 +770,16 @@
     var drawHistory=[];
     var isDrawing=false;
     var statsInterval=null;
-
-    /* ═══ POOL STATE — DYNAMIC ═══ */
     var poolConfig={totalPool:20000,numberDigits:5,numberMax:19999};
 
-    /* ═══ UTILITIES ═══ */
     function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
-    function censorName(name){if(!name)return'—';var parts=name.trim().split(/\s+/);if(parts.length===1)return parts[0].charAt(0)+'*'.repeat(Math.max(0,parts[0].length-1));return parts.map(function(p,i){return i===0?p:p.charAt(0)+'*'.repeat(Math.max(0,p.length-1));}).join(' ');}
+    function censorName(name){if(!name)return'-';var parts=name.trim().split(/\s+/);if(parts.length===1)return parts[0].charAt(0)+'*'.repeat(Math.max(0,parts[0].length-1));return parts.map(function(p,i){return i===0?p:p.charAt(0)+'*'.repeat(Math.max(0,p.length-1));}).join(' ');}
     function censorPhone(phone){if(!phone||phone.length<4)return'****';return'*'.repeat(phone.length-4)+phone.slice(-4);}
     function fmtN(n){return Number(n).toLocaleString();}
     function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
     function escAttr(s){return esc(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
-
     function statusBadge(s){s=(s||'').toUpperCase();if(s==='APPROVED')return'<span class="status-badge approved"><i class="fas fa-check-circle"></i> Approved</span>';if(s==='DECLINED')return'<span class="status-badge declined"><i class="fas fa-times-circle"></i> Declined</span>';return'<span class="status-badge pending"><i class="fas fa-clock"></i> Pending</span>';}
-
     function showToast(msg,type){type=type||'info';var c=document.getElementById('toastContainer');var t=document.createElement('div');t.className='toast '+type;var icon=type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle';t.innerHTML='<i class="fas '+icon+'"></i><span class="msg">'+esc(msg)+'</span>';c.appendChild(t);setTimeout(function(){t.classList.add('removing');setTimeout(function(){t.remove();},300);},4000);}
-
     function friendlyError(msg){
       if(!msg)return'Something went wrong. Please try again.';
       var s=String(msg).toLowerCase();
@@ -577,7 +794,6 @@
       return msg;
     }
 
-    /* ═══ POOL HELPERS ═══ */
     function updatePoolConfig(settings){
       if(settings.total_pool) poolConfig.totalPool=parseInt(settings.total_pool)||20000;
       if(settings.number_digits) poolConfig.numberDigits=parseInt(settings.number_digits)||5;
@@ -585,104 +801,58 @@
       else poolConfig.numberMax=poolConfig.totalPool-1;
       if(!poolConfig.numberDigits) poolConfig.numberDigits=String(poolConfig.numberMax).length;
     }
-
     function poolRangeStr(){
       var minS=String(0).padStart(poolConfig.numberDigits,'0');
       var maxS=String(poolConfig.numberMax).padStart(poolConfig.numberDigits,'0');
-      return minS+'–'+maxS;
+      return minS+'\u2013'+maxS;
     }
-
     function poolPreviewText(poolSize){
-      var ps=parseInt(poolSize);
-      if(isNaN(ps)||ps<10000)return'';
-      ps=Math.round(ps/10000)*10000;
-      if(ps<10000)ps=10000;
-      if(ps>200000)ps=200000;
-      var mx=ps-1;
-      var digits=String(mx).length;
-      var minS=String(0).padStart(digits,'0');
-      var maxS=String(mx).padStart(digits,'0');
-      return fmtN(ps)+' numbers: '+minS+' – '+maxS+' ('+digits+' digits)';
+      var ps=parseInt(poolSize);if(isNaN(ps)||ps<10000)return'';
+      ps=Math.round(ps/10000)*10000;if(ps<10000)ps=10000;if(ps>200000)ps=200000;
+      var mx=ps-1;var digits=String(mx).length;
+      var minS=String(0).padStart(digits,'0');var maxS=String(mx).padStart(digits,'0');
+      return fmtN(ps)+' numbers: '+minS+' \u2013 '+maxS+' ('+digits+' digits)';
     }
-
     function updateAdminPoolLabels(){
-      var range=poolRangeStr();
-      var digits=poolConfig.numberDigits;
+      var range=poolRangeStr();var digits=poolConfig.numberDigits;
       var placeholder='e.g. '+String(0).padStart(digits,'0').substring(0,digits-3)+'123';
-
-      // Update pool badge
       var badgeText=document.getElementById('adminPoolBadgeText');
       if(badgeText) badgeText.textContent=fmtN(poolConfig.totalPool)+' Pool';
-
-      // Update number input labels & placeholders
-      var addLabel=document.getElementById('addNumLabel');
-      if(addLabel) addLabel.textContent='Number ('+range+')';
-      var addInput=document.getElementById('addNumInput');
-      if(addInput){addInput.placeholder=placeholder;addInput.maxLength=digits;}
-
       var removeLabel=document.getElementById('removeNumLabel');
       if(removeLabel) removeLabel.textContent='Number to Remove ('+range+')';
       var removeInput=document.getElementById('removeNumInput');
       if(removeInput){removeInput.placeholder=placeholder;removeInput.maxLength=digits;}
-
       var searchLabel=document.getElementById('searchNumLabel');
       if(searchLabel) searchLabel.textContent='Number ('+range+')';
       var searchInput=document.getElementById('searchNumInput');
       if(searchInput){searchInput.placeholder=placeholder;searchInput.maxLength=digits;}
     }
 
-    /* ═══ BUILD SLOT DIGITS DYNAMICALLY ═══ */
     function buildSlots(){
-      var container=document.getElementById('slotContainer');
-      if(!container)return;
+      var container=document.getElementById('slotContainer');if(!container)return;
       container.innerHTML='';
       for(var i=0;i<poolConfig.numberDigits;i++){
-        var div=document.createElement('div');
-        div.className='slot-digit';
-        div.id='slot'+i;
-        div.innerHTML='<span class="slot-value">?</span>';
-        container.appendChild(div);
+        var div=document.createElement('div');div.className='slot-digit';div.id='slot'+i;
+        div.innerHTML='<span class="slot-value">?</span>';container.appendChild(div);
       }
     }
 
-    /* ═══ API ═══ */
     async function apiGet(action,params){
-      params=params||{};
-      params.action=action;
-      if(adminToken)params.token=adminToken;
-      try{
-        var url=API+'?'+new URLSearchParams(params).toString();
-        var r=await fetch(url);
-        var d=await r.json();
-        if(d.authFailed){handleAuthFailed();return{success:false};}
-        return d;
-      }catch(e){
-        return{success:false,error:friendlyError(e.message)};
-      }
+      params=params||{};params.action=action;if(adminToken)params.token=adminToken;
+      try{var url=API+'?'+new URLSearchParams(params).toString();var r=await fetch(url);var d=await r.json();if(d.authFailed){handleAuthFailed();return{success:false};}return d;}
+      catch(e){return{success:false,error:friendlyError(e.message)};}
     }
-
     async function apiPost(action,data){
-      data=data||{};
-      data.action=action;
-      if(adminToken)data.token=adminToken;
-      try{
-        var r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)});
-        var d=await r.json();
-        if(d.authFailed){handleAuthFailed();return{success:false};}
-        return d;
-      }catch(e){
-        return{success:false,error:friendlyError(e.message)};
-      }
+      data=data||{};data.action=action;if(adminToken)data.token=adminToken;
+      try{var r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)});var d=await r.json();if(d.authFailed){handleAuthFailed();return{success:false};}return d;}
+      catch(e){return{success:false,error:friendlyError(e.message)};}
     }
-
     function handleAuthFailed(){adminToken=null;sessionStorage.removeItem('adminToken');showToast('Session expired. Please log in again.','error');showAdminSection('adminLoginSection');}
 
-    /* ═══ INIT ═══ */
     document.addEventListener('DOMContentLoaded',function(){
       if(!API||API==='YOUR_WEB_APP_URL_HERE'){showToast('Service not configured.','error');return;}
       var hash=window.location.hash.replace('#','');
-      if(hash===ADMIN_SECRET)showAdminPanel();
-      else showPublicView();
+      if(hash===ADMIN_SECRET)showAdminPanel();else showPublicView();
     });
     window.addEventListener('hashchange',function(){var hash=window.location.hash.replace('#','');if(hash===ADMIN_SECRET)showAdminPanel();else showPublicView();});
 
@@ -701,291 +871,128 @@
       document.getElementById('mainSiteLink').href=window.location.href.split('#')[0];
       if(statsInterval){clearInterval(statsInterval);statsInterval=null;}
       adminToken=sessionStorage.getItem('adminToken');
-      if(adminToken)checkAdminSession();
-      else showAdminSection('adminLoginSection');
+      if(adminToken)checkAdminSession();else showAdminSection('adminLoginSection');
     }
 
-        var listenersReady=false;
+    var listenersReady=false;
     function setupListeners(){
-      if(listenersReady)return;
-      listenersReady=true;
+      if(listenersReady)return;listenersReady=true;
       document.getElementById('inputQuantity').addEventListener('input',updatePriceSummary);
       document.getElementById('inputQuantity').addEventListener('blur',function(){
-        var min=parseInt(this.min)||50;
-        var max=parseInt(this.max)||1000;
-        var v=parseInt(this.value);
-        if(isNaN(v)||v<min){
-          v=min;
-          showToast('Minimum quantity is '+fmtN(min),'info');
-        }
-        if(v>max){
-          v=max;
-          showToast('Maximum quantity is '+fmtN(max),'info');
-        }
-        this.value=v;
-        updatePriceSummary();
+        var min=parseInt(this.min)||50;var max=parseInt(this.max)||1000;var v=parseInt(this.value);
+        if(isNaN(v)||v<min){v=min;showToast('Minimum quantity is '+fmtN(min),'info');}
+        if(v>max){v=max;showToast('Maximum quantity is '+fmtN(max),'info');}
+        this.value=v;updatePriceSummary();
       });
-      document.getElementById('inputGcashRef').addEventListener('input',function(){
-        this.value=this.value.replace(/\D/g,'').substring(0,13);
-      });
-
-      /* Pool size input — live warning */
+      document.getElementById('inputGcashRef').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,13);});
       var poolInput=document.getElementById('setTotalPool');
       if(poolInput){
-        poolInput.addEventListener('input',function(){
-          var preview=document.getElementById('poolPreview');
-          if(preview) preview.textContent=poolPreviewText(this.value);
-        });
-        poolInput.addEventListener('blur',function(){
-          var v=parseInt(this.value);
-          if(!isNaN(v)){
-            v=Math.round(v/10000)*10000;
-            if(v<10000)v=10000;
-            if(v>200000)v=200000;
-            this.value=v;
-            var preview=document.getElementById('poolPreview');
-            if(preview) preview.textContent=poolPreviewText(v);
-          }
-        });
+        poolInput.addEventListener('input',function(){var preview=document.getElementById('poolPreview');if(preview) preview.textContent=poolPreviewText(this.value);});
+        poolInput.addEventListener('blur',function(){var v=parseInt(this.value);if(!isNaN(v)){v=Math.round(v/10000)*10000;if(v<10000)v=10000;if(v>200000)v=200000;this.value=v;var preview=document.getElementById('poolPreview');if(preview) preview.textContent=poolPreviewText(v);}});
       }
     }
 
-    /* ═══ PUBLIC ═══ */
-      async function loadPublicSettings(){
-      var r=await apiGet('publicSettings');
-      if(!r.success)return;
-      appSettings=r;
-
-      /* Update pool config from server */
-      updatePoolConfig(r);
-
+    async function loadPublicSettings(){
+      var r=await apiGet('publicSettings');if(!r.success)return;
+      appSettings=r;updatePoolConfig(r);
       document.title=r.lottery_name||'SWEETSPOT';
-      document.getElementById('gcashName2').textContent=r.gcash_name||'—';
-      document.getElementById('gcashNumber2').textContent=r.gcash_number||'—';
-      document.getElementById('pricePerNumber').textContent='₱'+(r.price_per_number||1).toFixed(2);
+      document.getElementById('gcashName2').textContent=r.gcash_name||'-';
+      document.getElementById('gcashNumber2').textContent=r.gcash_number||'-';
+      document.getElementById('mayaName').textContent=r.maya_name||r.gcash_name||'-';
+      document.getElementById('mayaNumber').textContent=r.maya_number||r.gcash_number||'-';
+      document.getElementById('pricePerNumber').textContent='\u20B1'+(r.price_per_number||1).toFixed(2);
       var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;
       var qi=document.getElementById('inputQuantity');
       qi.min=minQ;qi.max=maxQ;qi.value=minQ;qi.step=1;
-      document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' — Max: '+fmtN(maxQ);
-      updatePriceSummary();
-      buildQuickPicks();
+      document.getElementById('qtyHint').innerHTML='<i class="fas fa-info-circle"></i> Min: '+fmtN(minQ)+' \u2014 Max: '+fmtN(maxQ);
+      updatePriceSummary();buildQuickPicks();
       if(r.draw_date){document.getElementById('drawDateText').textContent=formatDrawDate(r.draw_date);document.getElementById('drawDateBanner').classList.add('visible');}
       if(r.announcement){document.getElementById('announcementText').textContent=r.announcement;document.getElementById('announcementBanner').classList.add('visible');}
       if(r.maintenance_mode)document.getElementById('maintenanceOverlay').classList.add('active');
     }
-
     function formatDrawDate(dateStr){if(!dateStr)return'';var months=['January','February','March','April','May','June','July','August','September','October','November','December'];try{if(/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateStr)){var parts=dateStr.split('-');return months[parseInt(parts[1])-1]+' '+parseInt(parts[2])+', '+parts[0];}var dt=new Date(dateStr);if(!isNaN(dt.getTime()))return months[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();}catch(e){}return dateStr;}
 
     async function loadStats(){
-      var r=await apiGet('stats');
-      if(!r.success)return;
-      var total=r.total||poolConfig.totalPool;
-      var pct=total>0?(r.sold/total*100):0;
+      var r=await apiGet('stats');if(!r.success)return;
+      var total=r.total||poolConfig.totalPool;var pct=total>0?(r.sold/total*100):0;
       document.getElementById('progressFill').style.width=pct.toFixed(1)+'%';
       document.getElementById('progressPercent').textContent=pct.toFixed(1)+'%';
       animateNum('statBuyers',r.uniqueBuyers||0);
       isSoldOut=r.remaining<=0;
       if(isSoldOut){
         var inProgress=document.getElementById('sectionStep2').classList.contains('active')||document.getElementById('sectionStep3').classList.contains('active')||document.getElementById('sectionStep4').classList.contains('active');
-        if(!inProgress){
-          document.getElementById('purchaseFlow').style.display='none';
-          document.getElementById('soldoutBanner').classList.add('visible');
-        }
-      }else{
-        document.getElementById('purchaseFlow').style.display='';
-        document.getElementById('soldoutBanner').classList.remove('visible');
-      }
+        if(!inProgress){document.getElementById('purchaseFlow').style.display='none';document.getElementById('soldoutBanner').classList.add('visible');}
+      }else{document.getElementById('purchaseFlow').style.display='';document.getElementById('soldoutBanner').classList.remove('visible');}
     }
-
-    function animateNum(id,target){
-      var el=document.getElementById(id);
-      if(el._animInterval){clearInterval(el._animInterval);el._animInterval=null;}
-      var cur=parseInt(el.textContent.replace(/\D/g,''))||0;
-      if(cur===target){el.textContent=fmtN(target);return;}
-      var step=0;var d=target-cur;
-      el._animInterval=setInterval(function(){
-        step++;
-        el.textContent=fmtN(Math.round(cur+d/30*step));
-        if(step>=30){clearInterval(el._animInterval);el._animInterval=null;el.textContent=fmtN(target);}
-      },20);
-    }
+    function animateNum(id,target){var el=document.getElementById(id);if(el._animInterval){clearInterval(el._animInterval);el._animInterval=null;}var cur=parseInt(el.textContent.replace(/\D/g,''))||0;if(cur===target){el.textContent=fmtN(target);return;}var step=0;var d=target-cur;el._animInterval=setInterval(function(){step++;el.textContent=fmtN(Math.round(cur+d/30*step));if(step>=30){clearInterval(el._animInterval);el._animInterval=null;el.textContent=fmtN(target);}},20);}
 
     function showSection(id){document.querySelectorAll('#purchaseFlow .section').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+    function adjustQty(d){var inp=document.getElementById('inputQuantity');var minQ=parseInt(inp.min)||50;var maxQ=parseInt(inp.max)||1000;var current=parseInt(inp.value)||minQ;var newVal=current+d;newVal=Math.min(maxQ,Math.max(minQ,newVal));inp.value=newVal;updatePriceSummary();}
+    function updatePriceSummary(){var q=parseInt(document.getElementById('inputQuantity').value)||0;var p=appSettings.price_per_number||1;document.getElementById('summaryTotal').textContent='\u20B1'+fmtN(q*p)+'.00';}
 
-    function adjustQty(d){
-      var inp=document.getElementById('inputQuantity');
-      var minQ=parseInt(inp.min)||50;
-      var maxQ=parseInt(inp.max)||1000;
-      var current=parseInt(inp.value)||minQ;
-
-      var newVal=current+d;
-      newVal=Math.min(maxQ,Math.max(minQ,newVal));
-
-      inp.value=newVal;
-      updatePriceSummary();
-    }
-
-    function updatePriceSummary(){var q=parseInt(document.getElementById('inputQuantity').value)||0;var p=appSettings.price_per_number||1;document.getElementById('summaryTotal').textContent='₱'+fmtN(q*p)+'.00';}
     function buildQuickPicks(){
-      var grid=document.getElementById('quickPickGrid');
-      if(!grid)return;
-
-      var minQ=appSettings.min_quantity||50;
-      var maxQ=appSettings.max_quantity||1000;
-      var pool=poolConfig.totalPool||20000;
-
-      /* Generate smart quick pick values based on pool and limits */
+      var grid=document.getElementById('quickPickGrid');if(!grid)return;
+      var minQ=appSettings.min_quantity||50;var maxQ=appSettings.max_quantity||1000;var pool=poolConfig.totalPool||20000;
       var picks=[];
-
-      if(pool<=10000){
-        picks=[50,100,200,500,1000];
-      }else if(pool<=20000){
-        picks=[50,100,250,500,1000,2000];
-      }else if(pool<=50000){
-        picks=[100,250,500,1000,2500,5000];
-      }else if(pool<=100000){
-        picks=[100,500,1000,2500,5000,10000];
-      }else{
-        picks=[500,1000,2500,5000,10000,25000];
-      }
-
-      /* Filter: only show picks that make sense within limits */
-      picks=picks.filter(function(v){
-        return v>=1&&v<=maxQ;
-      });
-
-      /* Ensure we always have the min value as first pick if not present */
-      if(picks.indexOf(minQ)===-1&&minQ>0){
-        picks.unshift(minQ);
-      }
-
-      /* Remove duplicates and sort */
-      picks=picks.filter(function(v,i,a){return a.indexOf(v)===i;});
-      picks.sort(function(a,b){return a-b;});
-
-      /* Limit to 6 buttons max */
-      if(picks.length>6) picks=picks.slice(0,6);
-
-      /* Build buttons */
+      if(pool<=10000)picks=[50,100,200,500,1000];
+      else if(pool<=20000)picks=[50,100,250,500,1000,2000];
+      else if(pool<=50000)picks=[100,250,500,1000,2500,5000];
+      else if(pool<=100000)picks=[100,500,1000,2500,5000,10000];
+      else picks=[500,1000,2500,5000,10000,25000];
+      picks=picks.filter(function(v){return v>=1&&v<=maxQ;});
+      if(picks.indexOf(minQ)===-1&&minQ>0)picks.unshift(minQ);
+      picks=picks.filter(function(v,i,a){return a.indexOf(v)===i;});picks.sort(function(a,b){return a-b;});
+      if(picks.length>6)picks=picks.slice(0,6);
       grid.innerHTML='';
       picks.forEach(function(val,idx){
-        var btn=document.createElement('button');
-        btn.type='button';
+        var btn=document.createElement('button');btn.type='button';
         btn.className='quick-pick-btn'+(idx>=picks.length-2?' qp-highlight':'');
         btn.innerHTML='<span class="qp-plus">+</span><span class="qp-value">'+fmtN(val)+'</span>';
-        btn.onclick=function(){quickAdd(val,btn);};
-        grid.appendChild(btn);
+        btn.onclick=function(){quickAdd(val,btn);};grid.appendChild(btn);
       });
     }
-
     function quickAdd(amount,btnEl){
-      var inp=document.getElementById('inputQuantity');
-      var minQ=parseInt(inp.min)||50;
-      var maxQ=parseInt(inp.max)||1000;
-      var current=parseInt(inp.value)||minQ;
-
-      var newVal=current+amount;
-
-      if(newVal>maxQ){
-        if(current>=maxQ){
-          showToast('Already at maximum ('+fmtN(maxQ)+')','error');
-          return;
-        }
-        newVal=maxQ;
-        showToast('Capped at maximum: '+fmtN(maxQ),'info');
-      }
-
-      inp.value=newVal;
-      updatePriceSummary();
-
-      /* Visual feedback */
-      if(btnEl){
-        btnEl.classList.add('qp-added');
-        setTimeout(function(){btnEl.classList.remove('qp-added');},400);
-      }
-
-      showToast('+'+fmtN(amount)+' → Total: '+fmtN(newVal),'success');
+      var inp=document.getElementById('inputQuantity');var minQ=parseInt(inp.min)||50;var maxQ=parseInt(inp.max)||1000;var current=parseInt(inp.value)||minQ;var newVal=current+amount;
+      if(newVal>maxQ){if(current>=maxQ){showToast('Already at maximum ('+fmtN(maxQ)+')','error');return;}newVal=maxQ;showToast('Capped at maximum: '+fmtN(maxQ),'info');}
+      inp.value=newVal;updatePriceSummary();
+      if(btnEl){btnEl.classList.add('qp-added');setTimeout(function(){btnEl.classList.remove('qp-added');},400);}
+      showToast('+'+fmtN(amount)+' \u2022 Total: '+fmtN(newVal),'success');
     }
+    function resetQty(){var inp=document.getElementById('inputQuantity');var minQ=parseInt(inp.min)||50;inp.value=minQ;updatePriceSummary();showToast('Reset to '+fmtN(minQ),'info');}
+    function setMaxQty(){var inp=document.getElementById('inputQuantity');var maxQ=parseInt(inp.max)||1000;inp.value=maxQ;updatePriceSummary();showToast('Set to maximum: '+fmtN(maxQ),'success');}
 
-    function resetQty(){
-      var inp=document.getElementById('inputQuantity');
-      var minQ=parseInt(inp.min)||50;
-      inp.value=minQ;
-      updatePriceSummary();
-      showToast('Reset to '+fmtN(minQ),'info');
-    }
-
-    function setMaxQty(){
-      var inp=document.getElementById('inputQuantity');
-      var maxQ=parseInt(inp.max)||1000;
-      inp.value=maxQ;
-      updatePriceSummary();
-      showToast('Set to maximum: '+fmtN(maxQ),'success');
-    }
     function goToStep1(){showSection('sectionStep1');}
 
-      async function goToStep2(){
+    async function goToStep2(){
       if(isSoldOut){showToast('All numbers are sold out!','error');return;}
-      var name=document.getElementById('inputName').value.trim();
-      var phone=document.getElementById('inputPhone').value.trim();
-      var qtyInput=document.getElementById('inputQuantity');
-      var qty=parseInt(qtyInput.value);
-      var errs=[];
-      if(!name||name.length<2) errs.push('Enter your full name');
-      if(!/^09\d{9}$/.test(phone)) errs.push('Phone: 11 digits starting with 09');
-      var minQ=appSettings.min_quantity||50;
-      var maxQ=appSettings.max_quantity||1000;
-      if(isNaN(qty)||qty<minQ){
-        errs.push('Minimum quantity is '+fmtN(minQ));
-        qtyInput.value=minQ;
-        updatePriceSummary();
-      }else if(qty>maxQ){
-        errs.push('Maximum quantity is '+fmtN(maxQ));
-        qtyInput.value=maxQ;
-        updatePriceSummary();
-      }
+      var name=document.getElementById('inputName').value.trim();var phone=document.getElementById('inputPhone').value.trim();var qtyInput=document.getElementById('inputQuantity');var qty=parseInt(qtyInput.value);var errs=[];
+      if(!name||name.length<2)errs.push('Enter your full name');
+      if(!/^09\d{9}$/.test(phone))errs.push('Phone: 11 digits starting with 09');
+      var minQ=appSettings.min_quantity||50;var maxQ=appSettings.max_quantity||1000;
+      if(isNaN(qty)||qty<minQ){errs.push('Minimum quantity is '+fmtN(minQ));qtyInput.value=minQ;updatePriceSummary();}
+      else if(qty>maxQ){errs.push('Maximum quantity is '+fmtN(maxQ));qtyInput.value=maxQ;updatePriceSummary();}
       if(errs.length){errs.forEach(function(e){showToast(e,'error');});return;}
-      var btn=document.getElementById('btnContinue');
-      btn.disabled=true;
-      btn.innerHTML='<div class="spinner"></div><span>Checking availability...</span>';
+      var btn=document.getElementById('btnContinue');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Checking availability...</span>';
       try{
         var r=await apiGet('checkAvailability',{quantity:qty});
-        if(!r.success){
-          btn.disabled=false;
-          btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
-          if(r.available!==undefined&&r.available>=0){
-            if(r.available===0){showToast('All numbers are sold out!','error');}
-            else{
-              showToast('Only '+fmtN(r.available)+' numbers remaining. Please reduce your quantity.','error');
-              if(r.available>=minQ){
-                qtyInput.value=r.available;
-                updatePriceSummary();
-                showToast('Quantity adjusted to '+fmtN(r.available),'info');
-              }
-            }
-          }else{showToast(friendlyError(r.error),'error');}
-          return;
-        }
-        btn.disabled=false;
-        btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
+        if(!r.success){btn.disabled=false;btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
+          if(r.available!==undefined&&r.available>=0){if(r.available===0){showToast('All numbers are sold out!','error');}else{showToast('Only '+fmtN(r.available)+' numbers remaining. Please reduce your quantity.','error');if(r.available>=minQ){qtyInput.value=r.available;updatePriceSummary();showToast('Quantity adjusted to '+fmtN(r.available),'info');}}}else{showToast(friendlyError(r.error),'error');}return;}
+        btn.disabled=false;btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
         formData.name=name;formData.phone=phone;formData.quantity=qty;
         var total=qty*(appSettings.price_per_number||1);
-        document.getElementById('payAmount').textContent='₱'+fmtN(total)+'.00';
+        document.getElementById('payAmount').textContent='\u20B1'+fmtN(total)+'.00';
         document.getElementById('payQty').textContent='for '+fmtN(qty)+' numbers';
-        document.getElementById('payAmountStep').textContent='₱'+fmtN(total)+'.00';
+        document.getElementById('payAmountStep').textContent='\u20B1'+fmtN(total)+'.00';
+        document.getElementById('payAmountStepMaya').textContent='\u20B1'+fmtN(total)+'.00';
         showSection('sectionStep2');
-      }catch(e){
-        btn.disabled=false;
-        btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';
-        showToast('Connection error. Please try again.','error');
-      }
+      }catch(e){btn.disabled=false;btn.innerHTML='<span>Continue to Payment</span><i class="fas fa-arrow-right"></i>';showToast('Connection error. Please try again.','error');}
     }
 
     function goToStep3(){
       var total=formData.quantity*(appSettings.price_per_number||1);
-      document.getElementById('step3Name').textContent=(formData.name);
-      document.getElementById('step3Phone').textContent=(formData.phone);
-      document.getElementById('step3Amount').textContent='₱'+fmtN(total)+'.00';
+      document.getElementById('step3Name').textContent=formData.name;
+      document.getElementById('step3Phone').textContent=formData.phone;
+      document.getElementById('step3Amount').textContent='\u20B1'+fmtN(total)+'.00';
       document.getElementById('inputGcashRef').value='';
       showSection('sectionStep3');
       setTimeout(function(){document.getElementById('inputGcashRef').focus();},400);
@@ -993,228 +1000,184 @@
 
     function copyToClipboard(text){
       if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(text);}
-      return new Promise(function(resolve,reject){
-        try{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);resolve();}catch(e){reject(e);}
-      });
+      return new Promise(function(resolve,reject){try{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);resolve();}catch(e){reject(e);}});
     }
-
     function copyGcash(){
       var t=document.getElementById('gcashNumber2').textContent;
-      copyToClipboard(t).then(function(){
-        var b=document.getElementById('copyGcashBtn');
-        b.classList.add('copied');b.innerHTML='<i class="fas fa-check"></i>';
-        showToast('Copied!','success');
-        setTimeout(function(){b.classList.remove('copied');b.innerHTML='<i class="fas fa-copy"></i>';},2000);
-      }).catch(function(){showToast('Could not copy. Please copy manually.','error');});
+      copyToClipboard(t).then(function(){var b=document.getElementById('copyGcashBtn');b.classList.add('copied');b.innerHTML='<i class="fas fa-check"></i>';showToast('Copied!','success');setTimeout(function(){b.classList.remove('copied');b.innerHTML='<i class="fas fa-copy"></i>';},2000);}).catch(function(){showToast('Could not copy. Please copy manually.','error');});
+    }
+    function copyMaya(){
+      var t=document.getElementById('mayaNumber').textContent;
+      copyToClipboard(t).then(function(){var b=document.getElementById('copyMayaBtn');b.classList.add('copied');b.innerHTML='<i class="fas fa-check"></i>';showToast('Copied!','success');setTimeout(function(){b.classList.remove('copied');b.innerHTML='<i class="fas fa-copy"></i>';},2000);}).catch(function(){showToast('Could not copy. Please copy manually.','error');});
+    }
+    function copyField(id,btn){copyToClipboard(document.getElementById(id).textContent).then(function(){btn.classList.add('copied');btn.innerHTML='<i class="fas fa-check"></i>';showToast('Copied!','success');setTimeout(function(){btn.classList.remove('copied');btn.innerHTML='<i class="fas fa-copy"></i>';},2000);}).catch(function(){showToast('Could not copy. Please copy manually.','error');});}
+
+    /* Payment app deep links */
+    function switchPaymentMethod(method){
+      document.querySelectorAll('.payment-method-tab').forEach(function(t){t.classList.remove('active');});
+      document.querySelector('[data-method="'+method+'"]').classList.add('active');
+      document.querySelectorAll('.payment-method-content').forEach(function(c){c.classList.remove('active');});
+      document.getElementById(method==='gcash'?'paymentGcash':'paymentMaya').classList.add('active');
+    }
+    function openGcashApp(e){
+      e.preventDefault();var gcashNum=(appSettings.gcash_number||'').replace(/\D/g,'');
+      try{window.location.href='gcash://sendmoney?number='+gcashNum;setTimeout(function(){window.open('https://m.gcash.com','_blank');},2000);}catch(err){window.open('https://m.gcash.com','_blank');}
+      showToast('Opening GCash...','info');
+    }
+    function openMayaApp(e){
+      e.preventDefault();
+      try{window.location.href='paymaya://sendmoney';setTimeout(function(){window.open('https://www.maya.ph','_blank');},2000);}catch(err){window.open('https://www.maya.ph','_blank');}
+      showToast('Opening Maya...','info');
     }
 
-    function copyField(id,btn){
-      copyToClipboard(document.getElementById(id).textContent).then(function(){
-        btn.classList.add('copied');btn.innerHTML='<i class="fas fa-check"></i>';
-        showToast('Copied!','success');
-        setTimeout(function(){btn.classList.remove('copied');btn.innerHTML='<i class="fas fa-copy"></i>';},2000);
-      }).catch(function(){showToast('Could not copy. Please copy manually.','error');});
-    }
+    /* How It Works Modal */
+    function showHowItWorks(){document.getElementById('hiwModalOverlay').classList.add('active');}
+    function closeHiwModal(){document.getElementById('hiwModalOverlay').classList.remove('active');}
+    document.addEventListener('DOMContentLoaded',function(){var hiwO=document.getElementById('hiwModalOverlay');if(hiwO){hiwO.addEventListener('click',function(e){if(e.target===this)closeHiwModal();});}});
 
     async function submitPurchase(){
-      if(isSubmitting)return;
-      var ref=document.getElementById('inputGcashRef').value.trim();
-      if(!/^\d{13}$/.test(ref)){showToast('GCash ref must be exactly 13 digits','error');return;}
+      if(isSubmitting)return;var ref=document.getElementById('inputGcashRef').value.trim();
+      if(!/^\d{13}$/.test(ref)){showToast('Reference must be exactly 13 digits','error');return;}
       if(!formData.name||formData.name.length<2||!/^09\d{9}$/.test(formData.phone)){showToast('Invalid data. Please go back and check your info.','error');return;}
       formData.gcashRef=ref;isSubmitting=true;
       var btn=document.getElementById('btnSubmit');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Verifying...</span>';
       var res=await apiPost('purchase',{name:formData.name,phone:formData.phone,gcashRef:formData.gcashRef,quantity:formData.quantity});
-      if(!res.success){
-        btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i><span>Submit</span>';isSubmitting=false;
-        showToast(friendlyError(res.error),'error');
-        if(res.error&&res.error.toLowerCase().indexOf('gcash')!==-1){
-          document.getElementById('inputGcashRef').value='';
-          document.getElementById('inputGcashRef').classList.add('error');
-          setTimeout(function(){document.getElementById('inputGcashRef').classList.remove('error');},3000);
-          document.getElementById('inputGcashRef').focus();
-        }
-        return;
-      }
+      if(!res.success){btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i><span>Submit</span>';isSubmitting=false;showToast(friendlyError(res.error),'error');
+        if(res.error&&res.error.toLowerCase().indexOf('gcash')!==-1){document.getElementById('inputGcashRef').value='';document.getElementById('inputGcashRef').classList.add('error');setTimeout(function(){document.getElementById('inputGcashRef').classList.remove('error');},3000);document.getElementById('inputGcashRef').focus();}return;}
       showGenOverlay();await waitGen();hideGenOverlay();
       btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i><span>Submit</span>';isSubmitting=false;
       document.getElementById('receiptName').textContent=censorName(formData.name);
       document.getElementById('receiptPhone').textContent=censorPhone(formData.phone);
-      document.getElementById('receiptAmount').textContent='₱'+fmtN(res.amount)+'.00';
+      document.getElementById('receiptAmount').textContent='\u20B1'+fmtN(res.amount)+'.00';
       document.getElementById('receiptDate').textContent=res.timestamp;
       document.getElementById('receiptTxId').textContent=res.transactionId;
       document.getElementById('receiptGcashRef').textContent=formData.gcashRef;
-      showSection('sectionStep4');launchConfetti();showToast('Entries submitted! 🎉','success');loadStats();
+      showSection('sectionStep4');launchConfetti();showToast('Entries submitted!','success');loadStats();
     }
-
     function resetForm(){
-      document.getElementById('inputName').value='';
-      document.getElementById('inputPhone').value='';
-      document.getElementById('inputGcashRef').value='';
+      document.getElementById('inputName').value='';document.getElementById('inputPhone').value='';document.getElementById('inputGcashRef').value='';
       document.getElementById('inputQuantity').value=appSettings.min_quantity||50;
-      formData={name:'',phone:'',quantity:appSettings.min_quantity||50,gcashRef:''};
-      updatePriceSummary();
-      if(isSoldOut){
-        document.getElementById('purchaseFlow').style.display='none';
-        document.getElementById('soldoutBanner').classList.add('visible');
-      }else{
-        showSection('sectionStep1');
-      }
+      formData={name:'',phone:'',quantity:appSettings.min_quantity||50,gcashRef:''};updatePriceSummary();
+      if(isSoldOut){document.getElementById('purchaseFlow').style.display='none';document.getElementById('soldoutBanner').classList.add('visible');}else{showSection('sectionStep1');}
     }
 
-    /* ═══ GENERATING OVERLAY ═══ */
     var genStart=0;
     function showGenOverlay(){genStart=Date.now();var o=document.getElementById('generatingOverlay');document.getElementById('genProgressFill').style.width='0%';document.getElementById('genStatus').textContent='Initializing...';o.classList.add('active');var msgs=['Connecting...','Verifying payment...','Generating numbers...','Assigning entries...','Securing numbers...','Almost done...'];var mi=0;var sIv=setInterval(function(){if(mi>=msgs.length){clearInterval(sIv);return;}document.getElementById('genStatus').textContent=msgs[mi++];},600);var p=0;var pIv=setInterval(function(){p+=Math.random()*15+5;if(p>90)p=90;document.getElementById('genProgressFill').style.width=p+'%';if(p>=90)clearInterval(pIv);},500);o._iv=[sIv,pIv];}
     function waitGen(){return new Promise(function(r){setTimeout(r,Math.max(0,3500-(Date.now()-genStart)));});}
-    function hideGenOverlay(){var o=document.getElementById('generatingOverlay');document.getElementById('genProgressFill').style.width='100%';document.getElementById('genStatus').textContent='Complete! ✓';if(o._iv)o._iv.forEach(function(i){clearInterval(i);});setTimeout(function(){o.classList.remove('active');},500);}
-
+    function hideGenOverlay(){var o=document.getElementById('generatingOverlay');document.getElementById('genProgressFill').style.width='100%';document.getElementById('genStatus').textContent='Complete!';if(o._iv)o._iv.forEach(function(i){clearInterval(i);});setTimeout(function(){o.classList.remove('active');},500);}
     function launchConfetti(){var c=document.getElementById('confettiContainer');var cols=['#6C3CE1','#8B5CF6','#F59E0B','#10B981','#EF4444','#60A5FA','#F472B6','#34D399'];for(var i=0;i<80;i++){var d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'%';d.style.backgroundColor=cols[Math.floor(Math.random()*cols.length)];d.style.width=(Math.random()*8+6)+'px';d.style.height=(Math.random()*8+6)+'px';d.style.animationDuration=(Math.random()*2+2)+'s';d.style.animationDelay=(Math.random()*1.5)+'s';if(Math.random()>0.5)d.style.borderRadius='50%';c.appendChild(d);}setTimeout(function(){c.innerHTML='';},5000);}
 
-    /* ═══ ADMIN AUTH ═══ */
+    /* ADMIN AUTH */
     function showAdminSection(id){document.querySelectorAll('#adminView .section').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
     async function adminLogin(){var u=document.getElementById('adminUsername').value.trim(),p=document.getElementById('adminPassword').value;if(!u||!p){showToast('Enter credentials','error');return;}var btn=document.getElementById('btnAdminLogin');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Logging in...</span>';var res=await apiPost('adminLogin',{username:u,password:p});btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i><span>Login</span>';if(!res.success){showToast(friendlyError(res.error),'error');return;}adminToken=res.token;sessionStorage.setItem('adminToken',adminToken);document.getElementById('adminPassword').value='';showToast('Welcome back!','success');showAdminSection('adminDashSection');loadDashboard();}
     function adminLogout(){apiPost('adminLogout',{token:adminToken});adminToken=null;sessionStorage.removeItem('adminToken');showToast('Logged out','info');showAdminSection('adminLoginSection');}
     async function checkAdminSession(){var r=await apiGet('adminInit');if(!r.success){adminToken=null;sessionStorage.removeItem('adminToken');showAdminSection('adminLoginSection');return;}
-      /* Update pool from admin init settings */
-      if(r.settings&&r.settings.total_pool){
-        var tp=parseInt(r.settings.total_pool)||20000;
-        var mx=tp-1;
-        poolConfig.totalPool=tp;
-        poolConfig.numberMax=mx;
-        poolConfig.numberDigits=String(mx).length;
-      }
-      buildSlots();
-      updateAdminPoolLabels();
-      showAdminSection('adminDashSection');loadDashboard();
+      if(r.settings&&r.settings.total_pool){var tp=parseInt(r.settings.total_pool)||20000;var mx=tp-1;poolConfig.totalPool=tp;poolConfig.numberMax=mx;poolConfig.numberDigits=String(mx).length;}
+      buildSlots();updateAdminPoolLabels();showAdminSection('adminDashSection');loadDashboard();
     }
 
-    /* ═══ ADMIN TABS ═══ */
-    function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}else if(tab==='draw'){document.getElementById('tabDraw').style.display='';buildSlots();loadDrawHistory();}else if(tab==='search'){document.getElementById('tabSearch').style.display='';}else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}}
+    /* ADMIN TABS */
+    function switchAdminTab(tab){document.querySelectorAll('.admin-nav-btn').forEach(function(b){b.classList.remove('active');});document.querySelector('[data-tab="'+tab+'"]').classList.add('active');document.querySelectorAll('.admin-tab').forEach(function(t){t.style.display='none';});
+      if(tab==='dashboard'){document.getElementById('tabDashboard').style.display='';loadDashboard();}
+      else if(tab==='transactions'){document.getElementById('tabTransactions').style.display='';txPage=1;loadTransactions();}
+      else if(tab==='numbers'){document.getElementById('tabNumbers').style.display='';soldPage=1;loadSoldNumbers();}
+      else if(tab==='draw'){document.getElementById('tabDraw').style.display='';buildSlots();loadDrawHistory();}
+      else if(tab==='search'){document.getElementById('tabSearch').style.display='';}
+      else if(tab==='settings'){document.getElementById('tabSettings').style.display='';loadSettingsForm();}
+    }
 
-    /* ═══ ADMIN DASHBOARD ═══ */
+    /* ADMIN DASHBOARD */
     async function loadDashboard(){var r=await apiGet('adminDashboard');if(!r.success)return;
-      /* Update pool config from dashboard response */
-      if(r.totalPool){
-        poolConfig.totalPool=r.totalPool;
-        poolConfig.numberMax=r.totalPool-1;
-        poolConfig.numberDigits=r.numberDigits||String(poolConfig.numberMax).length;
-        updateAdminPoolLabels();
-      }
-      document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='₱'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});}
-
-    document.addEventListener('click',function(e){
-      var txEl=e.target.closest('[data-txid]');
-      if(txEl){var txId=txEl.getAttribute('data-txid');if(txId)viewTransaction(txId);}
-    });
-
-    /* ═══ ADMIN TRANSACTIONS ═══ */
-    async function loadTransactions(){var r=await apiGet('adminTransactions',{page:txPage,perPage:20});if(!r.success)return;var body=document.getElementById('txBody'),empty=document.getElementById('txEmpty');body.innerHTML='';if(!r.transactions||r.transactions.length===0){empty.style.display='';document.getElementById('txPagination').innerHTML='';return;}empty.style.display='none';r.transactions.forEach(function(tx){var actions='<div class="table-actions"><button data-action="view" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-eye"></i></button>';if(tx.status==='PENDING'){actions+='<button data-action="approve" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-check"></i></button><button class="danger" data-action="decline" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-times"></i></button>';}if(tx.status!=='PENDING'){actions+='<button class="danger" data-action="delete" data-txid="'+escAttr(tx.transactionId)+'" data-status="'+escAttr(tx.status)+'"><i class="fas fa-trash"></i></button>';}actions+='</div>';body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+esc(tx.phone)+'</td><td style="font-family:monospace;font-size:11px">'+esc(tx.gcashRef)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">₱'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td>'+actions+'</td></tr>';});var pg=document.getElementById('txPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="txPage='+(r.page-1)+';loadTransactions()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="txPage='+(r.page+1)+';loadTransactions()"><i class="fas fa-chevron-right"></i></button>';}
-
-    document.addEventListener('click',function(e){
-      var btn=e.target.closest('[data-action]');
-      if(!btn)return;
-      var action=btn.getAttribute('data-action');
-      var txId=btn.getAttribute('data-txid');
-      if(!txId)return;
-      if(action==='view')viewTransaction(txId);
-      else if(action==='approve')approveTx(txId);
-      else if(action==='decline')declineTx(txId);
-      else if(action==='delete')deleteTx(txId,btn.getAttribute('data-status')||'');
-    });
-
-    async function viewTransaction(txId){var r=await apiGet('adminGetTransaction',{transactionId:txId});if(!r.success){showToast(friendlyError(r.error),'error');return;}var tx=r.transaction;var nums=tx.soldNumbers||[];var numbersSection='';if(nums.length>0){numbersSection='<div style="margin-top:16px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Numbers ('+fmtN(nums.length)+')</span></div><div class="numbers-grid">'+nums.map(function(n){return'<span class="num-tag">'+esc(n)+'</span>';}).join('')+'</div><div class="numbers-actions"><button class="btn btn-xs btn-secondary" onclick="copyAllNumbers()"><i class="fas fa-copy"></i> Copy All</button><button class="btn btn-xs btn-secondary" onclick="downloadNumbers()"><i class="fas fa-download"></i> Download CSV</button></div></div>';}document.getElementById('modalTitle').textContent='Transaction Details';document.getElementById('modalBody').innerHTML='<div style="display:grid;gap:0;"><div class="receipt-row"><span class="r-label">TX ID</span><span class="r-value txid">'+esc(tx.transactionId)+'</span></div><div class="receipt-row"><span class="r-label">Name</span><span class="r-value">'+esc(tx.name)+'</span></div><div class="receipt-row"><span class="r-label">Phone</span><span class="r-value">'+esc(tx.phone)+'</span></div><div class="receipt-row"><span class="r-label">GCash Ref</span><span class="r-value ref">'+esc(tx.gcashRef)+'</span></div><div class="receipt-row"><span class="r-label">Quantity</span><span class="r-value">'+fmtN(tx.quantity)+'</span></div><div class="receipt-row"><span class="r-label">Amount</span><span class="r-value amount">₱'+fmtN(tx.amount)+'</span></div><div class="receipt-row"><span class="r-label">Status</span><span class="r-value">'+statusBadge(tx.status)+'</span></div><div class="receipt-row"><span class="r-label">Date</span><span class="r-value">'+esc(tx.timestamp)+'</span></div><div class="receipt-row"><span class="r-label">Numbers in Registry</span><span class="r-value">'+fmtN(tx.soldCount||0)+'</span></div></div>'+numbersSection;window._modalNumbers=nums;window._modalTx=tx;var f='<button class="btn btn-sm btn-secondary" onclick="closeModal()">Close</button>';if(tx.status==='PENDING')f='<button class="btn btn-sm btn-success" onclick="closeModal();approveTx(\''+escAttr(tx.transactionId)+'\')"><i class="fas fa-check"></i> Approve</button><button class="btn btn-sm btn-danger" onclick="closeModal();declineTx(\''+escAttr(tx.transactionId)+'\')"><i class="fas fa-times"></i> Decline</button>'+f;document.getElementById('modalFooter').innerHTML=f;document.getElementById('modalOverlay').classList.add('active');}
-
-    function copyAllNumbers(){if(!window._modalNumbers||window._modalNumbers.length===0){showToast('No numbers','error');return;}var text=window._modalNumbers.join(', ');copyToClipboard(text).then(function(){showToast('Copied '+fmtN(window._modalNumbers.length)+' numbers!','success');}).catch(function(){showToast('Could not copy. Please try manually.','error');});}
-
-    function downloadNumbers(){
-      if(!window._modalNumbers||window._modalNumbers.length===0){showToast('No numbers','error');return;}
-      var tx=window._modalTx||{};
-      var csv='Number,Transaction ID,Name,Phone\n';
-      window._modalNumbers.forEach(function(n){csv+=n+','+(tx.transactionId||'')+','+('"'+(tx.name||'')+'"')+','+(tx.phone||'')+'\n';});
-      var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sweetspot-'+(tx.transactionId||'numbers')+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Downloaded '+fmtN(window._modalNumbers.length)+' numbers','success');
+      if(r.totalPool){poolConfig.totalPool=r.totalPool;poolConfig.numberMax=r.totalPool-1;poolConfig.numberDigits=r.numberDigits||String(poolConfig.numberMax).length;updateAdminPoolLabels();}
+      document.getElementById('asSold').textContent=fmtN(r.sold);document.getElementById('asRemaining').textContent=fmtN(r.remaining);document.getElementById('asRevenue').textContent='\u20B1'+fmtN(r.totalRevenue);document.getElementById('asPending').textContent=fmtN(r.pendingTransactions);document.getElementById('asApproved').textContent=fmtN(r.approvedTransactions);document.getElementById('asBuyers').textContent=fmtN(r.uniqueBuyers);
+      var badge=document.getElementById('pendingBadge');if(r.pendingTransactions>0){badge.textContent=r.pendingTransactions;badge.style.display='';}else badge.style.display='none';
+      var body=document.getElementById('recentBody'),empty=document.getElementById('recentEmpty');body.innerHTML='';
+      if(!r.recentActivity||r.recentActivity.length===0){empty.style.display='';return;}
+      empty.style.display='none';r.recentActivity.forEach(function(tx){body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">\u20B1'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td style="font-size:11px">'+esc(tx.timestamp)+'</td></tr>';});
     }
+    document.addEventListener('click',function(e){var txEl=e.target.closest('[data-txid]');if(txEl){var txId=txEl.getAttribute('data-txid');if(txId)viewTransaction(txId);}});
 
+    /* ADMIN TRANSACTIONS */
+    async function loadTransactions(){var r=await apiGet('adminTransactions',{page:txPage,perPage:20});if(!r.success)return;var body=document.getElementById('txBody'),empty=document.getElementById('txEmpty');body.innerHTML='';
+      if(!r.transactions||r.transactions.length===0){empty.style.display='';document.getElementById('txPagination').innerHTML='';return;}
+      empty.style.display='none';r.transactions.forEach(function(tx){var actions='<div class="table-actions"><button data-action="view" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-eye"></i></button>';if(tx.status==='PENDING'){actions+='<button data-action="approve" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-check"></i></button><button class="danger" data-action="decline" data-txid="'+escAttr(tx.transactionId)+'"><i class="fas fa-times"></i></button>';}if(tx.status!=='PENDING'){actions+='<button class="danger" data-action="delete" data-txid="'+escAttr(tx.transactionId)+'" data-status="'+escAttr(tx.status)+'"><i class="fas fa-trash"></i></button>';}actions+='</div>';body.innerHTML+='<tr><td class="tx-id" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</td><td class="tx-name">'+esc(tx.name)+'</td><td>'+esc(tx.phone)+'</td><td style="font-family:monospace;font-size:11px">'+esc(tx.gcashRef)+'</td><td>'+fmtN(tx.quantity)+'</td><td class="tx-amount">\u20B1'+fmtN(tx.amount)+'</td><td>'+statusBadge(tx.status)+'</td><td>'+actions+'</td></tr>';});
+      var pg=document.getElementById('txPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="txPage='+(r.page-1)+';loadTransactions()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="txPage='+(r.page+1)+';loadTransactions()"><i class="fas fa-chevron-right"></i></button>';
+    }
+    document.addEventListener('click',function(e){var btn=e.target.closest('[data-action]');if(!btn)return;var action=btn.getAttribute('data-action');var txId=btn.getAttribute('data-txid');if(!txId)return;if(action==='view')viewTransaction(txId);else if(action==='approve')approveTx(txId);else if(action==='decline')declineTx(txId);else if(action==='delete')deleteTx(txId,btn.getAttribute('data-status')||'');});
+
+    async function viewTransaction(txId){var r=await apiGet('adminGetTransaction',{transactionId:txId});if(!r.success){showToast(friendlyError(r.error),'error');return;}var tx=r.transaction;var nums=tx.soldNumbers||[];var numbersSection='';if(nums.length>0){numbersSection='<div style="margin-top:16px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Numbers ('+fmtN(nums.length)+')</span></div><div class="numbers-grid">'+nums.map(function(n){return'<span class="num-tag">'+esc(n)+'</span>';}).join('')+'</div><div class="numbers-actions"><button class="btn btn-xs btn-secondary" onclick="copyAllNumbers()"><i class="fas fa-copy"></i> Copy All</button><button class="btn btn-xs btn-secondary" onclick="downloadNumbers()"><i class="fas fa-download"></i> Download CSV</button></div></div>';}document.getElementById('modalTitle').textContent='Transaction Details';document.getElementById('modalBody').innerHTML='<div style="display:grid;gap:0;"><div class="receipt-row"><span class="r-label">TX ID</span><span class="r-value txid">'+esc(tx.transactionId)+'</span></div><div class="receipt-row"><span class="r-label">Name</span><span class="r-value">'+esc(tx.name)+'</span></div><div class="receipt-row"><span class="r-label">Phone</span><span class="r-value">'+esc(tx.phone)+'</span></div><div class="receipt-row"><span class="r-label">Ref#</span><span class="r-value ref">'+esc(tx.gcashRef)+'</span></div><div class="receipt-row"><span class="r-label">Quantity</span><span class="r-value">'+fmtN(tx.quantity)+'</span></div><div class="receipt-row"><span class="r-label">Amount</span><span class="r-value amount">\u20B1'+fmtN(tx.amount)+'</span></div><div class="receipt-row"><span class="r-label">Status</span><span class="r-value">'+statusBadge(tx.status)+'</span></div><div class="receipt-row"><span class="r-label">Date</span><span class="r-value">'+esc(tx.timestamp)+'</span></div><div class="receipt-row"><span class="r-label">Numbers in Registry</span><span class="r-value">'+fmtN(tx.soldCount||0)+'</span></div></div>'+numbersSection;window._modalNumbers=nums;window._modalTx=tx;var f='<button class="btn btn-sm btn-secondary" onclick="closeModal()">Close</button>';if(tx.status==='PENDING')f='<button class="btn btn-sm btn-success" onclick="closeModal();approveTx(\''+escAttr(tx.transactionId)+'\')"><i class="fas fa-check"></i> Approve</button><button class="btn btn-sm btn-danger" onclick="closeModal();declineTx(\''+escAttr(tx.transactionId)+'\')"><i class="fas fa-times"></i> Decline</button>'+f;document.getElementById('modalFooter').innerHTML=f;document.getElementById('modalOverlay').classList.add('active');}
+    function copyAllNumbers(){if(!window._modalNumbers||window._modalNumbers.length===0){showToast('No numbers','error');return;}copyToClipboard(window._modalNumbers.join(', ')).then(function(){showToast('Copied '+fmtN(window._modalNumbers.length)+' numbers!','success');}).catch(function(){showToast('Could not copy.','error');});}
+    function downloadNumbers(){if(!window._modalNumbers||window._modalNumbers.length===0){showToast('No numbers','error');return;}var tx=window._modalTx||{};var csv='Number,Transaction ID,Name,Phone\n';window._modalNumbers.forEach(function(n){csv+=n+','+(tx.transactionId||'')+','+('"'+(tx.name||'')+'"')+','+(tx.phone||'')+'\n';});var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sweetspot-'+(tx.transactionId||'numbers')+'.csv';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Downloaded '+fmtN(window._modalNumbers.length)+' numbers','success');}
     async function approveTx(txId){if(!confirm('Approve this transaction?'))return;var r=await apiPost('adminApproveTransaction',{transactionId:txId});showToast(r.success?'Approved!':friendlyError(r.error),r.success?'success':'error');if(r.success){loadTransactions();loadDashboard();}}
     async function declineTx(txId){if(!confirm('Decline? Numbers will be freed.'))return;var r=await apiPost('adminDeclineTransaction',{transactionId:txId});showToast(r.success?'Declined. '+(r.freedNumbers||0)+' freed.':friendlyError(r.error),r.success?'success':'error');if(r.success){loadTransactions();loadDashboard();}}
-    async function deleteTx(txId,status){if(status==='PENDING'){showToast('Decline first before deleting.','error');return;}var cp='';if(status==='APPROVED'){if(!confirm('⚠️ This is an APPROVED transaction. Deleting will free all associated numbers. Continue?'))return;cp='DELETE_APPROVED';}else{if(!confirm('Delete this transaction permanently?'))return;}var r=await apiPost('adminDeleteTransaction',{transactionId:txId,confirm:cp});if(!r.success&&r.error==='CONFIRM_REQUIRED'){if(confirm(r.message||'Are you sure?')){var r2=await apiPost('adminDeleteTransaction',{transactionId:txId,confirm:r.confirmType||'DELETE_APPROVED'});showToast(r2.success?(r2.message||'Deleted'):friendlyError(r2.error),r2.success?'success':'error');if(r2.success){loadTransactions();loadDashboard();}}return;}showToast(r.success?(r.message||'Deleted'):friendlyError(r.error),r.success?'success':'error');if(r.success){loadTransactions();loadDashboard();}}
-    async function deleteAllTransactions(){if(!confirm('⚠️ DELETE ALL TRANSACTIONS\n\nThis will permanently delete ALL transactions and free ALL sold numbers.\n\nThis action CANNOT be undone.\n\nAre you sure?'))return;var typed=prompt('🔴 FINAL CONFIRMATION\n\nType "DELETE ALL" to confirm:','');if(!typed||typed.trim().toUpperCase()!=='DELETE ALL'){showToast('Cancelled.','info');return;}var btn=document.getElementById('btnDeleteAll');btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Deleting...';var res=await apiPost('adminDeleteAllTransactions',{});if(!res.success&&res.error==='CONFIRM_REQUIRED'){res=await apiPost('adminDeleteAllTransactions',{confirm:res.confirmType||'DELETE_ALL_CONFIRMED'});}btn.disabled=false;btn.innerHTML='<i class="fas fa-trash-alt"></i> Delete All';if(res.success){showToast(res.message||'All deleted.','success');loadTransactions();loadDashboard();}else{showToast(friendlyError(res.error),'error');}}
+    async function deleteTx(txId,status){if(status==='PENDING'){showToast('Decline first before deleting.','error');return;}var cp='';if(status==='APPROVED'){if(!confirm('This is an APPROVED transaction. Deleting will free all associated numbers. Continue?'))return;cp='DELETE_APPROVED';}else{if(!confirm('Delete this transaction permanently?'))return;}var r=await apiPost('adminDeleteTransaction',{transactionId:txId,confirm:cp});if(!r.success&&r.error==='CONFIRM_REQUIRED'){if(confirm(r.message||'Are you sure?')){var r2=await apiPost('adminDeleteTransaction',{transactionId:txId,confirm:r.confirmType||'DELETE_APPROVED'});showToast(r2.success?(r2.message||'Deleted'):friendlyError(r2.error),r2.success?'success':'error');if(r2.success){loadTransactions();loadDashboard();}}return;}showToast(r.success?(r.message||'Deleted'):friendlyError(r.error),r.success?'success':'error');if(r.success){loadTransactions();loadDashboard();}}
+    async function deleteAllTransactions(){if(!confirm('DELETE ALL TRANSACTIONS\n\nThis will permanently delete ALL transactions and free ALL sold numbers.\n\nThis action CANNOT be undone.\n\nAre you sure?'))return;var typed=prompt('FINAL CONFIRMATION\n\nType "DELETE ALL" to confirm:','');if(!typed||typed.trim().toUpperCase()!=='DELETE ALL'){showToast('Cancelled.','info');return;}var btn=document.getElementById('btnDeleteAll');btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Deleting...';var res=await apiPost('adminDeleteAllTransactions',{});if(!res.success&&res.error==='CONFIRM_REQUIRED'){res=await apiPost('adminDeleteAllTransactions',{confirm:res.confirmType||'DELETE_ALL_CONFIRMED'});}btn.disabled=false;btn.innerHTML='<i class="fas fa-trash-alt"></i> Delete All';if(res.success){showToast(res.message||'All deleted.','success');loadTransactions();loadDashboard();}else{showToast(friendlyError(res.error),'error');}}
 
-    /* ═══ ADMIN NUMBERS ═══ */
-    async function loadSoldNumbers(){var r=await apiGet('adminSoldNumbers',{page:soldPage,perPage:50});if(!r.success)return;var body=document.getElementById('soldBody'),empty=document.getElementById('soldEmpty');body.innerHTML='';if(!r.numbers||r.numbers.length===0){empty.style.display='';document.getElementById('soldPagination').innerHTML='';return;}empty.style.display='none';r.numbers.forEach(function(n){body.innerHTML+='<tr><td style="font-family:monospace;font-weight:700;color:var(--primary-light)">'+esc(n.number)+'</td><td class="tx-id" data-txid="'+escAttr(n.transactionId)+'">'+esc(n.transactionId)+'</td><td>'+esc(n.name)+'</td><td>'+esc(n.phone)+'</td><td style="font-size:11px">'+esc(n.timestamp)+'</td></tr>';});var pg=document.getElementById('soldPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="soldPage='+(r.page-1)+';loadSoldNumbers()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="soldPage='+(r.page+1)+';loadSoldNumbers()"><i class="fas fa-chevron-right"></i></button>';}
+    /* ADMIN NUMBERS */
+    async function loadSoldNumbers(){var r=await apiGet('adminSoldNumbers',{page:soldPage,perPage:50});if(!r.success)return;var body=document.getElementById('soldBody'),empty=document.getElementById('soldEmpty');body.innerHTML='';
+      if(!r.numbers||r.numbers.length===0){empty.style.display='';document.getElementById('soldPagination').innerHTML='';return;}
+      empty.style.display='none';r.numbers.forEach(function(n){body.innerHTML+='<tr><td style="font-family:monospace;font-weight:700;color:var(--primary-light)">'+esc(n.number)+'</td><td class="tx-id" data-txid="'+escAttr(n.transactionId)+'">'+esc(n.transactionId)+'</td><td>'+esc(n.name)+'</td><td>'+esc(n.phone)+'</td><td style="font-size:11px">'+esc(n.timestamp)+'</td></tr>';});
+      var pg=document.getElementById('soldPagination');pg.innerHTML='<button '+(r.page<=1?'disabled':'')+' onclick="soldPage='+(r.page-1)+';loadSoldNumbers()"><i class="fas fa-chevron-left"></i></button><span>Page '+r.page+' of '+r.totalPages+'</span><button '+(r.page>=r.totalPages?'disabled':'')+' onclick="soldPage='+(r.page+1)+';loadSoldNumbers()"><i class="fas fa-chevron-right"></i></button>';
+    }
 
-    async function addNumber(){
-      var btn=event.target.closest('button');
-      var num=document.getElementById('addNumInput').value.trim();
+    /* GENERATE NUMBERS (Admin) */
+    async function generateNumbers(){
+      var btn=document.getElementById('btnGenerateNums');
+      var qty=parseInt(document.getElementById('addNumQuantity').value);
       var name=document.getElementById('addNumName').value.trim()||'Manual';
       var phone=document.getElementById('addNumPhone').value.trim();
-      if(!num){showToast('Enter a number','error');return;}
-      btn.disabled=true;var origHTML=btn.innerHTML;btn.innerHTML='<div class="spinner"></div>';
-      var r=await apiPost('adminAddNumber',{number:num,name:name,phone:phone});
+      if(!qty||qty<1){showToast('Enter how many numbers to generate','error');return;}
+      if(qty>10000){showToast('Maximum 10,000 numbers at a time','error');return;}
+      if(!confirm('Generate '+fmtN(qty)+' random number(s) for "'+name+'"?\n\nThey will be marked as sold immediately.'))return;
+      btn.disabled=true;var origHTML=btn.innerHTML;btn.innerHTML='<div class="spinner"></div> Generating '+fmtN(qty)+' numbers...';
+      var r=await apiPost('adminGenerateNumbers',{quantity:qty,name:name,phone:phone});
       btn.disabled=false;btn.innerHTML=origHTML;
-      showToast(r.success?(r.message||'Added'):friendlyError(r.error),r.success?'success':'error');
-      if(r.success){document.getElementById('addNumInput').value='';document.getElementById('addNumName').value='';document.getElementById('addNumPhone').value='';loadSoldNumbers();}
+      if(r.success){
+        var infoDiv=document.getElementById('genNumsInfo');
+        document.getElementById('genNumsCount').textContent=fmtN(r.generated||qty);
+        document.getElementById('genNumsName').textContent=name;infoDiv.style.display='';
+        showToast(r.message||(fmtN(r.generated)+' numbers generated!'),'success');
+        if(r.sampleNumbers&&r.sampleNumbers.length>0){var sample=r.sampleNumbers.slice(0,10).join(', ');if(r.sampleNumbers.length>10)sample+='...';showToast('Sample: '+sample,'info');}
+        loadSoldNumbers();loadDashboard();
+      }else{showToast(friendlyError(r.error),'error');}
     }
 
     async function removeNumber(){
-      var btn=event.target.closest('button');
-      var num=document.getElementById('removeNumInput').value.trim();
-      if(!num){showToast('Enter a number','error');return;}
-      if(!confirm('Remove number '+num+'?'))return;
+      var btn=event.target.closest('button');var num=document.getElementById('removeNumInput').value.trim();
+      if(!num){showToast('Enter a number','error');return;}if(!confirm('Remove number '+num+'?'))return;
       btn.disabled=true;var origHTML=btn.innerHTML;btn.innerHTML='<div class="spinner"></div>';
-      var r=await apiPost('adminRemoveNumber',{number:num});
-      btn.disabled=false;btn.innerHTML=origHTML;
+      var r=await apiPost('adminRemoveNumber',{number:num});btn.disabled=false;btn.innerHTML=origHTML;
       showToast(r.success?(r.message||'Removed'):friendlyError(r.error),r.success?'success':'error');
       if(r.success){document.getElementById('removeNumInput').value='';loadSoldNumbers();}
     }
 
-    /* ═══ ADMIN SEARCH ═══ */
+    /* ADMIN SEARCH */
     async function searchNumber(){
-      var btn=event.target.closest('button');
-      var q=document.getElementById('searchNumInput').value.trim();
-      if(!q){showToast('Enter a number','error');return;}
+      var btn=event.target.closest('button');var q=document.getElementById('searchNumInput').value.trim();if(!q){showToast('Enter a number','error');return;}
       btn.disabled=true;var origHTML=btn.innerHTML;btn.innerHTML='<div class="spinner"></div>';
-      var r=await apiGet('adminSearchNumber',{query:q});
-      btn.disabled=false;btn.innerHTML=origHTML;
+      var r=await apiGet('adminSearchNumber',{query:q});btn.disabled=false;btn.innerHTML=origHTML;
       var c=document.getElementById('searchNumResults');
       if(!r.success){c.innerHTML='<p style="color:var(--text-muted)">Search failed</p>';return;}
       if(!r.found||r.results.length===0){c.innerHTML='<div class="empty-state" style="padding:24px"><i class="fas fa-search" style="font-size:24px"></i><p>Number <strong>'+esc(r.query)+'</strong> not found (available)</p></div>';return;}
       c.innerHTML=r.results.map(function(n){return'<div class="search-result-card"><div class="sr-row"><span class="sr-label">Number</span><span class="sr-value" style="color:var(--primary-light);font-family:monospace">'+esc(n.number)+'</span></div><div class="sr-row"><span class="sr-label">TX ID</span><span class="sr-value" style="font-size:11px;cursor:pointer;color:var(--primary-light)" data-txid="'+escAttr(n.transactionId)+'">'+esc(n.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(n.name)+'</span></div><div class="sr-row"><span class="sr-label">Phone</span><span class="sr-value">'+esc(n.phone)+'</span></div><div class="sr-row"><span class="sr-label">Date</span><span class="sr-value">'+esc(n.timestamp)+'</span></div></div>';}).join('');
     }
-
     async function searchBuyer(){
-      var btn=event.target.closest('button');
-      var q=document.getElementById('searchBuyerInput').value.trim();
-      if(!q){showToast('Enter search term','error');return;}
+      var btn=event.target.closest('button');var q=document.getElementById('searchBuyerInput').value.trim();if(!q){showToast('Enter search term','error');return;}
       btn.disabled=true;var origHTML=btn.innerHTML;btn.innerHTML='<div class="spinner"></div>';
-      var r=await apiGet('adminSearchBuyer',{query:q});
-      btn.disabled=false;btn.innerHTML=origHTML;
+      var r=await apiGet('adminSearchBuyer',{query:q});btn.disabled=false;btn.innerHTML=origHTML;
       var c=document.getElementById('searchBuyerResults');
       if(!r.success){c.innerHTML='<p style="color:var(--text-muted)">Search failed</p>';return;}
       if(r.total===0){c.innerHTML='<div class="empty-state" style="padding:24px"><i class="fas fa-user" style="font-size:24px"></i><p>No results for "'+esc(q)+'"</p></div>';return;}
-      c.innerHTML='<p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">'+r.total+' result(s)</p>'+r.results.map(function(tx){return'<div class="search-result-card"><div class="sr-row"><span class="sr-label">TX ID</span><span class="sr-value" style="font-size:11px;color:var(--primary-light);cursor:pointer" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(tx.name)+'</span></div><div class="sr-row"><span class="sr-label">Phone</span><span class="sr-value">'+esc(tx.phone)+'</span></div><div class="sr-row"><span class="sr-label">GCash Ref</span><span class="sr-value">'+esc(tx.gcashRef)+'</span></div><div class="sr-row"><span class="sr-label">Qty / Amount</span><span class="sr-value">'+fmtN(tx.quantity)+' / ₱'+fmtN(tx.amount)+'</span></div><div class="sr-row"><span class="sr-label">Status</span><span class="sr-value">'+statusBadge(tx.status)+'</span></div></div>';}).join('');
+      c.innerHTML='<p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">'+r.total+' result(s)</p>'+r.results.map(function(tx){return'<div class="search-result-card"><div class="sr-row"><span class="sr-label">TX ID</span><span class="sr-value" style="font-size:11px;color:var(--primary-light);cursor:pointer" data-txid="'+escAttr(tx.transactionId)+'">'+esc(tx.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(tx.name)+'</span></div><div class="sr-row"><span class="sr-label">Phone</span><span class="sr-value">'+esc(tx.phone)+'</span></div><div class="sr-row"><span class="sr-label">Ref#</span><span class="sr-value">'+esc(tx.gcashRef)+'</span></div><div class="sr-row"><span class="sr-label">Qty / Amount</span><span class="sr-value">'+fmtN(tx.quantity)+' / \u20B1'+fmtN(tx.amount)+'</span></div><div class="sr-row"><span class="sr-label">Status</span><span class="sr-value">'+statusBadge(tx.status)+'</span></div></div>';}).join('');
     }
+    async function searchDuplicates(){var btn=document.getElementById('btnDupCheck');btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Checking...';var r=await apiGet('adminSearchDuplicates');btn.disabled=false;btn.innerHTML='<i class="fas fa-search"></i> Check for Duplicates';var c=document.getElementById('searchDupResults');if(!r.success){c.innerHTML='<p style="color:var(--text-muted)">Check failed</p>';return;}if(r.uniqueDuplicatedNumbers===0){c.innerHTML='<div class="empty-state" style="padding:24px"><i class="fas fa-check-circle" style="font-size:24px;color:var(--accent)"></i><p style="color:var(--accent)">No duplicates found!</p></div>';return;}c.innerHTML='<p style="font-size:12px;color:var(--danger);margin-bottom:12px">'+r.uniqueDuplicatedNumbers+' duplicated number(s)</p>'+r.duplicates.map(function(d){return'<div class="search-result-card" style="border-color:rgba(239,68,68,0.3)"><div class="sr-row"><span class="sr-label">Number</span><span class="sr-value" style="color:var(--danger);font-family:monospace">'+esc(d.number)+' (\u00d7'+d.occurrences+')</span></div><div class="sr-row"><span class="sr-label">First TX</span><span class="sr-value" style="font-size:11px;cursor:pointer;color:var(--primary-light)" data-txid="'+escAttr(d.transactionId)+'">'+esc(d.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(d.name)+'</span></div></div>';}).join('');}
 
-    async function searchDuplicates(){var btn=document.getElementById('btnDupCheck');btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Checking...';var r=await apiGet('adminSearchDuplicates');btn.disabled=false;btn.innerHTML='<i class="fas fa-search"></i> Check for Duplicates';var c=document.getElementById('searchDupResults');if(!r.success){c.innerHTML='<p style="color:var(--text-muted)">Check failed</p>';return;}if(r.uniqueDuplicatedNumbers===0){c.innerHTML='<div class="empty-state" style="padding:24px"><i class="fas fa-check-circle" style="font-size:24px;color:var(--accent)"></i><p style="color:var(--accent)">No duplicates found! ✓</p></div>';return;}c.innerHTML='<p style="font-size:12px;color:var(--danger);margin-bottom:12px">⚠️ '+r.uniqueDuplicatedNumbers+' duplicated number(s)</p>'+r.duplicates.map(function(d){return'<div class="search-result-card" style="border-color:rgba(239,68,68,0.3)"><div class="sr-row"><span class="sr-label">Number</span><span class="sr-value" style="color:var(--danger);font-family:monospace">'+esc(d.number)+' (×'+d.occurrences+')</span></div><div class="sr-row"><span class="sr-label">First TX</span><span class="sr-value" style="font-size:11px;cursor:pointer;color:var(--primary-light)" data-txid="'+escAttr(d.transactionId)+'">'+esc(d.transactionId)+'</span></div><div class="sr-row"><span class="sr-label">Name</span><span class="sr-value">'+esc(d.name)+'</span></div></div>';}).join('');}
-
-    /* ═══ ADMIN SETTINGS ═══ */
+    /* ADMIN SETTINGS */
     async function loadSettingsForm(){
-      var r=await apiGet('adminInit');
-      if(!r.success)return;
-      var s=r.settings;
-
-      /* Update pool config from settings */
-      if(s.total_pool){
-        var tp=parseInt(s.total_pool)||20000;
-        var mx=tp-1;
-        poolConfig.totalPool=tp;
-        poolConfig.numberMax=mx;
-        poolConfig.numberDigits=String(mx).length;
-        updateAdminPoolLabels();
-        buildSlots();
-      }
-
+      var r=await apiGet('adminInit');if(!r.success)return;var s=r.settings;
+      if(s.total_pool){var tp=parseInt(s.total_pool)||20000;var mx=tp-1;poolConfig.totalPool=tp;poolConfig.numberMax=mx;poolConfig.numberDigits=String(mx).length;updateAdminPoolLabels();buildSlots();}
       document.getElementById('setLotteryName').value=s.lottery_name||'';
-      var dv=s.draw_date||'';
-      if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}
+      var dv=s.draw_date||'';if(dv&&!dv.match(/^\d{4}-\d{2}-\d{2}$/)){try{var pd=new Date(dv);if(!isNaN(pd))dv=pd.getFullYear()+'-'+String(pd.getMonth()+1).padStart(2,'0')+'-'+String(pd.getDate()).padStart(2,'0');}catch(e){}}
       document.getElementById('setDrawDate').value=dv;
       document.getElementById('setAnnouncement').value=s.announcement||'';
       document.getElementById('setTotalPool').value=s.total_pool||'20000';
@@ -1223,314 +1186,104 @@
       document.getElementById('setMaxQuantity').value=s.max_quantity||'1000';
       document.getElementById('setGcashName').value=s.gcash_name||'';
       document.getElementById('setGcashNumber').value=s.gcash_number||'';
+      document.getElementById('setMayaName').value=s.maya_name||'';
+      document.getElementById('setMayaNumber').value=s.maya_number||'';
       document.getElementById('setMaintenance').checked=s.maintenance_mode==='true';
       document.getElementById('setNewPassword').value='';
-
-      /* Show pool preview */
-      var preview=document.getElementById('poolPreview');
-      if(preview) preview.textContent=poolPreviewText(s.total_pool||'20000');
-
-      /* Setup pool preview listener (only once via setupListeners) */
+      var preview=document.getElementById('poolPreview');if(preview) preview.textContent=poolPreviewText(s.total_pool||'20000');
     }
-
     async function saveSettings(){
-      var btn=document.getElementById('btnSaveSettings');
-      btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';
-
-      var poolVal=document.getElementById('setTotalPool').value;
-
+      var btn=document.getElementById('btnSaveSettings');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Saving...</span>';
       var data={
         lottery_name:document.getElementById('setLotteryName').value,
         draw_date:document.getElementById('setDrawDate').value,
         announcement:document.getElementById('setAnnouncement').value,
-        total_pool:poolVal,
+        total_pool:document.getElementById('setTotalPool').value,
         price_per_number:document.getElementById('setPricePerNumber').value,
         min_quantity:document.getElementById('setMinQuantity').value,
         max_quantity:document.getElementById('setMaxQuantity').value,
         gcash_name:document.getElementById('setGcashName').value,
         gcash_number:document.getElementById('setGcashNumber').value,
+        maya_name:document.getElementById('setMayaName').value,
+        maya_number:document.getElementById('setMayaNumber').value,
         maintenance_mode:document.getElementById('setMaintenance').checked?'true':'false'
       };
-      var pw=document.getElementById('setNewPassword').value;
-      if(pw)data.new_password=pw;
-
+      var pw=document.getElementById('setNewPassword').value;if(pw)data.new_password=pw;
       var r=await apiPost('adminUpdateSettings',data);
       btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i><span>Save Settings</span>';
+      if(r.success){
+        if(r.warnings&&r.warnings.length>0){r.warnings.forEach(function(w){showToast(w,'info');});}
+        showToast(r.message||'Settings saved!','success');
+        var tp=parseInt(document.getElementById('setTotalPool').value)||20000;tp=Math.round(tp/10000)*10000;if(tp<10000)tp=10000;if(tp>200000)tp=200000;
+        poolConfig.totalPool=tp;poolConfig.numberMax=tp-1;poolConfig.numberDigits=String(tp-1).length;
+        updateAdminPoolLabels();buildSlots();loadDashboard();
+      }else{showToast(friendlyError(r.error),'error');}
+    }
 
-        if(r.success){
-        /* Show warnings if any */
-        if(r.warnings&&r.warnings.length>0){
-          r.warnings.forEach(function(w){showToast('⚠️ '+w,'info');});
-          showToast(r.message||'Settings saved!','success');
-        }else{
-          showToast('Settings saved!','success');
-        }
-        /* Refresh pool config after save */
-        var tp=parseInt(document.getElementById('setTotalPool').value)||20000;
-        tp=Math.round(tp/10000)*10000;
-        if(tp<10000)tp=10000;if(tp>200000)tp=200000;
-        poolConfig.totalPool=tp;
-        poolConfig.numberMax=tp-1;
-        poolConfig.numberDigits=String(tp-1).length;
-        updateAdminPoolLabels();
-        buildSlots();
-        loadDashboard();
+    /* DRAW WINNER SYSTEM */
+    function secureRandom(max){var arr=new Uint32Array(1);crypto.getRandomValues(arr);return arr[0]%max;}
+    function generateDrawNumber(){var num=secureRandom(poolConfig.totalPool);return String(num).padStart(poolConfig.numberDigits,'0').split('');}
+    function getDigitMax(digitIndex){if(digitIndex===0){return parseInt(String(poolConfig.numberMax).charAt(0))+1;}return 10;}
+    function startSlotAnimation(slotEl,digitIndex){var maxVal=getDigitMax(digitIndex);var val=slotEl.querySelector('.slot-value');slotEl._spinInterval=setInterval(function(){val.textContent=secureRandom(maxVal);},80);}
+    function stopSlotAnimation(slotEl){if(slotEl._spinInterval){clearInterval(slotEl._spinInterval);slotEl._spinInterval=null;}}
+    function revealDigit(index,digit){return new Promise(function(resolve){var slot=document.getElementById('slot'+index);stopSlotAnimation(slot);var maxVal=getDigitMax(index);var count=0;var si=setInterval(function(){slot.querySelector('.slot-value').textContent=secureRandom(maxVal);count++;if(count>=8){clearInterval(si);slot.classList.remove('spinning');slot.classList.add('revealed');slot.querySelector('.slot-value').textContent=digit;resolve();}},150);});}
+
+    async function startDraw(){
+      if(isDrawing)return;isDrawing=true;var numDigits=poolConfig.numberDigits;
+      var btn=document.getElementById('btnDrawWinner');btn.disabled=true;btn.innerHTML='<div class="spinner"></div><span>Drawing...</span>';
+      document.getElementById('winnerReveal').classList.remove('visible');document.getElementById('btnDrawAgain').style.display='none';
+      document.getElementById('drawTitleText').textContent='Drawing Winner...';document.getElementById('drawStatus').textContent='Generating random number...';
+      for(var i=0;i<numDigits;i++){var s=document.getElementById('slot'+i);if(!s)continue;stopSlotAnimation(s);s.className='slot-digit';s.style.opacity='';s.querySelector('.slot-value').textContent='?';}
+      var digits=generateDrawNumber();var drawnNumber=digits.join('');
+      for(var j=0;j<numDigits;j++){var se=document.getElementById('slot'+j);if(!se)continue;se.classList.add('spinning');startSlotAnimation(se,j);}
+      document.getElementById('drawStatus').textContent='Shuffling numbers...';await delay(2000);
+      for(var k=0;k<numDigits;k++){document.getElementById('drawStatus').textContent='Revealing digit '+(k+1)+' of '+numDigits+'...';await revealDigit(k,digits[k]);if(k<numDigits-1){for(var cd=5;cd>0;cd--){document.getElementById('drawStatus').textContent='Next digit in '+cd+'s...';await delay(1000);}}}
+      document.getElementById('drawStatus').textContent='Checking number '+drawnNumber+'...';document.getElementById('drawTitleText').textContent='Checking...';await delay(1500);
+      var res=await apiGet('adminDrawWinner',{number:drawnNumber});
+      if(!res.success){for(var si2=0;si2<numDigits;si2++){var slotEl=document.getElementById('slot'+si2);if(slotEl)stopSlotAnimation(slotEl);}showToast(friendlyError(res.error),'error');document.getElementById('drawTitleText').textContent='Error';document.getElementById('drawStatus').textContent='Something went wrong. Please try again.';btn.style.display='none';document.getElementById('btnDrawAgain').style.display='';isDrawing=false;return;}
+      if(res.matched){
+        document.getElementById('drawStatus').textContent='';document.getElementById('drawTitleText').textContent='Winner Found!';await delay(500);
+        for(var w=0;w<numDigits;w++){var wSlot=document.getElementById('slot'+w);if(wSlot)wSlot.classList.add('revealed');}
+        document.getElementById('winnerNumber').textContent=res.number;document.getElementById('winnerName').textContent=res.name||'-';document.getElementById('winnerPhone').textContent=res.phone||'-';document.getElementById('winnerTxId').textContent='TX: '+(res.transactionId||'-');
+        document.getElementById('winnerReveal').classList.add('visible');btn.style.display='none';document.getElementById('btnDrawAgain').style.display='';launchConfetti();
+        drawHistory.unshift({number:res.number,name:res.name||'-',phone:res.phone||'-',transactionId:res.transactionId||'-',timestamp:res.drawnAt||new Date().toLocaleString(),matched:true});
+        saveDrawHistory();renderDrawHistory();showToast('Winner: '+(res.name||res.number),'success');
       }else{
-        showToast(friendlyError(r.error),'error');
+        document.getElementById('drawTitleText').textContent='No Match';document.getElementById('drawStatus').textContent=drawnNumber+' is not a sold number. Draw again!';
+        for(var nm=0;nm<numDigits;nm++){var nmSlot=document.getElementById('slot'+nm);if(nmSlot)nmSlot.style.opacity='0.4';}
+        btn.style.display='none';document.getElementById('btnDrawAgain').style.display='';
+        drawHistory.unshift({number:drawnNumber,name:'-',phone:'-',transactionId:'-',timestamp:new Date().toLocaleString(),matched:false});
+        saveDrawHistory();renderDrawHistory();showToast(drawnNumber+' \u2014 No match. Try again!','info');
       }
+      isDrawing=false;
     }
-
-    /* ═══════════════════════════════════════════════════════════
-       DRAW WINNER SYSTEM — DYNAMIC DIGITS
-       ═══════════════════════════════════════════════════════════ */
-
-    function secureRandom(max){
-      var arr=new Uint32Array(1);
-      crypto.getRandomValues(arr);
-      return arr[0]%max;
+    function resetDraw(){
+      isDrawing=false;var numDigits=poolConfig.numberDigits;var btn=document.getElementById('btnDrawWinner');btn.style.display='';btn.disabled=false;btn.innerHTML='<i class="fas fa-dice"></i><span>Draw a Winner</span>';
+      document.getElementById('btnDrawAgain').style.display='none';document.getElementById('winnerReveal').classList.remove('visible');
+      document.getElementById('drawTitleText').textContent='Ready to Draw';document.getElementById('drawStatus').textContent='Click the button below to draw a winner';
+      for(var i=0;i<numDigits;i++){var slot=document.getElementById('slot'+i);if(!slot)continue;stopSlotAnimation(slot);slot.className='slot-digit';slot.style.opacity='';slot.querySelector('.slot-value').textContent='?';}
     }
-
-    function generateDrawNumber() {
-      var num=secureRandom(poolConfig.totalPool);
-      var s=String(num).padStart(poolConfig.numberDigits,'0');
-      return s.split('');
-    }
-
-    /**
-     * Get the max value for a digit at a given position during slot animation.
-     * For the first digit, it's limited based on the pool's max first digit.
-     * For other digits, it's always 0-9.
-     */
-    function getDigitMax(digitIndex){
-      if(digitIndex===0){
-        var maxFirstDigit=parseInt(String(poolConfig.numberMax).charAt(0));
-        return maxFirstDigit+1; // e.g. for 19999 -> first digit max is 1, so range is 0-1
+    function saveDrawHistory(){try{localStorage.setItem('sweetspot_draw_history',JSON.stringify(drawHistory.slice(0,100)));}catch(e){}}
+    function loadDrawHistoryFromStorage(){try{var raw=localStorage.getItem('sweetspot_draw_history');if(raw)drawHistory=JSON.parse(raw);}catch(e){drawHistory=[];}}
+    function loadDrawHistory(){loadDrawHistoryFromStorage();renderDrawHistory();}
+    function renderDrawHistory(){
+      var container=document.getElementById('drawHistoryList');var empty=document.getElementById('drawHistoryEmpty');
+      if(drawHistory.length===0){container.innerHTML='';container.appendChild(empty);empty.style.display='';return;}
+      empty.style.display='none';var html='';
+      for(var i=0;i<drawHistory.length;i++){
+        var d=drawHistory[i];var isMatch=d.matched!==false;
+        var icon=isMatch?'<i class="fas fa-trophy" style="color:var(--secondary);font-size:14px"></i>':'<i class="fas fa-times-circle" style="color:var(--danger);font-size:14px"></i>';
+        var label=isMatch?'<span style="font-size:10px;color:var(--accent);font-weight:600;text-transform:uppercase">Winner</span>':'<span style="font-size:10px;color:var(--danger);font-weight:600;text-transform:uppercase">No Match</span>';
+        var nameD=isMatch?esc(d.name):'<span style="color:var(--text-muted)">Not sold</span>';
+        var numC=isMatch?'var(--secondary)':'var(--text-muted)';var bg=isMatch?'rgba(245,158,11,0.15)':'rgba(239,68,68,0.1)';
+        html+='<div class="draw-history-item"><div class="draw-history-left"><div style="width:32px;height:32px;border-radius:50%;background:'+bg+';display:flex;align-items:center;justify-content:center;flex-shrink:0">'+icon+'</div><div><div style="display:flex;align-items:center;gap:8px"><span class="draw-history-num" style="color:'+numC+'">'+esc(d.number)+'</span>'+label+'</div><div class="draw-history-name">'+nameD+'</div><div class="draw-history-date">'+esc(d.timestamp)+'</div></div></div><div style="text-align:right">'+(isMatch?'<div style="font-size:11px;color:var(--text-muted);font-family:monospace;cursor:pointer" data-txid="'+escAttr(d.transactionId)+'">'+esc(d.transactionId)+'</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">'+esc(d.phone)+'</div>':'')+'</div></div>';
       }
-      return 10;
+      container.innerHTML=html;container.appendChild(empty);
     }
 
-    function startSlotAnimation(slotEl, digitIndex) {
-      var maxVal=getDigitMax(digitIndex);
-      var val = slotEl.querySelector('.slot-value');
-      slotEl._spinInterval = setInterval(function() {
-        val.textContent = secureRandom(maxVal);
-      }, 80);
-    }
-
-    function stopSlotAnimation(slotEl) {
-      if (slotEl._spinInterval) {
-        clearInterval(slotEl._spinInterval);
-        slotEl._spinInterval = null;
-      }
-    }
-
-    function revealDigit(index, digit) {
-      return new Promise(function(resolve) {
-        var slot = document.getElementById('slot' + index);
-        stopSlotAnimation(slot);
-        var maxVal=getDigitMax(index);
-        var count = 0;
-        var si = setInterval(function() {
-          slot.querySelector('.slot-value').textContent = secureRandom(maxVal);
-          count++;
-          if (count >= 8) {
-            clearInterval(si);
-            slot.classList.remove('spinning');
-            slot.classList.add('revealed');
-            slot.querySelector('.slot-value').textContent = digit;
-            resolve();
-          }
-        }, 150);
-      });
-    }
-
-    async function startDraw() {
-      if (isDrawing) return;
-      isDrawing = true;
-
-      var numDigits=poolConfig.numberDigits;
-
-      var btn = document.getElementById('btnDrawWinner');
-      btn.disabled = true;
-      btn.innerHTML = '<div class="spinner"></div><span>Drawing...</span>';
-
-      document.getElementById('winnerReveal').classList.remove('visible');
-      document.getElementById('btnDrawAgain').style.display = 'none';
-      document.getElementById('drawTitleText').textContent = 'Drawing Winner...';
-      document.getElementById('drawStatus').textContent = 'Generating random number...';
-
-      for (var i = 0; i < numDigits; i++) {
-        var s = document.getElementById('slot' + i);
-        if(!s)continue;
-        stopSlotAnimation(s);
-        s.className = 'slot-digit';
-        s.style.opacity = '';
-        s.querySelector('.slot-value').textContent = '?';
-      }
-
-      var digits = generateDrawNumber();
-      var drawnNumber = digits.join('');
-
-      for (var j = 0; j < numDigits; j++) {
-        var se = document.getElementById('slot' + j);
-        if(!se)continue;
-        se.classList.add('spinning');
-        startSlotAnimation(se, j);
-      }
-
-      document.getElementById('drawStatus').textContent = 'Shuffling numbers...';
-      await delay(2000);
-
-      for (var k = 0; k < numDigits; k++) {
-        document.getElementById('drawStatus').textContent = 'Revealing digit ' + (k + 1) + ' of ' + numDigits + '...';
-        await revealDigit(k, digits[k]);
-        if (k < numDigits - 1) {
-          for (var cd = 5; cd > 0; cd--) {
-            document.getElementById('drawStatus').textContent = 'Next digit in ' + cd + 's...';
-            await delay(1000);
-          }
-        }
-      }
-
-      document.getElementById('drawStatus').textContent = 'Checking number ' + drawnNumber + '...';
-      document.getElementById('drawTitleText').textContent = 'Checking...';
-      await delay(1500);
-
-      var res = await apiGet('adminDrawWinner', { number: drawnNumber });
-
-      if (!res.success) {
-        for (var si2 = 0; si2 < numDigits; si2++) {
-          var slotEl=document.getElementById('slot' + si2);
-          if(slotEl)stopSlotAnimation(slotEl);
-        }
-        showToast(friendlyError(res.error), 'error');
-        document.getElementById('drawTitleText').textContent = 'Error';
-        document.getElementById('drawStatus').textContent = 'Something went wrong. Please try again.';
-        btn.style.display = 'none';
-        document.getElementById('btnDrawAgain').style.display = '';
-        isDrawing = false;
-        return;
-      }
-
-      if (res.matched) {
-        document.getElementById('drawStatus').textContent = '';
-        document.getElementById('drawTitleText').textContent = '🎉 Winner Found!';
-        await delay(500);
-
-        for (var w = 0; w < numDigits; w++) {
-          var wSlot=document.getElementById('slot' + w);
-          if(wSlot)wSlot.classList.add('revealed');
-        }
-
-        document.getElementById('winnerNumber').textContent = res.number;
-        document.getElementById('winnerName').textContent = res.name || '—';
-        document.getElementById('winnerPhone').textContent = res.phone || '—';
-        document.getElementById('winnerTxId').textContent = 'TX: ' + (res.transactionId || '—');
-        document.getElementById('winnerReveal').classList.add('visible');
-
-        btn.style.display = 'none';
-        document.getElementById('btnDrawAgain').style.display = '';
-        launchConfetti();
-
-        drawHistory.unshift({
-          number: res.number, name: res.name || '—', phone: res.phone || '—',
-          transactionId: res.transactionId || '—',
-          timestamp: res.drawnAt || new Date().toLocaleString(), matched: true
-        });
-        saveDrawHistory();
-        renderDrawHistory();
-        showToast('🏆 Winner: ' + (res.name || res.number), 'success');
-
-      } else {
-        document.getElementById('drawTitleText').textContent = 'No Match';
-        document.getElementById('drawStatus').textContent = drawnNumber + ' is not a sold number. Draw again!';
-
-        for (var nm = 0; nm < numDigits; nm++) {
-          var nmSlot=document.getElementById('slot' + nm);
-          if(nmSlot)nmSlot.style.opacity = '0.4';
-        }
-
-        btn.style.display = 'none';
-        document.getElementById('btnDrawAgain').style.display = '';
-
-        drawHistory.unshift({
-          number: drawnNumber, name: '—', phone: '—', transactionId: '—',
-          timestamp: new Date().toLocaleString(), matched: false
-        });
-        saveDrawHistory();
-        renderDrawHistory();
-        showToast(drawnNumber + ' — No match. Try again!', 'info');
-      }
-
-      isDrawing = false;
-    }
-
-    function resetDraw() {
-      isDrawing = false;
-      var numDigits=poolConfig.numberDigits;
-      var btn = document.getElementById('btnDrawWinner');
-      btn.style.display = '';
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-dice"></i><span>Draw a Winner</span>';
-      document.getElementById('btnDrawAgain').style.display = 'none';
-      document.getElementById('winnerReveal').classList.remove('visible');
-      document.getElementById('drawTitleText').textContent = 'Ready to Draw';
-      document.getElementById('drawStatus').textContent = 'Click the button below to draw a winner';
-      for (var i = 0; i < numDigits; i++) {
-        var slot = document.getElementById('slot' + i);
-        if(!slot)continue;
-        stopSlotAnimation(slot);
-        slot.className = 'slot-digit';
-        slot.style.opacity = '';
-        slot.querySelector('.slot-value').textContent = '?';
-      }
-    }
-
-    function saveDrawHistory(){
-      try{localStorage.setItem('sweetspot_draw_history',JSON.stringify(drawHistory.slice(0,100)));}catch(e){}
-    }
-    function loadDrawHistoryFromStorage(){
-      try{
-        var raw=localStorage.getItem('sweetspot_draw_history');
-        if(raw)drawHistory=JSON.parse(raw);
-      }catch(e){drawHistory=[];}
-    }
-
-    function loadDrawHistory(){
-      loadDrawHistoryFromStorage();
-      renderDrawHistory();
-    }
-
-    function renderDrawHistory() {
-      var container = document.getElementById('drawHistoryList');
-      var empty = document.getElementById('drawHistoryEmpty');
-      if (drawHistory.length === 0) {
-        container.innerHTML = '';
-        container.appendChild(empty);
-        empty.style.display = '';
-        return;
-      }
-      empty.style.display = 'none';
-      var html = '';
-      for (var i = 0; i < drawHistory.length; i++) {
-        var d = drawHistory[i];
-        var isMatch = d.matched !== false;
-        var icon = isMatch ? '<i class="fas fa-trophy" style="color:var(--secondary);font-size:14px"></i>' : '<i class="fas fa-times-circle" style="color:var(--danger);font-size:14px"></i>';
-        var label = isMatch ? '<span style="font-size:10px;color:var(--accent);font-weight:600;text-transform:uppercase">Winner</span>' : '<span style="font-size:10px;color:var(--danger);font-weight:600;text-transform:uppercase">No Match</span>';
-        var nameD = isMatch ? esc(d.name) : '<span style="color:var(--text-muted)">Not sold</span>';
-        var numC = isMatch ? 'var(--secondary)' : 'var(--text-muted)';
-        var bg = isMatch ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.1)';
-        html += '<div class="draw-history-item"><div class="draw-history-left"><div style="width:32px;height:32px;border-radius:50%;background:'+bg+';display:flex;align-items:center;justify-content:center;flex-shrink:0">'+icon+'</div><div><div style="display:flex;align-items:center;gap:8px"><span class="draw-history-num" style="color:'+numC+'">'+esc(d.number)+'</span>'+label+'</div><div class="draw-history-name">'+nameD+'</div><div class="draw-history-date">'+esc(d.timestamp)+'</div></div></div><div style="text-align:right">'+(isMatch?'<div style="font-size:11px;color:var(--text-muted);font-family:monospace;cursor:pointer" data-txid="'+escAttr(d.transactionId)+'">'+esc(d.transactionId)+'</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">'+esc(d.phone)+'</div>':'')+'</div></div>';
-      }
-      container.innerHTML = html;
-      container.appendChild(empty);
-    }
-
-    /* ═══ MODAL ═══ */
     function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
     document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-    /* ═══ INIT: Build initial slots ═══ */
     buildSlots();
   </script>
 </body>
