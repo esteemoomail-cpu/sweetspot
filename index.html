@@ -887,21 +887,37 @@
         if(v>max){v=max;showToast('Maximum quantity is '+fmtN(max),'info');}
         this.value=v;updatePriceSummary();
       });
-      document.getElementById('inputGcashRef').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,13);});
+      document.getElementById('inputGcashRef').addEventListener('input',function(){
+  if(formData.paymentMethod==='maya'){
+    // Allow alphanumeric for Maya
+    this.value=this.value.replace(/[^a-zA-Z0-9]/g,'').substring(0,13);
+  }else{
+    // GCash: digits only
+    this.value=this.value.replace(/\D/g,'').substring(0,13);
+  }
+  updateRefHint();
+});
       var poolInput=document.getElementById('setTotalPool');
       if(poolInput){
         poolInput.addEventListener('input',function(){var preview=document.getElementById('poolPreview');if(preview) preview.textContent=poolPreviewText(this.value);});
         poolInput.addEventListener('blur',function(){var v=parseInt(this.value);if(!isNaN(v)){v=Math.round(v/10000)*10000;if(v<10000)v=10000;if(v>200000)v=200000;this.value=v;var preview=document.getElementById('poolPreview');if(preview) preview.textContent=poolPreviewText(v);}});
       }
     }
-
+function updateRefHint(){
+  var hint=document.getElementById('refHint');
+  if(!hint)return;
+  if(formData.paymentMethod==='maya'){
+    hint.innerHTML='<i class="fas fa-info-circle"></i> Up to 13 alphanumeric characters from your Maya receipt';
+  }else{
+    hint.innerHTML='<i class="fas fa-info-circle"></i> Up to 13 digits from your GCash receipt';
+  }
+}
     async function loadPublicSettings(){
       var r=await apiGet('publicSettings');if(!r.success)return;
       appSettings=r;updatePoolConfig(r);
       document.title=r.lottery_name||'SWEETSPOT';
       document.getElementById('gcashName2').textContent=r.gcash_name||'-';
       document.getElementById('gcashNumber2').textContent=r.gcash_number||'-';
-      document.getElementById('mayaName').textContent=r.maya_name||r.gcash_name||'-';
       document.getElementById('mayaNumber').textContent=r.maya_number||r.gcash_number||'-';
       document.getElementById('pricePerNumber').textContent='\u20B1'+(r.price_per_number||1).toFixed(2);
       var minQ=r.min_quantity||50,maxQ=r.max_quantity||1000;
@@ -1161,12 +1177,24 @@
     function copyField(id,btn){copyToClipboard(document.getElementById(id).textContent).then(function(){btn.classList.add('copied');btn.innerHTML='<i class="fas fa-check"></i>';showToast('Copied!','success');setTimeout(function(){btn.classList.remove('copied');btn.innerHTML='<i class="fas fa-copy"></i>';},2000);}).catch(function(){showToast('Could not copy. Please copy manually.','error');});}
 
     function switchPaymentMethod(method){
-      document.querySelectorAll('.payment-method-tab').forEach(function(t){t.classList.remove('active');});
-      document.querySelector('[data-method="'+method+'"]').classList.add('active');
-      document.querySelectorAll('.payment-method-content').forEach(function(c){c.classList.remove('active');});
-      document.getElementById(method==='gcash'?'paymentGcash':'paymentMaya').classList.add('active');
-      formData.paymentMethod=method;
+  document.querySelectorAll('.payment-method-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelector('[data-method="'+method+'"]').classList.add('active');
+  document.querySelectorAll('.payment-method-content').forEach(function(c){c.classList.remove('active');});
+  document.getElementById(method==='gcash'?'paymentGcash':'paymentMaya').classList.add('active');
+  formData.paymentMethod=method;
+  // Clear ref input when switching payment method
+  var refInput=document.getElementById('inputGcashRef');
+  if(refInput)refInput.value='';
+  // Update input mode
+  if(refInput){
+    if(method==='maya'){
+      refInput.removeAttribute('inputmode');
+    }else{
+      refInput.setAttribute('inputmode','numeric');
     }
+  }
+  updateRefHint();
+}
 
     function openGcashApp(e){
       e.preventDefault();
@@ -1219,7 +1247,11 @@
       }
 
       var ref=document.getElementById('inputGcashRef').value.trim();
-      if(!/^\d{1,13}$/.test(ref)){showToast('Reference must be 1-13 digits','error');return;}
+if(formData.paymentMethod==='maya'){
+  if(!/^[a-zA-Z0-9]{1,13}$/.test(ref)){showToast('Reference must be 1-13 alphanumeric characters','error');return;}
+}else{
+  if(!/^\d{1,13}$/.test(ref)){showToast('Reference must be 1-13 digits','error');return;}
+}
       if(!formData.name||formData.name.length<2||!/^09\d{9}$/.test(formData.phone)){showToast('Invalid data. Please go back and check your info.','error');return;}
 
       formData.gcashRef=ref;
